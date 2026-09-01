@@ -1,85 +1,56 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import Card from '@/components/ui/Card';
-import { skillCategories } from '@/data/content';
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08 },
+const categories = [
+  {
+    title: 'FRONTEND',
+    skills: ['REACT.JS', 'NEXT.JS (APP ROUTER)', 'TYPESCRIPT', 'TAILWIND CSS', 'VITE', 'HTML5 / CSS3'],
   },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 15 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-};
+  {
+    title: 'BACKEND',
+    skills: ['NODE.JS', 'EXPRESS.JS', 'RESTFUL APIS', 'JWT / BCRYPT', 'STRIPE API', 'NODEMAILER'],
+  },
+  {
+    title: 'BANCOS DE DADOS & CLOUD',
+    skills: ['POSTGRESQL', 'SQL', 'NEON.TECH', 'VERCEL', 'GIT / GITHUB', 'CI/CD'],
+  },
+  {
+    title: 'METODOLOGIAS & TESTES',
+    skills: ['SCRUM (CSM®)', 'KANBAN (TKP®)', 'AGILE / JIT', 'VITEST', 'CLEAN ARCHITECTURE', 'SOLID'],
+  },
+];
 
 export default function TechStackSection() {
   return (
     <section
       id="tech-stack"
-      className="section-padding bg-zinc-900/20"
+      className="grid grid-cols-1 lg:grid-cols-[minmax(9rem,0.33fr)_1fr] gap-[clamp(1.5rem,5vw,7rem)] p-[clamp(4rem,10vw,10rem)] px-[var(--page-gutter)] border-b border-rule bg-paper"
       aria-labelledby="tech-heading"
     >
-      <div className="mx-auto max-w-6xl px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
-        >
-          <h2
-            id="tech-heading"
-            className="text-3xl md:text-4xl font-bold text-gradient mb-4"
-          >
-            Tech Stack
-          </h2>
-          <p className="text-zinc-400 text-lg">
-            Tecnologias e ferramentas que domino e utilizo no dia a dia.
-          </p>
-        </motion.div>
+      {/* Coluna Esquerda: Rótulo */}
+      <div className="label-mono text-soft">03 / TECH STACK</div>
 
-        {/* Grid de Categorias */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      {/* Coluna Direita */}
+      <div>
+        <h2
+          id="tech-heading"
+          className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[16ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
         >
-          {skillCategories.map((category) => (
-            <motion.div key={category.category} variants={itemVariants}>
-              <Card className="h-full">
-                {/* Cabeçalho da categoria */}
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="text-2xl" role="img" aria-hidden="true">
-                    {category.icon}
-                  </span>
-                  <h3 className="text-lg font-semibold text-zinc-200">
-                    {category.category}
-                  </h3>
-                </div>
+          Engenharia &amp; Competências.
+        </h2>
 
-                {/* Skills */}
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
-                    <span
-                      key={skill.name}
-                      className="px-3 py-1.5 font-mono text-xs text-zinc-300 rounded-lg bg-[#27272A]/70 border border-zinc-700/40 hover:border-emerald-500/40 hover:text-emerald-400 transition-all duration-200 cursor-default"
-                    >
-                      {skill.name}
-                    </span>
-                  ))}
-                </div>
-              </Card>
-            </motion.div>
+        {/* Grade de Categorias */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[clamp(2rem,4vw,4rem)]">
+          {categories.map((cat) => (
+            <div key={cat.title} className="border-t border-rule pt-6 space-y-4">
+              <h3 className="label-mono text-ink font-semibold tracking-widest">
+                {cat.title}
+              </h3>
+              <p className="label-mono text-soft leading-relaxed text-[0.72rem]">
+                {cat.skills.join(' — ')}
+              </p>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -2,107 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --font-inter: 'Inter', sans-serif;
-  }
+:root {
+  --paper: #ffffff;
+  --ink: #111111;
+  --soft-ink: #5c5c5c;
+  --rule: #161616;
+  --quiet-rule: #d8d8d8;
+  --page-gutter: clamp(1.25rem, 4vw, 4.5rem);
+  --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --serif: "Iowan Old Style", Baskerville, "Times New Roman", Times, serif;
+}
 
+/* Reset de elementos para estética de papel impresso */
+* {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Utilitários tipográficos suíços */
+.label-mono {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.065em;
+  text-transform: uppercase;
+}
+
+.text-soft {
+  color: var(--soft-ink);
+}
+
+.border-rule {
+  border-color: var(--rule);
+}
+
+.border-quiet {
+  border-color: var(--quiet-rule);
+}
+
+/* Overlay de scanlines do retrato monocromático */
+.scanlines-overlay {
+  position: relative;
+}
+
+.scanlines-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.08) 0px,
+    rgba(255, 255, 255, 0.08) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  mix-blend-mode: soft-light;
+}
+
+/* Acessibilidade & foco */
+a, button {
+  transition: color 170ms ease, background-color 170ms ease, border-color 170ms ease;
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--ink) !important;
+  outline-offset: 4px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
   * {
-    box-sizing: border-box;
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
   }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    background-color: #0D0D0E;
-    color: #f4f4f5;
-    font-family: var(--font-inter), system-ui, sans-serif;
-  }
-
-  /* Focus visível para acessibilidade */
-  :focus-visible {
-    outline: 2px solid #34d399;
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
-
-  /* Scrollbar personalizada */
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #09090b;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #3f3f46;
-    border-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #52525b;
-  }
-}
-
-@layer utilities {
-  .text-gradient {
-    background: linear-gradient(135deg, #f4f4f5 0%, #a1a1aa 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .text-gradient-emerald {
-    background: linear-gradient(135deg, #34d399 0%, #059669 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .glass-card {
-    background: rgba(24, 24, 27, 0.6);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(63, 63, 70, 0.5);
-  }
-
-  .glow-emerald {
-    box-shadow: 0 0 30px rgba(52, 211, 153, 0.08);
-  }
-
-  .section-padding {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-}
-
-/* Animações suaves */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

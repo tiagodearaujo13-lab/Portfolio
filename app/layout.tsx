@@ -1,18 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: 'Tiago Araújo Francisco — Full-Stack Developer & CSM®',
@@ -49,12 +36,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-PT" className="scroll-smooth">
-      <body
-        className={`${inter.variable} ${jetBrainsMono.variable} font-sans bg-[#0D0D0E] text-zinc-100 antialiased`}
-      >
+      <body className="font-sans bg-paper text-ink antialiased">
         {children}
       </body>
     </html>
   );
 }
-

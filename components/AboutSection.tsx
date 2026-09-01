@@ -1,124 +1,31 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import Card from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
-import { aboutContent, certifications } from '@/data/content';
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
 export default function AboutSection() {
   return (
     <section
       id="sobre"
-      className="section-padding"
+      className="grid grid-cols-1 lg:grid-cols-[minmax(9rem,0.33fr)_1fr] gap-[clamp(1.5rem,5vw,7rem)] p-[clamp(4rem,10vw,10rem)] px-[var(--page-gutter)] border-b border-rule bg-paper"
       aria-labelledby="about-heading"
     >
-      <div className="mx-auto max-w-6xl px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
+      {/* Coluna Esquerda: Rótulo */}
+      <div className="label-mono text-soft">01 / SOBRE</div>
+
+      {/* Coluna Direita */}
+      <div>
+        <h2
+          id="about-heading"
+          className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[16ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
         >
-          <h2
-            id="about-heading"
-            className="text-3xl md:text-4xl font-bold text-gradient mb-4"
-          >
-            Sobre Mim
-          </h2>
-          <p className="text-emerald-400 text-lg font-medium">
-            {aboutContent.headline}
+          Da Cozinha de Alta Pressão à Engenharia de Software.
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 max-w-[63rem] gap-[clamp(1.5rem,5vw,5.5rem)]">
+          <p className="font-sans text-[clamp(1.05rem,1.65vw,1.42rem)] leading-[1.45] text-ink">
+            Fiz a transição de 20 anos a liderar operações de alta gastronomia para a engenharia de software. Não por acaso — mas porque reconheci que as duas disciplinas exigem o mesmo: arquitetura sólida, execução impecável e zero margem para falha crítica.
           </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Textos - 2 colunas */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            className="lg:col-span-2 space-y-6"
-          >
-            {aboutContent.paragraphs.map((paragraph, index) => (
-              <motion.p
-                key={index}
-                variants={itemVariants}
-                className="text-zinc-400 leading-relaxed text-base md:text-lg"
-              >
-                {paragraph}
-              </motion.p>
-            ))}
-
-            {/* Valores / Mindset */}
-            <motion.div
-              variants={itemVariants}
-              className="grid grid-cols-2 gap-3 pt-4"
-            >
-              {aboutContent.values.map((value) => (
-                <div
-                  key={value.label}
-                  className="flex items-center gap-3 rounded-xl bg-zinc-900/40 border border-zinc-800/40 px-4 py-3"
-                >
-                  <span className="text-2xl" role="img" aria-hidden="true">
-                    {value.icon}
-                  </span>
-                  <span className="text-sm text-zinc-300 font-medium">
-                    {value.label}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Certificações - 1 coluna */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <Card className="sticky top-24">
-              <h3 className="text-lg font-semibold text-zinc-200 mb-6 flex items-center gap-2">
-                <span className="text-emerald-400">●</span>
-                Certificações
-              </h3>
-              <div className="space-y-4">
-                {certifications.map((cert) => (
-                  <div
-                    key={cert.name}
-                    className="flex items-start gap-3 pb-4 border-b border-zinc-800/40 last:border-0 last:pb-0"
-                  >
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs font-bold">
-                      {cert.badge}
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-zinc-200">
-                        {cert.name}
-                      </p>
-                      <p className="text-xs text-zinc-500">
-                        {cert.issuer} · {cert.year}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          </motion.div>
+          <p className="font-sans text-[clamp(1.05rem,1.65vw,1.42rem)] leading-[1.45] text-ink">
+            Construí o <strong className="font-semibold text-ink">DocFácil.pt</strong> do zero: desde a arquitetura de base de dados até à UI, integração de pagamentos e motor de geração de PDFs. Em produção, com utilizadores reais, resolvendo problemas reais com tolerância zero a falhas.
+          </p>
         </div>
       </div>
     </section>

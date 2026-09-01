@@ -1,39 +1,26 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-mono)', 'monospace'],
-      },
       colors: {
-        brand: {
-          emerald: '#34d399',
-          'emerald-dark': '#059669',
-        },
+        paper: "var(--paper)",
+        ink: "var(--ink)",
+        "soft-ink": "var(--soft-ink)",
+        rule: "var(--rule)",
+        "quiet-rule": "var(--quiet-rule)",
       },
-      animation: {
-        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
-        'pulse-slow': 'pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-      },
-      keyframes: {
-        fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        'pulse-slow': {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.5' },
-        },
+      fontFamily: {
+        mono: ["var(--mono)"],
+        sans: ["var(--sans)"],
+        serif: ["var(--serif)"],
       },
     },
   },
   plugins: [],
 };
-
 export default config;
