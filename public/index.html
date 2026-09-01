@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>Tiago Francisco — Software Engineer & Serial Entrepreneur</title>
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS & CSS RESET
+       ========================================================================== */
+    :root {
+      --paper: #ffffff;
+      --ink: #111111;
+      --soft-ink: #5c5c5c;
+      --rule: #161616;
+      --quiet-rule: #d8d8d8;
+      --page-gutter: clamp(1.25rem, 4vw, 4.5rem);
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --serif: Iowan Old Style, Baskerville, "Times New Roman", Times, serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 0.16em;
+      text-decoration-thickness: 1px;
+      transition: text-decoration-thickness 170ms ease, color 170ms ease;
+    }
+
+    a:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 4px;
+    }
+
+    /* Micro-rótulos reutilizáveis */
+    .micro-label {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.065em;
+      text-transform: uppercase;
+      line-height: 1.35;
+    }
+
+    /* ==========================================================================
+       1. NAVBAR / HEADER
+       ========================================================================== */
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 2rem;
+      padding: 1.25rem var(--page-gutter) 1.1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .wordmark {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .wordmark:hover {
+      text-decoration: none;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .header-note {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.065em;
+      text-transform: uppercase;
+      line-height: 1.35;
+      color: var(--soft-ink);
+      text-align: right;
+    }
+
+    .lang-select {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.065em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background-color: var(--paper);
+      border: 1px solid var(--ink);
+      padding: 0.25rem 1.5rem 0.25rem 0.5rem;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%225%22%20viewBox%3D%220%200%208%205%22%3E%3Cpath%20fill%3D%22%23111111%22%20d%3D%22M0%200l4%205%204-5z%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.4rem center;
+    }
+
+    /* ==========================================================================
+       2. HERO SECTION
+       ========================================================================== */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(15rem, 0.88fr);
+      min-height: min(48rem, calc(100vh - 3.6rem));
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(2rem, 6vw, 6rem) var(--page-gutter) clamp(2rem, 4vw, 4rem);
+    }
+
+    .hero-eyebrow {
+      color: var(--soft-ink);
+    }
+
+    .hero-title {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: clamp(4.5rem, 11.1vw, 11.5rem);
+      letter-spacing: -0.085em;
+      line-height: 0.78;
+      max-width: 9ch;
+      margin: clamp(3rem, 10vw, 8rem) 0 clamp(3rem, 8vw, 6.5rem);
+      color: var(--ink);
+    }
+
+    .hero-declaration {
+      font-family: var(--serif);
+      font-size: clamp(1.15rem, 1.65vw, 1.55rem);
+      line-height: 1.25;
+      max-width: 36rem;
+      color: var(--ink);
+    }
+
+    .hero-portrait {
+      position: relative;
+      height: 100%;
+      min-height: 24rem;
+      background-color: #e5e5e5;
+      border-left: 1px solid var(--rule);
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .hero-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1) contrast(1.25) brightness(1.05);
+      mix-blend-mode: multiply;
+      display: block;
+    }
+
+    .hero-portrait::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 100% 4px;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .portrait-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.84);
+      color: #ffffff;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.065em;
+      text-transform: uppercase;
+      line-height: 1.35;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+
+    /* ==========================================================================
+       3. PADRÃO DE SEÇÃO (GRID COM ÍNDICE À ESQUERDA)
+       ========================================================================== */
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(9rem, 0.33fr) 1fr;
+      gap: clamp(1.5rem, 5vw, 7rem);
+      padding: clamp(4rem, 10vw, 10rem) var(--page-gutter);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-index {
+      color: var(--soft-ink);
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2.3rem, 5.1vw, 5.7rem);
+      font-weight: 400;
+      letter-spacing: -0.06em;
+      line-height: 0.94;
+      max-width: 16ch;
+      margin-bottom: clamp(2.25rem, 5vw, 4.75rem);
+      color: var(--ink);
+    }
+
+    /* ABOUT SECTION */
+    .about-body {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      max-width: 63rem;
+      gap: clamp(1.5rem, 5vw, 5.5rem);
+    }
+
+    .about-body p {
+      font-family: var(--sans);
+      font-size: clamp(1.05rem, 1.65vw, 1.42rem);
+      line-height: 1.45;
+      color: var(--ink);
+    }
+
+    /* PRODUCTS SECTION */
+    .products-container {
+      margin-left: calc(-1 * var(--page-gutter));
+      margin-right: calc(-1 * var(--page-gutter));
+    }
+
+    .products-list {
+      list-style: none;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .product-item {
+      display: block;
+      text-decoration: none;
+      color: var(--ink);
+      border-bottom: 1px solid var(--rule);
+      transition: background-color 170ms ease, color 170ms ease;
+    }
+
+    .product-item:last-child {
+      border-bottom: none;
+    }
+
+    .product-link {
+      display: grid;
+      grid-template-columns: minmax(4rem, 0.5fr) minmax(12rem, 1.2fr) 2fr auto;
+      gap: 1.25rem;
+      align-items: baseline;
+      padding: clamp(1.5rem, 3.2vw, 3.2rem) var(--page-gutter);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .product-kicker {
+      color: inherit;
+    }
+
+    .product-name {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 3.5vw, 4rem);
+      font-weight: 400;
+      letter-spacing: -0.055em;
+      line-height: 0.92;
+      color: inherit;
+    }
+
+    .product-desc {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      line-height: 1.35;
+      max-width: 25rem;
+      color: var(--soft-ink);
+      transition: color 170ms ease;
+    }
+
+    .product-arrow {
+      font-family: var(--sans);
+      font-size: 1.5rem;
+      line-height: 1;
+      transition: transform 170ms ease;
+    }
+
+    /* HOVER STATE: Inverte cores */
+    .product-item:hover {
+      background-color: var(--ink);
+      color: var(--paper);
+    }
+
+    .product-item:hover .product-desc {
+      color: var(--paper);
+    }
+
+    .product-item:hover .product-arrow {
+      transform: translateX(0.35rem);
+    }
+
+    /* PRESENCE SECTION */
+    .presence-layout {
+      display: grid;
+      grid-template-columns: 0.95fr minmax(16rem, 0.75fr);
+      gap: clamp(3rem, 10vw, 11rem);
+    }
+
+    .presence-entry {
+      border-top: 1px solid var(--quiet-rule);
+      margin-top: 2.25rem;
+      padding-top: 2.25rem;
+    }
+
+    .presence-entry:first-child {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .presence-entry-meta {
+      color: var(--soft-ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .presence-entry-text {
+      font-family: var(--sans);
+      font-size: clamp(1.05rem, 1.65vw, 1.42rem);
+      line-height: 1.45;
+      color: var(--ink);
+    }
+
+    .contact-panel {
+      border: 1px solid var(--rule);
+      padding: clamp(1.4rem, 3vw, 2.4rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-copy {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      font-weight: 400;
+      line-height: 1.03;
+      margin-bottom: 2rem;
+      color: var(--ink);
+    }
+
+    .contact-link {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink);
+      display: inline-block;
+    }
+
+    .contact-link::after {
+      content: " ↗";
+    }
+
+    /* ==========================================================================
+       4. FOOTER
+       ========================================================================== */
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem var(--page-gutter);
+      border-top: 1px solid var(--rule);
+    }
+
+    .footer-left {
+      color: var(--soft-ink);
+    }
+
+    .back-to-top {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.065em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .back-to-top:hover {
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       5. RESPONSIVO (max-width: 720px)
+       ========================================================================== */
+    @media (max-width: 720px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-portrait {
+        border-left: none;
+        border-top: 1px solid var(--rule);
+        min-height: 20rem;
+      }
+
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 3rem var(--page-gutter);
+      }
+
+      .about-body {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .product-link {
+        grid-template-columns: 1fr auto;
+        gap: 0.75rem;
+      }
+
+      .product-kicker {
+        grid-column: 1 / -1;
+      }
+
+      .product-desc {
+        grid-column: 1 / 2;
+        max-width: 100%;
+      }
+
+      .product-arrow {
+        grid-column: 2 / 3;
+        align-self: center;
+      }
+
+      .presence-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, ::before, ::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- 1. NAVBAR / HEADER -->
+  <header class="site-header" role="banner">
+    <a href="#top" class="wordmark" aria-label="Página inicial — Tiago Francisco">Tiago Francisco</a>
+    <div class="header-right">
+      <div class="header-note">
+        Software engineer &amp;<br>serial entrepreneur
+      </div>
+      <label for="lang-switcher" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;">Selecionar Idioma</label>
+      <select id="lang-switcher" class="lang-select" aria-label="Idioma / Language">
+        <option value="EN">EN</option>
+        <option value="PT">PT-BR</option>
+        <option value="NL">NL</option>
+        <option value="ES">ES</option>
+      </select>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- 2. HERO SECTION -->
+    <section class="hero" aria-label="Perfil de Tiago Francisco">
+      <div class="hero-content">
+        <div class="micro-label hero-eyebrow">Profile / 2026</div>
+        <h1 class="hero-title">Tiago<br>Francisco</h1>
+        <p class="hero-declaration">
+          Over two decades of leadership and operations transformed into zero-tolerance agile software engineering and clean architecture.
+        </p>
+      </div>
+      <figure class="hero-portrait">
+        <img 
+          src="assets/tiago.webp" 
+          alt="Retrato P&B de Tiago Francisco" 
+          onerror="this.onerror=null; this.src='../public/assets/tiago.webp';"
+        >
+        <figcaption class="portrait-caption">
+          <span>Tiago Francisco</span>
+          <span>0001 / B&amp;W</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- 3. ABOUT SECTION -->
+    <section class="section-grid" id="about" aria-labelledby="about-title">
+      <div class="micro-label section-index">01 / About</div>
+      <div>
+        <h2 id="about-title" class="section-title">Engineering, education &amp; entrepreneurship.</h2>
+        <div class="about-body">
+          <p>
+            Transitioning from 20 years leading high-demand operations to software engineering wasn't accidental — it was driven by the realization that both fields demand solid architecture, flawless execution, and zero tolerance for critical failures.
+          </p>
+          <p>
+            Built DocFácil.pt from scratch — from database schema design to responsive UI, Stripe payment integrations, and dynamic PDF rendering. Bringing high-level operational discipline to every line of code.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PRODUCTS SECTION -->
+    <section class="section-grid" id="products" aria-labelledby="products-title">
+      <div class="micro-label section-index">02 / Products</div>
+      <div>
+        <h2 id="products-title" class="section-title">Active Projects.</h2>
+        <div class="products-container">
+          <ul class="products-list" role="list">
+            <li class="product-item">
+              <a href="https://docfacil.pt" target="_blank" rel="noopener noreferrer" class="product-link" aria-label="DocFácil.pt — LegalTech SaaS">
+                <span class="micro-label product-kicker">01 / Flagship</span>
+                <span class="product-name">DocFácil.pt</span>
+                <span class="product-desc">LegalTech SaaS platform in production simplifying dynamic document automation for PMEs.</span>
+                <span class="product-arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li class="product-item">
+              <a href="https://github.com/tiagodearaujo13-lab/leadpulse" target="_blank" rel="noopener noreferrer" class="product-link" aria-label="LeadPulse — B2B Lead Scraping Extension">
+                <span class="micro-label product-kicker">02 / Extension</span>
+                <span class="product-name">LeadPulse</span>
+                <span class="product-desc">B2B lead extraction extension with rate-limiting, XSS sanitization and active licensing API.</span>
+                <span class="product-arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li class="product-item">
+              <a href="https://github.com/tiagodearaujo13-lab/cognirav" target="_blank" rel="noopener noreferrer" class="product-link" aria-label="Cognirav — Psychometric Platform">
+                <span class="micro-label product-kicker">03 / Practice</span>
+                <span class="product-name">Cognirav</span>
+                <span class="product-desc">Interactive psychometric testing engine evaluating 30+ cognitive dimensions in real-time.</span>
+                <span class="product-arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li class="product-item">
+              <a href="https://github.com/tiagodearaujo13-lab/godoy-shake" target="_blank" rel="noopener noreferrer" class="product-link" aria-label="Godoy Shake — Mobile Web App">
+                <span class="micro-label product-kicker">04 / Web App</span>
+                <span class="product-name">Godoy Shake</span>
+                <span class="product-desc">Mobile-first interactive ordering catalog optimized for high-speed conversion.</span>
+                <span class="product-arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PRESENCE SECTION -->
+    <section class="section-grid" id="presence" aria-labelledby="presence-title">
+      <div class="micro-label section-index">03 / Presence</div>
+      <div>
+        <h2 id="presence-title" class="section-title">Events, talks &amp; good questions.</h2>
+        <div class="presence-layout">
+          <div class="presence-entries">
+            <div class="presence-entry">
+              <div class="micro-label presence-entry-meta">2026 / Keynote</div>
+              <p class="presence-entry-text">
+                "Clean Architecture &amp; Just-In-Time Engineering: Lessons from High-Pressure Environments."
+              </p>
+            </div>
+            <div class="presence-entry">
+              <div class="micro-label presence-entry-meta">2025 / Workshop</div>
+              <p class="presence-entry-text">
+                "Building Resilient Full-Stack Applications with TypeScript, React &amp; PostgreSQL."
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-panel">
+            <p class="contact-copy">Have an event, a talk, or an idea worth discussing?</p>
+            <a href="mailto:tiagodearaujo13@gmail.com" class="contact-link" aria-label="Enviar email para tiagodearaujo13@gmail.com">Initiate Contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 6. FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="micro-label footer-left">
+      © 2026 Tiago Francisco
+    </div>
+    <a href="#top" class="back-to-top" aria-label="Voltar ao topo da página">Back to top ↑</a>
+  </footer>
+
+</body>
+</html>

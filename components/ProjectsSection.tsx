@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Users, Zap } from 'lucide-react';
+import { ExternalLink, Github, Users, Zap, Layers } from 'lucide-react';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
@@ -20,30 +20,32 @@ export default function ProjectsSection() {
   return (
     <section
       id="projetos"
-      className="section-padding"
+      className="py-24 relative overflow-hidden"
       aria-labelledby="projects-heading"
     >
       <div className="mx-auto max-w-6xl px-6">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className="mb-14 text-left"
         >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono mb-4">
+            <Layers size={14} />
+            <span>ENGENHARIA & PRODUTO</span>
+          </div>
           <h2
             id="projects-heading"
-            className="text-3xl md:text-4xl font-bold text-gradient mb-4"
+            className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-zinc-100 tracking-tight mb-4"
           >
             Projetos em Destaque
           </h2>
-          <p className="text-zinc-400 text-lg">
-            Soluções reais, em produção, resolvendo problemas reais.
+          <p className="text-zinc-400 text-lg max-w-2xl">
+            Aplicações reais desenvolvidas do zero à produção com foco em arquitetura limpa, segurança e entrega de valor.
           </p>
         </motion.div>
 
-        {/* Featured Project — DocFácil.pt */}
         {featuredProject && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -54,17 +56,17 @@ export default function ProjectsSection() {
           >
             <Card
               as="article"
-              className="relative overflow-hidden border-emerald-500/20 hover:border-emerald-500/40"
-              glow
+              className="relative overflow-hidden border-emerald-500/30 bg-zinc-900/70 backdrop-blur-sm p-6 md:p-8 rounded-2xl hover:border-emerald-500/50 transition-all duration-300"
             >
-              {/* Glow de fundo */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <div
+                className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"
+                aria-hidden="true"
+              />
 
               <div className="relative z-10 space-y-6">
-                {/* Header do projeto */}
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div className="space-y-2">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 flex-wrap">
                       <h3 className="text-2xl md:text-3xl font-bold text-zinc-100">
                         {featuredProject.title}
                       </h3>
@@ -82,41 +84,41 @@ export default function ProjectsSection() {
                     )}
                   </div>
                   <Badge variant="success" size="md">
-                    <Zap size={14} />
-                    Projeto Flagship
+                    <Zap size={14} className="mr-1 inline" />
+                    Flagship SaaS
                   </Badge>
                 </div>
 
-                {/* Descrição */}
-                <p className="text-zinc-400 text-base md:text-lg leading-relaxed max-w-3xl">
+                <p className="text-zinc-300 text-base md:text-lg leading-relaxed max-w-3xl">
                   {featuredProject.description}
                 </p>
 
                 {featuredProject.longDescription && (
-                  <p className="text-zinc-500 text-sm leading-relaxed max-w-3xl">
+                  <p className="text-zinc-400 text-sm leading-relaxed max-w-3xl">
                     {featuredProject.longDescription}
                   </p>
                 )}
 
-                {/* Highlight */}
                 {featuredProject.highlight && (
-                  <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-xl px-5 py-3">
-                    <p className="text-sm text-emerald-300/80">
-                      💡 {featuredProject.highlight}
+                  <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-5 py-3.5">
+                    <p className="text-sm text-emerald-300 leading-relaxed">
+                      <span className="font-semibold text-emerald-400">Destaque Técnico: </span>
+                      {featuredProject.highlight}
                     </p>
                   </div>
                 )}
 
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 pt-2">
                   {featuredProject.stack.map((tech) => (
-                    <Badge key={tech} variant="info" size="sm">
+                    <span
+                      key={tech}
+                      className="px-2.5 py-1 text-xs font-mono font-medium rounded-md bg-zinc-800/80 text-zinc-300 border border-zinc-700/60"
+                    >
                       {tech}
-                    </Badge>
+                    </span>
                   ))}
                 </div>
 
-                {/* Links */}
                 <div className="flex flex-wrap gap-3 pt-2">
                   {featuredProject.links.live && (
                     <Button
@@ -135,7 +137,7 @@ export default function ProjectsSection() {
                       variant="secondary"
                       icon={<Github size={16} />}
                     >
-                      Ver Código
+                      Repositório GitHub
                     </Button>
                   )}
                 </div>
@@ -144,42 +146,53 @@ export default function ProjectsSection() {
           </motion.div>
         )}
 
-        {/* Outros Projetos */}
         <div className="grid md:grid-cols-2 gap-6">
           {otherProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
+              viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="h-full"
             >
-              <Card as="article" className="h-full flex flex-col">
-                <div className="flex-1 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <h3 className="text-xl font-semibold text-zinc-200">
+              <Card
+                as="article"
+                className="h-full flex flex-col justify-between p-6 rounded-xl bg-zinc-900/50 border border-zinc-800/80 hover:border-zinc-700 transition-all duration-200"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className="text-xl font-bold text-zinc-100">
                       {project.title}
                     </h3>
-                    <Badge variant={statusVariant[project.status]}>
+                    <Badge variant={statusVariant[project.status]} size="sm">
                       {project.statusLabel}
                     </Badge>
                   </div>
 
-                  <p className="text-zinc-400 text-sm leading-relaxed">
+                  <p className="text-zinc-300 text-sm leading-relaxed">
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-1.5">
+                  {project.highlight && (
+                    <p className="text-xs text-zinc-400 bg-zinc-950/60 p-3 rounded-lg border border-zinc-800/50 leading-relaxed">
+                      💡 {project.highlight}
+                    </p>
+                  )}
+
+                  <div className="flex flex-wrap gap-1.5 pt-2">
                     {project.stack.map((tech) => (
-                      <Badge key={tech} variant="default" size="sm">
+                      <span
+                        key={tech}
+                        className="px-2 py-0.5 text-xs font-mono rounded bg-zinc-800/60 text-zinc-400 border border-zinc-800"
+                      >
                         {tech}
-                      </Badge>
+                      </span>
                     ))}
                   </div>
                 </div>
 
-                {/* Links */}
-                <div className="flex gap-3 pt-4 mt-auto border-t border-zinc-800/40">
+                <div className="flex gap-3 pt-5 mt-6 border-t border-zinc-800/60">
                   {project.links.live && (
                     <Button
                       href={project.links.live}
