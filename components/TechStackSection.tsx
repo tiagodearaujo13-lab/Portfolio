@@ -70,7 +70,7 @@ export default function TechStackSection() {
                   {category.skills.map((skill) => (
                     <span
                       key={skill.name}
-                      className="px-3 py-1.5 text-sm bg-zinc-800/60 text-zinc-300 rounded-lg border border-zinc-700/40 hover:border-emerald-500/30 hover:text-emerald-400 transition-all duration-200 cursor-default"
+                      className="px-3 py-1.5 font-mono text-xs text-zinc-300 rounded-lg bg-[#27272A]/70 border border-zinc-700/40 hover:border-emerald-500/40 hover:text-emerald-400 transition-all duration-200 cursor-default"
                     >
                       {skill.name}
                     </span>

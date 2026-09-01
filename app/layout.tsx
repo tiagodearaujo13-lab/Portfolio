@@ -1,10 +1,16 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
@@ -44,10 +50,11 @@ export default function RootLayout({
   return (
     <html lang="pt-PT" className="scroll-smooth">
       <body
-        className={`${inter.variable} font-sans bg-zinc-950 text-zinc-100 antialiased`}
+        className={`${inter.variable} ${jetBrainsMono.variable} font-sans bg-[#0D0D0E] text-zinc-100 antialiased`}
       >
         {children}
       </body>
     </html>
   );
 }
+

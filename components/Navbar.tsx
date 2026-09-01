@@ -51,10 +51,10 @@ export default function Navbar() {
         {/* Logo / Nome */}
         <a
           href="#"
-          className="text-lg font-bold text-zinc-100 transition-colors hover:text-emerald-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded"
+          className="font-mono text-base font-bold text-zinc-100 transition-colors hover:text-emerald-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded flex items-center gap-1.5"
           aria-label={`${siteConfig.name} — Início`}
         >
-          T<span className="text-emerald-400">.</span>A
+          <span className="text-emerald-400">~/</span>tiago<span className="text-emerald-400">.dev</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -63,7 +63,7 @@ export default function Navbar() {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="px-3 py-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors rounded-lg hover:bg-zinc-800/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                className="px-3 py-2 font-mono text-xs uppercase tracking-wider text-zinc-400 hover:text-zinc-100 transition-colors rounded-lg hover:bg-zinc-800/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
               >
                 {item.label}
               </a>

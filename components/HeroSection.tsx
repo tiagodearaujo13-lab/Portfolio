@@ -58,8 +58,8 @@ export default function HeroSection() {
             <p className="text-lg md:text-xl text-emerald-400 font-medium">
               {siteConfig.title}
             </p>
-            <div className="flex items-center justify-center gap-2 text-zinc-500 text-sm">
-              <MapPin size={14} />
+            <div className="flex items-center justify-center gap-2 text-zinc-500 text-sm font-mono">
+              <MapPin size={14} className="text-emerald-400" />
               <span>{siteConfig.location}</span>
             </div>
           </motion.div>
@@ -107,8 +107,8 @@ export default function HeroSection() {
             className="flex flex-col items-center gap-2 text-zinc-600 hover:text-zinc-400 transition-colors"
             aria-label="Rolar para baixo"
           >
-            <span className="text-xs uppercase tracking-widest">Scroll</span>
-            <ArrowDown size={16} className="animate-bounce" />
+            <span className="font-mono text-xs uppercase tracking-widest">Scroll</span>
+            <ArrowDown size={16} className="animate-bounce text-emerald-500/70" />
           </a>
         </motion.div>
       </div>

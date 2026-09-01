@@ -73,7 +73,7 @@ export default function ProjectsSection() {
                       </Badge>
                     </div>
                     {featuredProject.users && (
-                      <div className="flex items-center gap-2 text-emerald-400">
+                      <div className="flex items-center gap-2 text-emerald-400 font-mono">
                         <Users size={16} />
                         <span className="text-sm font-medium">
                           {featuredProject.users}

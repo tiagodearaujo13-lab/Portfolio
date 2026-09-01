@@ -36,7 +36,7 @@ export default function Badge({
   return (
     <span
       className={clsx(
-        'inline-flex items-center gap-1.5 rounded-full border font-medium transition-colors',
+        'inline-flex items-center gap-1.5 rounded-full border font-mono font-medium transition-colors',
         variantStyles[variant],
         sizeStyles[size],
         className
