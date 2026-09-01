@@ -7,6 +7,7 @@ interface ButtonProps {
   size?: 'sm' | 'md' | 'lg';
   href?: string;
   external?: boolean;
+  type?: 'button' | 'submit' | 'reset';
   className?: string;
   onClick?: () => void;
   ariaLabel?: string;
@@ -34,6 +35,7 @@ export default function Button({
   size = 'md',
   href,
   external = false,
+  type = 'button',
   className,
   onClick,
   ariaLabel,
@@ -72,7 +74,7 @@ export default function Button({
 
   return (
     <button
-      type="button"
+      type={type}
       onClick={onClick}
       className={baseStyles}
       aria-label={ariaLabel}
