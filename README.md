@@ -8,7 +8,7 @@ Website de portfólio profissional com design minimalista dark mode, inspirado n
 
 ## ✨ Demo
 
-Acede ao portfólio ao vivo: portfólio-lilás-seis-37.vercel.app
+Acede ao portfólio ao vivo: https://portfólio-lilás-seis-37.vercel.app
 
 ---
 
