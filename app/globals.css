@@ -95,3 +95,12 @@ button:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 28;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}

@@ -1,6 +1,7 @@
 'use client';
 
 import { personalInfo } from '@/data/content';
+import SystemArchitectureGraphic from './SystemArchitectureGraphic';
 
 export default function AboutSection() {
   return (
@@ -30,6 +31,9 @@ export default function AboutSection() {
               {paragraph}
             </p>
           ))}
+
+          {/* Gráfico Esquemático de Arquitetura de Software */}
+          <SystemArchitectureGraphic />
         </div>
       </div>
     </section>
