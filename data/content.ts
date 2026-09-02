@@ -1,16 +1,38 @@
-import { SkillCategory, SocialLink, Experience, Certification } from '@/types';
+import { SkillCategory, SocialLink, ExperienceItem, Certification } from '@/types';
 
 export const siteConfig = {
   name: 'Tiago Araújo Francisco',
-  title: 'Desenvolvedor Full-Stack JS/TS | Certified Scrum Master (CSM®)',
+  title: 'Engenheiro de Software Full-Stack | Certified Scrum Master (CSM®)',
   location: 'Lagoa, Faro, Portugal',
   email: 'tiagodearaujo13@gmail.com',
   phone: '+351 939 347 977',
   whatsapp: 'https://wa.me/351939347977',
-  pitch:
-    '20 anos de liderança em operações e alta gastronomia canalizados para engenharia de software ágil, arquitetura limpa e entrega Just-in-Time com tolerância zero a falhas críticas.',
   available: true,
   availabilityText: 'Disponível para projetos & posições Full-Stack',
+};
+
+export const personalInfo = {
+  name: 'Tiago Araújo Francisco',
+  role: 'Engenheiro de Software Full-Stack | Certified Scrum Master (CSM®)',
+  location: 'Lagoa, Faro, Portugal',
+  email: 'tiagodearaujo13@gmail.com',
+  phone: '+351 939 347 977',
+  eyebrow: 'ENGENHARIA DE SOFTWARE & ARQUITETURA DE PRODUTO',
+  headline: 'TIAGO\nFRANCISCO',
+  bioHeadline:
+    'Arquitetura escalável, sistemas desacoplados e produtos reais em produção.',
+  bioStatement:
+    'Desenvolvo sistemas web resilientes, escaláveis e de alta disponibilidade em TypeScript, Node.js e React. Fundador e engenheiro líder de SaaS em produção com mais de 300 utilizadores ativos, canalizando duas décadas de liderança em operações críticas para engenharia de software previsível, código limpo e entregas Just-in-Time.',
+  aboutParagraphs: [
+    'Engenharia de software de alto rendimento compartilha os mesmos princípios de operações críticas de grande escala: organização rigorosa, desenho de arquitetura desacoplada, tolerância zero a falhas em produção e foco obsessivo em entrega de valor real ao utilizador final.',
+    'Durante 20 anos, liderei equipas multidisciplinares de mais de 20 profissionais em ambientes de pressão extrema e alta precisão. Essa vivência consolidou uma maturidade executiva rara: capacidade de dialogar com stakeholders de negócio, priorização implacável de backlog técnico sob incerteza e entrega pontual.',
+    'Como fundador e desenvolvedor do DocFácil.pt, projetei e coloquei em produção uma solução LegalTech completa: modelação relacional em PostgreSQL, pipelines de autenticação segura (JWT, Bcrypt, OAuth 2.0), motor de compilação de documentos em tempo de execução e processamento assíncrono de pagamentos via webhooks Stripe.',
+  ],
+  links: {
+    github: 'https://github.com/tiagodearaujo13-lab',
+    linkedin: 'https://www.linkedin.com/in/tiago-araújofrancisco/',
+    portfolio: 'https://portfolio-lilac-six-37.vercel.app/',
+  },
 };
 
 export const socialLinks: SocialLink[] = [
@@ -31,124 +53,134 @@ export const socialLinks: SocialLink[] = [
   },
 ];
 
-export const skillCategories: SkillCategory[] = [
+export const skills: SkillCategory[] = [
   {
-    category: 'Frontend',
-    icon: '🎨',
-    skills: [
-      { name: 'React.js' },
-      { name: 'Next.js' },
-      { name: 'TypeScript' },
-      { name: 'Tailwind CSS' },
-      { name: 'Framer Motion' },
-      { name: 'Vite' },
+    category: 'FRONTEND & INTERFACES',
+    items: [
+      'TypeScript',
+      'React.js',
+      'Next.js (App Router)',
+      'Vite',
+      'Tailwind CSS',
+      'Context API',
+      'Design Systems',
+      'Acessibilidade WCAG 2.1 AA',
+      'Responsive Layouts',
     ],
   },
   {
-    category: 'Backend',
-    icon: '⚙️',
-    skills: [
-      { name: 'Node.js' },
-      { name: 'Express.js' },
-      { name: 'RESTful APIs' },
-      { name: 'JWT / Auth' },
-      { name: 'Nodemailer' },
-      { name: 'Stripe' },
+    category: 'BACKEND & DISTRIBUÍDOS',
+    items: [
+      'Node.js',
+      'Express.js',
+      'RESTful APIs',
+      'Autenticação JWT',
+      'Google OAuth 2.0',
+      'Bcrypt Hashing',
+      'Rate Limiting',
+      'CORS & Security Headers',
+      'Nodemailer Engine',
     ],
   },
   {
-    category: 'Base de Dados',
-    icon: '🗄️',
-    skills: [
-      { name: 'PostgreSQL' },
-      { name: 'SQL' },
-      { name: 'Neon.tech' },
-      { name: 'Google OAuth' },
+    category: 'PERSISTÊNCIA & DADOS',
+    items: [
+      'PostgreSQL (Neon.tech)',
+      'Modelagem Relacional',
+      'Migrações de Schema',
+      'Otimização de Queries',
+      'Integridade Transacional (ACID)',
+      'SQLite (Local Prototyping)',
     ],
   },
   {
-    category: 'DevOps & Cloud',
-    icon: '☁️',
-    skills: [
-      { name: 'Git / GitHub' },
-      { name: 'CI/CD' },
-      { name: 'Vercel' },
-      { name: 'Clean Architecture' },
-    ],
-  },
-  {
-    category: 'Metodologias',
-    icon: '📋',
-    skills: [
-      { name: 'Scrum (CSM®)' },
-      { name: 'Kanban (TKP®)' },
-      { name: 'Agile' },
-      { name: 'Just-in-Time' },
+    category: 'INTEGRAÇÕES, QUALIDADE & DEVOPS',
+    items: [
+      'Stripe Checkout & Webhooks',
+      'Chrome Extensions Engine',
+      'Vitest & Testes Automatizados',
+      'Git & GitFlow',
+      'CI/CD Pipelines (GitHub Actions)',
+      'Vercel Deployment',
+      'Scrum (CSM®)',
+      'Kanban (TKP®)',
     ],
   },
 ];
 
-export const experiences: Experience[] = [
+export const experiences: ExperienceItem[] = [
   {
-    id: 'dev-freelance',
-    role: 'Desenvolvedor Full-Stack Freelance',
-    company: 'Independente',
-    period: '2023 — Presente',
-    location: 'Lagoa, Faro, Portugal',
+    id: 'docfacil',
+    role: 'Fundador & Lead Full-Stack Engineer',
+    company: 'DocFácil.pt (SaaS LegalTech)',
+    location: 'Portugal (Remoto)',
+    period: '2024 — PRESENTE',
     description: [
-      'Fundação e desenvolvimento integral do DocFácil.pt — SaaS LegalTech em produção com +300 utilizadores ativos.',
-      'Arquitetura full-stack com React, Node.js, PostgreSQL, integração Stripe e autenticação Google OAuth 2.0.',
-      'Entrega de soluções web para clientes com foco em performance, UX e clean architecture.',
+      'Idealização, arquitetura de sistemas e implementação ponta a ponta de plataforma SaaS com mais de 300 utilizadores ativos em produção.',
+      'Desenvolvimento de motor de compilação dinâmica de contratos em PDF com substituição algorítmica de cláusulas condicionais baseada em inputs em tempo real.',
+      'Engenharia de faturamento transacional com Stripe Checkout e orquestração de webhooks idempotentes para gestão automatizada do ciclo de subscrições.',
+      'Arquitetura de autenticação segura híbrida combinando JWT assinado, hashing de credenciais com Bcrypt e Single Sign-On via Google OAuth 2.0.',
+      'Migração de dados estruturais de SQLite local para PostgreSQL serverless em nuvem (Neon.tech) garantindo alta disponibilidade.',
     ],
-    skills: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'Next.js'],
+    technologies: [
+      'React.js',
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'Stripe API',
+      'JWT',
+      '@react-pdf/renderer',
+      'Tailwind CSS',
+    ],
   },
   {
-    id: 'ops-leader',
-    role: 'Diretor de Operações & Líder de Equipa',
-    company: 'Alta Gastronomia (Internacional)',
-    period: '2003 — 2023',
-    location: 'Portugal & Internacional',
+    id: 'freelance-dev',
+    role: 'Engenheiro de Software Full-Stack (Projetos Próprios / Freelancer)',
+    company: 'Consultoria Independente de Engenharia Web',
+    location: 'Portugal / Internacional',
+    period: '2023 — PRESENTE',
     description: [
-      'Liderança de equipas de até +20 pessoas em ambientes de alta pressão e exigência operacional.',
-      'Gestão de processos críticos com tolerância zero a falhas, aplicando metodologias Just-in-Time.',
-      'Tomada de decisão estratégica, resolução de problemas complexos e foco obsessivo em qualidade.',
+      'Engenharia de software com foco na arquitetura PERN/MERN, projetando monólitos bem modularizados, APIs limpas e contratos semânticos de integração.',
+      'Desenvolvimento de extensões Chrome avançadas para automação e extração de dados B2B com injeção segura de scripts e sanitização anti-XSS.',
+      'Aplicação contínua de boas práticas de Clean Architecture, refatoração orientada a testes (Vitest) e pipelines de deploy automatizados.',
     ],
-    skills: ['Liderança', 'Gestão de Equipas', 'Operações', 'Just-in-Time'],
+    technologies: [
+      'TypeScript',
+      'React',
+      'Node.js',
+      'Chrome API',
+      'REST APIs',
+      'Tailwind CSS',
+      'GitFlow',
+    ],
+  },
+  {
+    id: 'executive-chef',
+    role: 'Gestão Operacional & Liderança Executiva de Equipas',
+    company: 'Hotelaria & Alta Gastronomia (Vila Vita Parc e outras)',
+    location: 'Portugal',
+    period: '2003 — 2023',
+    description: [
+      'Liderança direta e coordenação diária de equipas multidisciplinares de alta performance (+20 colaboradores) em ambientes de estresse e pressão contínuos.',
+      'Gestão de cadeia de suprimentos, previsibilidade orçamentária, controlo rigoroso de desperdícios e entregas críticas sob o modelo Just-in-Time.',
+      'Resolução de incidentes e tomada de decisão estratégica em segundos mantendo conformidade absoluta com padrões de qualidade e tolerância zero a falhas.',
+    ],
+    technologies: [
+      'Liderança de Equipas',
+      'Processos Just-in-Time',
+      'Gestão de Crise',
+      'Tomada de Decisão',
+      'Controlo Orçamentário',
+    ],
   },
 ];
 
 export const certifications: Certification[] = [
+  { title: 'Certified Scrum Master® (CSM)', issuer: 'Scrum Alliance' },
+  { title: 'Team Kanban Practitioner® (TKP)', issuer: 'Kanban University' },
+  { title: 'Certified Agile Coach (CAC)', issuer: 'MASSIMUS' },
   {
-    name: 'Certified Scrum Master®',
-    issuer: 'Scrum Alliance',
-    year: '2024',
-    badge: 'CSM®',
-  },
-  {
-    name: 'Team Kanban Practitioner®',
-    issuer: 'Kanban University',
-    year: '2024',
-    badge: 'TKP®',
-  },
-  {
-    name: 'Full-Stack JavaScript/TypeScript',
-    issuer: 'Formação Especializada',
-    year: '2023',
-    badge: 'FS',
+    title: 'Engenharia Full-Stack JavaScript/TypeScript',
+    issuer: 'Mate academy Brasil',
   },
 ];
-
-export const aboutContent = {
-  headline: 'Engenharia com a disciplina de quem já liderou cozinhas Michelin.',
-  paragraphs: [
-    'Fiz a transição de 20 anos a liderar operações de alta gastronomia para a engenharia de software. Não por acaso — mas porque reconheci que as duas disciplinas exigem o mesmo: arquitetura sólida, execução impecável e zero margem para falha crítica.',
-    'Construí o DocFácil.pt do zero: desde a arquitetura de base de dados até à UI, integração de pagamentos e motor de geração de PDFs. Em produção, com utilizadores reais, resolvendo problemas reais.',
-    'Trago para cada projeto a mentalidade de um chefe de cozinha de alto nível: obsessão com qualidade, liderança por exemplo e entrega consistente sob pressão.',
-  ],
-  values: [
-    { icon: '⚡', label: 'Entrega Just-in-Time' },
-    { icon: '🎯', label: 'Tolerância Zero a Falhas Críticas' },
-    { icon: '🏗️', label: 'Clean Architecture' },
-    { icon: '👥', label: 'Liderança de Equipas' },
-  ],
-};

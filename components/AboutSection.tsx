@@ -1,5 +1,7 @@
 'use client';
 
+import { personalInfo } from '@/data/content';
+
 export default function AboutSection() {
   return (
     <section
@@ -8,24 +10,26 @@ export default function AboutSection() {
       aria-labelledby="about-heading"
     >
       {/* Coluna Esquerda: Rótulo */}
-      <div className="label-mono text-soft">01 / SOBRE</div>
+      <div className="label-mono text-soft">01 / PERFIL &amp; FILOSOFIA DE ENGENHARIA</div>
 
       {/* Coluna Direita */}
       <div>
         <h2
           id="about-heading"
-          className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[16ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
+          className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[20ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
         >
-          Da Cozinha de Alta Pressão à Engenharia de Software.
+          {personalInfo.bioHeadline}
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 max-w-[63rem] gap-[clamp(1.5rem,5vw,5.5rem)]">
-          <p className="font-sans text-[clamp(1.05rem,1.65vw,1.42rem)] leading-[1.45] text-ink">
-            Fiz a transição de 20 anos a liderar operações de alta gastronomia para a engenharia de software. Não por acaso — mas porque reconheci que as duas disciplinas exigem o mesmo: arquitetura sólida, execução impecável e zero margem para falha crítica.
-          </p>
-          <p className="font-sans text-[clamp(1.05rem,1.65vw,1.42rem)] leading-[1.45] text-ink">
-            Construí o <strong className="font-semibold text-ink">DocFácil.pt</strong> do zero: desde a arquitetura de base de dados até à UI, integração de pagamentos e motor de geração de PDFs. Em produção, com utilizadores reais, resolvendo problemas reais com tolerância zero a falhas.
-          </p>
+        <div className="space-y-[clamp(1.5rem,4vw,3.5rem)] max-w-[63rem]">
+          {personalInfo.aboutParagraphs.map((paragraph, index) => (
+            <p
+              key={index}
+              className="font-sans text-[clamp(1.05rem,1.65vw,1.42rem)] leading-[1.45] text-ink"
+            >
+              {paragraph}
+            </p>
+          ))}
         </div>
       </div>
     </section>

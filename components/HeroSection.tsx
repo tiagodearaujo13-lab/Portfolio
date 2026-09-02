@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { personalInfo } from '@/data/content';
 
 export default function HeroSection() {
   return (
@@ -13,7 +14,7 @@ export default function HeroSection() {
       <div className="flex flex-col justify-between p-[clamp(2rem,6vw,6rem)] px-[var(--page-gutter)] py-[clamp(2rem,4vw,4rem)]">
         {/* Eyebrow & Status */}
         <div className="flex flex-wrap items-center gap-3">
-          <span className="label-mono text-soft">PERFIL / 2026</span>
+          <span className="label-mono text-soft">{personalInfo.eyebrow}</span>
           <span className="label-mono px-2 py-0.5 border border-rule text-ink">
             DISPONÍVEL PARA PROJETOS &amp; POSIÇÕES FULL-STACK
           </span>
@@ -29,13 +30,13 @@ export default function HeroSection() {
         {/* Statement + Metadados + CTAs */}
         <div className="space-y-6">
           <p className="font-serif text-[clamp(1.15rem,1.65vw,1.55rem)] leading-[1.25] text-ink max-w-[36rem]">
-            20 anos de liderança em operações e alta gastronomia canalizados para engenharia de software ágil, arquitetura limpa e entrega Just-in-Time com tolerância zero a falhas críticas.
+            {personalInfo.bioStatement}
           </p>
 
           <div className="label-mono text-soft flex flex-wrap gap-x-4 gap-y-1">
-            <span>CERTIFICAÇÕES: CSM® · TKP®</span>
+            <span>{personalInfo.role}</span>
             <span>·</span>
-            <span>LAGOA, FARO, PORTUGAL</span>
+            <span>{personalInfo.location.toUpperCase()}</span>
           </div>
 
           {/* Botões de Ação */}

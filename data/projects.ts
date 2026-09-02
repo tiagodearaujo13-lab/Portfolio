@@ -20,127 +20,128 @@ export const projects: Project[] = [
     id: 'docfacil',
     title: 'DocFácil.pt',
     status: 'production',
-    statusLabel: 'Em Produção',
+    statusLabel: 'SaaS em Produção',
     featured: true,
     users: '+300 Utilizadores Ativos',
     description:
-      'Plataforma SaaS de LegalTech para geração e automação inteligente de contratos e documentos jurídicos em tempo real.',
+      'Plataforma SaaS LegalTech para orquestração, automação e geração algorítmica de documentos e contratos jurídicos em tempo de execução.',
     longDescription:
-      'Arquitetura full-stack escalável com frontend modular em React, backend em Node.js/Express, persistência de dados em PostgreSQL (Neon.tech), integração com Stripe Checkout (Webhooks) e autenticação JWT/Google OAuth 2.0.',
+      'Projetado como um monólito modular de alta coesão: frontend reativo em React.js, API RESTful desacoplada em Node.js/Express, persistência de dados em PostgreSQL gerenciado na Neon.tech e sistema financeiro integrado com Stripe Checkout via webhooks idempotentes.',
     highlight:
-      'Motor proprietário de renderização dinâmica de PDFs com adaptação algorítmica de cláusulas contratuais em tempo de execução.',
+      'Motor proprietário de compilação dinâmica de PDFs que avalia dependências lógicas e injeta cláusulas contratuais customizadas em microssegundos.',
     stack: [
       'React.js',
       'Node.js',
       'Express',
-      'PostgreSQL',
-      'Stripe API',
-      'JWT',
+      'PostgreSQL (Neon)',
+      'Stripe Webhooks',
+      'JWT Authentication',
+      '@react-pdf/renderer',
       'Tailwind CSS',
-      '@react-pdf/renderer'
     ],
     links: {
       live: 'https://docfacil.pt',
-      github: 'https://github.com/tiagodearaujo13-lab'
-    }
+      github: 'https://github.com/tiagodearaujo13-lab',
+    },
   },
   {
     id: 'leadpulse',
     title: 'LeadPulse',
     status: 'production',
-    statusLabel: 'Em Produção',
+    statusLabel: 'B2B Extension & API',
     featured: false,
-    users: 'B2B Extension & API',
+    users: 'Extração & Licenciamento Ativo',
     description:
-      'Extensão para navegador e backend voltado à captação, raspagem e validação de leads B2B com sistema de licenças ativas.',
+      'Módulo cliente/servidor e extensão Chrome voltada à captação, raspagem programática e validação cadastral de leads corporativos B2B.',
     longDescription:
-      'Desenvolvido com content scripts, sanitização de DOM contra vulnerabilidades XSS, autenticação JWT, rate limiter adaptativo e suíte de testes com Vitest.',
+      'Arquitetura segura com injeção de scripts isolados (Chrome API), sanitizador estrito de DOM contra injeções de script (anti-XSS), controle de autenticação JWT, rate limiter adaptativo no backend e suíte de testes unitários com Vitest.',
     highlight:
-      'Arquitetura com proteção multicamada: DOMSanitizer customizado, isolamento de contexto no Chrome API e rotas de webhooks seguras.',
+      'Camada defensiva de segurança: DOMSanitizer customizado, validação transacional de licenças ativas e isolamento de contexto de execução.',
     stack: [
       'TypeScript',
       'React.js',
       'Node.js',
       'Express',
       'Chrome Extension API',
+      'Vitest',
       'Tailwind CSS',
-      'Vitest'
     ],
     links: {
-      github: 'https://github.com/tiagodearaujo13-lab/leadpulse'
-    }
+      github: 'https://github.com/tiagodearaujo13-lab/leadpulse',
+    },
   },
   {
     id: 'cognirav',
     title: 'Cognirav',
     status: 'development',
-    statusLabel: 'Full-Stack App',
+    statusLabel: 'Full-Stack Platform',
     featured: false,
-    users: 'Avaliação Cognitiva',
+    users: 'Avaliação Cognitiva & Psicométrica',
     description:
-      'Plataforma interativa para aplicação de testes psicométricos, cálculo algorítmico de pontuação e relatórios de perfil.',
+      'Sistema de ponta a ponta para execução de baterias psicométricas, computação algorítmica de score e geração de diagnósticos analíticos de perfil.',
     longDescription:
-      'Separação entre server/ e web/. Engine reativa com React Context API para gerenciar 30+ dimensões de perguntas e API REST em Express com TypeScript ponta a ponta.',
+      'Monorepo modular estruturado em server/ e web/. Engine de avaliação em React Context API orquestrando 30+ dimensões de questionários com persistência assíncrona em API Express e tipagem estrita com TypeScript.',
     highlight:
-      'Sistema de cálculo dinâmico de score e geração de cards de compartilhamento social com canvas/exportação instantânea.',
+      'Algoritmo determinístico de cálculo de score cognitivo com geração de relatórios de perfil e cards para compartilhamento instantâneo via Canvas API.',
     stack: [
       'TypeScript',
       'React.js (Vite)',
       'Node.js',
       'Express',
       'React Context API',
-      'Tailwind CSS'
+      'Canvas API',
+      'Tailwind CSS',
     ],
     links: {
-      github: 'https://github.com/tiagodearaujo13-lab/cognirav'
-    }
+      github: 'https://github.com/tiagodearaujo13-lab/cognirav',
+    },
   },
   {
     id: 'godoy-shake',
     title: 'Godoy Shake',
     status: 'production',
-    statusLabel: 'Em Produção',
+    statusLabel: 'E-Commerce Mobile-First',
     featured: false,
-    users: 'Web App de Pedidos',
+    users: 'Conversão & Pedidos em Tempo Real',
     description:
-      'Catálogo interativo mobile-first para cardápio digital, personalização de pedidos de nutrição e conversão rápida.',
+      'Catálogo interativo e motor de pedidos de alta conversão, otimizado para navegação mobile com microinterações fluidas e checkout ágil.',
     longDescription:
-      'Interface focada em UI/UX moderna, alta velocidade de resposta, componentes acessíveis e navegação direta para conversão de pedidos.',
+      'Desenvolvido com foco em Core Web Vitals (zero Cumulative Layout Shift, carregamento abaixo de 800ms), navegação acessível e catálogo responsivo de produtos alimentares.',
     highlight:
-      'Fluxo de pedidos direto e intuitivo otimizado para dispositivos móveis.',
+      'Fluxo de checkout transacional direto sem atrito com microestados de seleção e validação local.',
     stack: [
       'React.js',
       'TypeScript',
       'Tailwind CSS',
       'Vite',
-      'Lucide React'
+      'Lucide React',
     ],
     links: {
-      github: 'https://github.com/tiagodearaujo13-lab/godoy-shake'
-    }
+      github: 'https://github.com/tiagodearaujo13-lab/godoy-shake',
+    },
   },
   {
     id: 'raiz-e-luz',
     title: 'Raiz & Luz',
     status: 'production',
-    statusLabel: 'Website Institucional',
+    statusLabel: 'Institutional Web App',
     featured: false,
-    users: 'Branding & Presença Digital',
+    users: 'Presença Digital de Alta Performance',
     description:
-      'Website institucional com identidade visual consistente, assets visuais otimizados e foco em autoridade de marca.',
+      'Aplicação institucional moderna construída com foco em autoridade de marca, design system customizado e conformidade estrita com padrões de acessibilidade.',
     longDescription:
-      'Desenvolvido com diretrizes de acessibilidade WCAG, otimização de imagens, tipografia balanceada e design system responsivo.',
+      'Arquitetura de componentes modularizada e acessível (WCAG AA), compressão avançada de assets estáticos e performance de carregamento ultrarrápida.',
     highlight:
-      'Design responsivo de alta fidelidade com paleta harmonizada e navegação fluida.',
+      'Design responsivo suíço com paleta harmônica e estrutura focada em alta retenção e tempo de sessão.',
     stack: [
       'React.js',
       'TypeScript',
       'Tailwind CSS',
       'Vite',
-      'Framer Motion'
+      'Framer Motion',
     ],
     links: {
-      github: 'https://github.com/tiagodearaujo13-lab/raiz-e-luz-web'
-    }
-  }
+      github: 'https://github.com/tiagodearaujo13-lab/raiz-e-luz-web',
+    },
+  },
 ];

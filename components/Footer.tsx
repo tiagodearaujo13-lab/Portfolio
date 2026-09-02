@@ -1,4 +1,4 @@
-import { siteConfig } from '@/data/content';
+import { personalInfo } from '@/data/content';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -9,7 +9,7 @@ export default function Footer() {
       role="contentinfo"
     >
       <div className="label-mono text-soft">
-        © {currentYear} {siteConfig.name}
+        © {currentYear} {personalInfo.name}
       </div>
 
       <a

@@ -1,7 +1,5 @@
 'use client';
 
-import { socialLinks } from '@/data/content';
-
 export default function Navbar() {
   return (
     <header
@@ -20,7 +18,7 @@ export default function Navbar() {
       {/* Direita: Nota + Links */}
       <div className="flex items-center gap-6 md:gap-8">
         <span className="hidden lg:inline text-soft font-mono text-[0.66rem] uppercase tracking-wider text-right">
-          Desenvolvedor Full-Stack JS/TS &amp; Scrum Master
+          Engenheiro Full-Stack JS/TS &amp; CSM®
         </span>
 
         <nav aria-label="Links rápidos" className="flex items-center gap-4 md:gap-6 font-mono text-[0.66rem] uppercase tracking-wider">

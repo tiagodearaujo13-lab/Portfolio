@@ -1,6 +1,6 @@
 'use client';
 
-import { siteConfig } from '@/data/content';
+import { personalInfo } from '@/data/content';
 
 export default function ContactSection() {
   return (
@@ -24,18 +24,18 @@ export default function ContactSection() {
         {/* Caixa de Destaque */}
         <div className="border border-rule p-[clamp(1.4rem,3vw,2.4rem)] flex flex-col justify-between max-w-[42rem] space-y-8 bg-paper">
           <p className="font-serif font-normal text-[clamp(1.4rem,2.5vw,2.2rem)] leading-[1.03] text-ink">
-            Tem um projeto, uma oportunidade full-stack ou uma ideia que vale a pena discutir?
+            Tem um projeto de engenharia, uma posição full-stack ou uma arquitetura que precisa de revisão crítica?
           </p>
 
           <div className="flex flex-col sm:flex-row flex-wrap gap-4 pt-4 border-t border-quiet">
             <a
-              href={`mailto:${siteConfig.email}`}
+              href={`mailto:${personalInfo.email}`}
               className="label-mono text-ink text-[0.78rem] tracking-wider no-underline hover:text-soft"
             >
-              {siteConfig.email} ↗
+              {personalInfo.email} ↗
             </a>
             <a
-              href="https://www.linkedin.com/in/tiago-araújofrancisco/"
+              href={personalInfo.links.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="label-mono text-ink text-[0.78rem] tracking-wider no-underline hover:text-soft"
@@ -43,7 +43,7 @@ export default function ContactSection() {
               LINKEDIN ↗
             </a>
             <a
-              href="https://github.com/tiagodearaujo13-lab"
+              href={personalInfo.links.github}
               target="_blank"
               rel="noopener noreferrer"
               className="label-mono text-ink text-[0.78rem] tracking-wider no-underline hover:text-soft"
@@ -51,12 +51,12 @@ export default function ContactSection() {
               GITHUB ↗
             </a>
             <a
-              href={siteConfig.whatsapp}
+              href={`https://wa.me/351939347977`}
               target="_blank"
               rel="noopener noreferrer"
               className="label-mono text-ink text-[0.78rem] tracking-wider no-underline hover:text-soft"
             >
-              {siteConfig.phone} ↗
+              {personalInfo.phone} ↗
             </a>
           </div>
         </div>

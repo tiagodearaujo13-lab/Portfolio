@@ -1,23 +1,6 @@
 'use client';
 
-const categories = [
-  {
-    title: 'FRONTEND',
-    skills: ['REACT.JS', 'NEXT.JS (APP ROUTER)', 'TYPESCRIPT', 'TAILWIND CSS', 'VITE', 'HTML5 / CSS3'],
-  },
-  {
-    title: 'BACKEND',
-    skills: ['NODE.JS', 'EXPRESS.JS', 'RESTFUL APIS', 'JWT / BCRYPT', 'STRIPE API', 'NODEMAILER'],
-  },
-  {
-    title: 'BANCOS DE DADOS & CLOUD',
-    skills: ['POSTGRESQL', 'SQL', 'NEON.TECH', 'VERCEL', 'GIT / GITHUB', 'CI/CD'],
-  },
-  {
-    title: 'METODOLOGIAS & TESTES',
-    skills: ['SCRUM (CSM®)', 'KANBAN (TKP®)', 'AGILE / JIT', 'VITEST', 'CLEAN ARCHITECTURE', 'SOLID'],
-  },
-];
+import { skills } from '@/data/content';
 
 export default function TechStackSection() {
   return (
@@ -35,18 +18,18 @@ export default function TechStackSection() {
           id="tech-heading"
           className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[16ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
         >
-          Engenharia &amp; Competências.
+          Taxonomia de Engenharia.
         </h2>
 
         {/* Grade de Categorias */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[clamp(2rem,4vw,4rem)]">
-          {categories.map((cat) => (
-            <div key={cat.title} className="border-t border-rule pt-6 space-y-4">
+          {skills.map((cat) => (
+            <div key={cat.category} className="border-t border-rule pt-6 space-y-4">
               <h3 className="label-mono text-ink font-semibold tracking-widest">
-                {cat.title}
+                {cat.category}
               </h3>
               <p className="label-mono text-soft leading-relaxed text-[0.72rem]">
-                {cat.skills.join(' — ')}
+                {cat.items.join(' — ').toUpperCase()}
               </p>
             </div>
           ))}

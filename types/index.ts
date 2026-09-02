@@ -1,39 +1,33 @@
 export interface Project {
   id: string;
   title: string;
-  description: string;
-  longDescription?: string;
   status: 'production' | 'development' | 'archived';
   statusLabel: string;
+  featured?: boolean;
   users?: string;
+  description: string;
+  longDescription?: string;
+  highlight?: string;
   stack: string[];
   links: {
     live?: string;
     github?: string;
   };
-  featured: boolean;
-  highlight?: string;
 }
 
-export interface Experience {
+export interface ExperienceItem {
   id: string;
   role: string;
   company: string;
-  period: string;
   location: string;
+  period: string;
   description: string[];
-  skills?: string[];
-}
-
-export interface Skill {
-  name: string;
-  icon?: string;
+  technologies: string[];
 }
 
 export interface SkillCategory {
   category: string;
-  icon: string;
-  skills: Skill[];
+  items: string[];
 }
 
 export interface SocialLink {
@@ -43,8 +37,6 @@ export interface SocialLink {
 }
 
 export interface Certification {
-  name: string;
+  title: string;
   issuer: string;
-  year: string;
-  badge?: string;
 }
