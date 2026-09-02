@@ -16,7 +16,7 @@
 
 /* Reset de elementos para estética de papel impresso */
 * {
-  border-radius: 0 !important;
+  border-radiu: 0 !important;
   box-shadow: none !important;
   text-shadow: none !important;
 }
@@ -68,22 +68,22 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.08) 0px,
-    rgba(255, 255, 255, 0.08) 2px,
-    transparent 2px,
-    transparent 4px
-  );
+  background: repeating-linear-gradient(0deg,
+      rgba(255, 255, 255, 0.08) 0px,
+      rgba(255, 255, 255, 0.08) 2px,
+      transparent 2px,
+      transparent 4px);
   mix-blend-mode: soft-light;
 }
 
 /* Acessibilidade & foco */
-a, button {
+a,
+button {
   transition: color 170ms ease, background-color 170ms ease, border-color 170ms ease;
 }
 
-a:focus-visible, button:focus-visible {
+a:focus-visible,
+button:focus-visible {
   outline: 2px solid var(--ink) !important;
   outline-offset: 4px !important;
 }
