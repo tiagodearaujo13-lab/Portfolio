@@ -16,7 +16,7 @@ export default function Navbar() {
         <a
           href="#"
           className="font-mono text-xs font-medium tracking-widest text-ink uppercase no-underline hover:no-underline"
-          aria-label="Tiago Francisco — Início"
+          aria-label="Tiago Araújo — Voltar ao início"
         >
           ~/tiago.dev
         </a>
@@ -28,12 +28,13 @@ export default function Navbar() {
           </span>
 
           <nav
-            aria-label="Links rápidos"
+            aria-label="Navegação principal"
             className="flex items-center gap-4 md:gap-6 font-mono text-[0.66rem] uppercase tracking-wider"
           >
             <button
               onClick={() => setIsModalOpen(true)}
               className="text-ink underline underline-offset-4 hover:text-soft bg-transparent border-none cursor-pointer font-mono text-[0.66rem] uppercase tracking-wider p-0"
+              aria-label="Abrir modal para descarregar o Curriculum Vitae"
             >
               CV ↓
             </button>
@@ -42,6 +43,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-ink underline underline-offset-4 hover:text-soft"
+              aria-label="Ver perfil no GitHub (abre em novo separador)"
             >
               GITHUB ↗
             </a>
@@ -50,12 +52,14 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-ink underline underline-offset-4 hover:text-soft"
+              aria-label="Ver perfil no LinkedIn (abre em novo separador)"
             >
               LINKEDIN ↗
             </a>
             <a
               href="#contato"
               className="text-ink underline underline-offset-4 hover:text-soft"
+              aria-label="Ir para a secção de contato"
             >
               CONTATO ↗
             </a>

@@ -122,6 +122,16 @@ export const experiences: ExperienceItem[] = [
       'Arquitetura de autenticação segura híbrida combinando JWT assinado, hashing de credenciais com Bcrypt e Single Sign-On via Google OAuth 2.0.',
       'Migração de dados estruturais de SQLite local para PostgreSQL serverless em nuvem (Neon.tech) garantindo alta disponibilidade.',
     ],
+    techStack: [
+      'React.js',
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'Stripe API',
+      'JWT',
+      '@react-pdf/renderer',
+      'Tailwind CSS',
+    ],
     technologies: [
       'React.js',
       'Node.js',
@@ -144,6 +154,15 @@ export const experiences: ExperienceItem[] = [
       'Desenvolvimento de extensões Chrome avançadas para automação e extração de dados B2B com injeção segura de scripts e sanitização anti-XSS.',
       'Aplicação contínua de boas práticas de Clean Architecture, refatoração orientada a testes (Vitest) e pipelines de deploy automatizados.',
     ],
+    techStack: [
+      'TypeScript',
+      'React',
+      'Node.js',
+      'Chrome API',
+      'REST APIs',
+      'Tailwind CSS',
+      'GitFlow',
+    ],
     technologies: [
       'TypeScript',
       'React',
@@ -164,6 +183,13 @@ export const experiences: ExperienceItem[] = [
       'Liderança direta e coordenação diária de equipas multidisciplinares de alta performance (+20 colaboradores) em ambientes de estresse e pressão contínuos.',
       'Gestão de cadeia de suprimentos, previsibilidade orçamentária, controlo rigoroso de desperdícios e entregas críticas sob o modelo Just-in-Time.',
       'Resolução de incidentes e tomada de decisão estratégica em segundos mantendo conformidade absoluta com padrões de qualidade e tolerância zero a falhas.',
+    ],
+    techStack: [
+      'Liderança de Equipas',
+      'Processos Just-in-Time',
+      'Gestão de Crise',
+      'Tomada de Decisão',
+      'Controlo Orçamentário',
     ],
     technologies: [
       'Liderança de Equipas',

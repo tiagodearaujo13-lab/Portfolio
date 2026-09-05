@@ -31,6 +31,7 @@ export default function ContactSection() {
             <a
               href={`mailto:${personalInfo.email}`}
               className="label-mono text-ink text-[0.78rem] tracking-wider no-underline hover:text-soft"
+              aria-label={`Enviar e-mail para ${personalInfo.email}`}
             >
               {personalInfo.email} ↗
             </a>
@@ -39,6 +40,7 @@ export default function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="label-mono text-ink text-[0.78rem] tracking-wider no-underline hover:text-soft"
+              aria-label="Aceder ao perfil no LinkedIn (abre em novo separador)"
             >
               LINKEDIN ↗
             </a>
@@ -47,6 +49,7 @@ export default function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="label-mono text-ink text-[0.78rem] tracking-wider no-underline hover:text-soft"
+              aria-label="Aceder ao perfil no GitHub (abre em novo separador)"
             >
               GITHUB ↗
             </a>
@@ -55,6 +58,7 @@ export default function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="label-mono text-ink text-[0.78rem] tracking-wider no-underline hover:text-soft"
+              aria-label="Iniciar conversa no WhatsApp (abre em novo separador)"
             >
               {personalInfo.phone} ↗
             </a>

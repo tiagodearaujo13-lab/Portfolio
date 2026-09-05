@@ -4,9 +4,10 @@ node_modules/
 .pnp.js
 .yarn/install-state.gz
 
-# Build
-/.next/
+# Build & Cobertura
+.next/
 /out/
+coverage/
 
 # Produção
 /build
@@ -21,8 +22,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Variáveis de ambiente
-.env
-.env*.local
+.env*
 !.env.example
 
 # Vercel

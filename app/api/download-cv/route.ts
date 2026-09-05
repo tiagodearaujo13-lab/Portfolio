@@ -1,16 +1,66 @@
 import { NextRequest, NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
+import { ApiResponse } from '@/types';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const PDF_FILE_PATH = path.join(process.cwd(), 'public', 'assets', 'cv-tiago-francisco.pdf');
 
-export async function POST(req: NextRequest) {
+/**
+ * Servidor seguro de PDF do CV via requisição GET.
+ * Configura cabeçalhos de segurança e cache contínuo.
+ */
+export async function GET(): Promise<NextResponse> {
   try {
-    const body = await req.json();
+    const fileBuffer = await fs.promises.readFile(PDF_FILE_PATH);
+
+    return new NextResponse(fileBuffer, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename="Tiago-Araujo-Fullstack-Dev.pdf"',
+        'Cache-Control': 'public, max-age=86400, stale-while-revalidate=43200',
+      },
+    });
+  } catch (error) {
+    const err = error as { code?: string; message?: string };
+    console.error('[API_DOWNLOAD_CV_GET_ERROR]', err);
+
+    if (err.code === 'ENOENT') {
+      return NextResponse.json<ApiResponse>(
+        {
+          success: false,
+          error: 'Ficheiro PDF do CV não foi encontrado no servidor.',
+        },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json<ApiResponse>(
+      {
+        success: false,
+        error: 'Erro interno ao processar a solicitação de download.',
+      },
+      { status: 500 }
+    );
+  }
+}
+
+/**
+ * Validação de lead e autorização de download via requisição POST.
+ */
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  try {
+    const body = await req.json().catch(() => ({}));
     const { email } = body;
 
     // 1. Validação estrita de entrada
     if (!email || typeof email !== 'string' || !EMAIL_REGEX.test(email.trim())) {
-      return NextResponse.json(
-        { error: 'Por favor, introduza um endereço de e-mail válido.' },
+      return NextResponse.json<ApiResponse>(
+        {
+          success: false,
+          error: 'Por favor, introduza um endereço de e-mail válido.',
+        },
         { status: 400 }
       );
     }
@@ -23,15 +73,14 @@ export async function POST(req: NextRequest) {
       timeStyle: 'medium',
     });
 
-    // 2. Extração de telemetria da requisição (Vercel Edge Headers)
+    // 2. Extração de telemetria da requisição
     const userAgent = req.headers.get('user-agent') || 'Desconhecido';
     const clientIp =
       req.headers.get('x-forwarded-for') ||
       req.headers.get('x-real-ip') ||
       'IP Oculto';
     const city =
-      req.headers.get('x-vercel-ip-city') ||
-      'Localização não identificada';
+      req.headers.get('x-vercel-ip-city') || 'Localização não identificada';
     const country = req.headers.get('x-vercel-ip-country') || 'PT';
 
     // 3. Notificação via Resend (não-bloqueante — tolerante a falhas)
@@ -97,27 +146,36 @@ export async function POST(req: NextRequest) {
       } catch (emailErr) {
         console.error('[RESEND_DISPATCH_FAILED]', emailErr);
       }
-    } else {
-      console.warn(
-        '[WARN] RESEND_API_KEY não encontrada nas variáveis de ambiente.'
-      );
     }
 
-    // 4. Log de telemetria visível no painel da Vercel
     console.log(
       `[CV_LEAD_CAPTURED] Email: ${cleanEmail} | Time: ${timestamp} | IP: ${clientIp} | City: ${city}, ${country}`
     );
 
-    // 5. Retorno de sucesso garantindo a entrega do PDF
-    return NextResponse.json({
+    // 4. Verificação defensiva da existência do arquivo
+    try {
+      await fs.promises.access(PDF_FILE_PATH, fs.constants.R_OK);
+    } catch {
+      return NextResponse.json<ApiResponse>(
+        {
+          success: false,
+          error: 'Ficheiro PDF do CV não foi encontrado no servidor.',
+        },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json<ApiResponse<{ downloadUrl: string }>>({
       success: true,
       message: 'Download autorizado com sucesso.',
-      downloadUrl: '/assets/cv-tiago-francisco.pdf',
+      data: {
+        downloadUrl: '/api/download-cv',
+      },
     });
   } catch (error) {
-    console.error('[API_ROUTE_ERROR]', error);
-    return NextResponse.json(
-      { error: 'Erro interno ao processar a solicitação.' },
+    console.error('[API_ROUTE_POST_ERROR]', error);
+    return NextResponse.json<ApiResponse>(
+      { success: false, error: 'Erro interno ao processar a solicitação.' },
       { status: 500 }
     );
   }

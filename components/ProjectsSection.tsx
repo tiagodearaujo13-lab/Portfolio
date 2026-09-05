@@ -26,7 +26,18 @@ export default function ProjectsSection() {
           <div className="divide-y divide-rule">
             {projects.map((project, index) => {
               const kickerNumber = String(index + 1).padStart(2, '0');
-              const linkUrl = project.links.live || project.links.github || '#';
+              const linkUrl =
+                project.liveUrl ||
+                project.links?.live ||
+                project.githubUrl ||
+                project.links?.github ||
+                '#';
+              const statusText = (
+                project.statusLabel ||
+                project.status ||
+                'PROJETO'
+              ).toUpperCase();
+              const stackItems = project.techStack || project.stack || [];
 
               return (
                 <a
@@ -35,10 +46,11 @@ export default function ProjectsSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group grid grid-cols-1 md:grid-cols-[minmax(4rem,0.5fr)_minmax(12rem,1.2fr)_2fr_auto] gap-5 items-baseline p-[clamp(1.5rem,3.2vw,3.2rem)] px-[var(--page-gutter)] text-ink no-underline transition-colors duration-[170ms] ease-in-out hover:bg-ink hover:text-paper"
+                  aria-label={`Ver detalhes do projeto ${project.title} (${statusText})`}
                 >
                   {/* Coluna 1: Kicker / Status */}
                   <span className="label-mono text-inherit">
-                    {kickerNumber} / {project.statusLabel.toUpperCase()}
+                    {kickerNumber} / {statusText}
                   </span>
 
                   {/* Coluna 2: Título Serifado */}
@@ -52,7 +64,7 @@ export default function ProjectsSection() {
                       {project.description}
                     </p>
                     <div className="label-mono opacity-80 text-[0.62rem]">
-                      {project.stack.slice(0, 4).join(' — ').toUpperCase()}
+                      {stackItems.slice(0, 4).join(' — ').toUpperCase()}
                     </div>
                   </div>
 

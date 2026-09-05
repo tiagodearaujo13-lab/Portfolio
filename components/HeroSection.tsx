@@ -13,7 +13,7 @@ export default function HeroSection() {
       <section
         id="hero"
         className="grid grid-cols-1 lg:grid-cols-[1.12fr_0.88fr] min-h-[min(48rem,calc(100svh-3.6rem))] border-b border-rule bg-paper"
-        aria-label="Perfil de Tiago Francisco"
+        aria-label="Perfil profissional de Tiago Araújo Francisco"
       >
         {/* Coluna Esquerda */}
         <div className="flex flex-col justify-between p-[clamp(2rem,6vw,6rem)] px-[var(--page-gutter)] py-[clamp(2rem,4vw,4rem)]">
@@ -49,18 +49,21 @@ export default function HeroSection() {
               <a
                 href="#projetos"
                 className="label-mono bg-ink text-paper px-6 py-3 no-underline hover:bg-soft-ink hover:text-paper"
+                aria-label="Navegar até a secção de projetos"
               >
                 VER PROJETOS →
               </a>
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="label-mono bg-paper text-ink border border-rule px-6 py-3 cursor-pointer hover:bg-ink hover:text-paper"
+                aria-label="Abrir modal para descarregar o Curriculum Vitae"
               >
                 DESCARREGAR CV ↓
               </button>
               <a
                 href="#contato"
                 className="label-mono bg-paper text-ink border border-rule px-6 py-3 no-underline hover:bg-ink hover:text-paper"
+                aria-label="Navegar para a secção de contato"
               >
                 ENTRAR EM CONTATO ↗
               </a>
@@ -72,7 +75,7 @@ export default function HeroSection() {
         <div className="relative min-h-[24rem] lg:min-h-full bg-[#e5e5e5] border-t lg:border-t-0 lg:border-l border-rule overflow-hidden scanlines-overlay">
           <Image
             src="/assets/tiago.webp"
-            alt="Retrato P&B de Tiago Francisco"
+            alt="Retrato P&B de Tiago Araújo Francisco"
             fill
             className="object-cover grayscale contrast-[1.25] brightness-[1.05] mix-blend-multiply"
             priority

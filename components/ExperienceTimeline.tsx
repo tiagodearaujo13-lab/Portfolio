@@ -54,7 +54,7 @@ export default function ExperienceTimeline() {
 
               {/* Tags de Tecnologias */}
               <div className="label-mono text-soft text-[0.65rem] flex flex-wrap gap-2">
-                {exp.technologies.map((tech) => (
+                {(exp.techStack || exp.technologies || []).map((tech) => (
                   <span
                     key={tech}
                     className="border border-quiet px-2 py-0.5 text-ink"
