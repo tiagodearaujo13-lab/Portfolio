@@ -46,6 +46,48 @@ export const projects: Project[] = [
     },
   },
   {
+    id: 'clearbounce',
+    title: 'ClearBounce',
+    status: 'development',
+    statusLabel: 'SaaS B2B Monorepo',
+    featured: false,
+    users: 'Validação SMTP de Listas em Escala',
+    role: 'Fundador & Lead Full-Stack Engineer',
+    impact: 'Pipeline SMTP Seguro & Billing Transacional',
+    description:
+      'Plataforma B2B de autoatendimento para validação e limpeza de listas de e-mails em escala, detetando endereços inválidos, domínios descartáveis e contas inexistentes via pipeline SMTP seguro.',
+    fullDescription:
+      'Monorepo de alta coesão estruturado em server/ (API Fastify com validação SMTP, filas BullMQ e billing) e web/ (self-service em Next.js App Router). Segurança orientada a OWASP Top 10: bloqueio SSRF antes de qualquer conexão SMTP, rate limiting em dupla camada, API Keys com hashing SHA-256 e webhooks Stripe com validação criptográfica.',
+    longDescription:
+      'Monorepo de alta coesão estruturado em server/ (API Fastify com validação SMTP, filas BullMQ e billing) e web/ (self-service em Next.js App Router). Segurança orientada a OWASP Top 10: bloqueio SSRF antes de qualquer conexão SMTP, rate limiting em dupla camada, API Keys com hashing SHA-256 e webhooks Stripe com validação criptográfica.',
+    highlight:
+      'Pipeline de verificação SMTP com proteção SSRF (IPs privados e loopback bloqueados) e processamento assíncrono de listas via filas BullMQ em Redis.',
+    techStack: [
+      'Fastify',
+      'Next.js (App Router)',
+      'TypeScript',
+      'PostgreSQL',
+      'Redis & BullMQ',
+      'Stripe Billing',
+      'JWT Authentication',
+      'Vitest & Playwright',
+    ],
+    stack: [
+      'Fastify',
+      'Next.js (App Router)',
+      'TypeScript',
+      'PostgreSQL',
+      'Redis & BullMQ',
+      'Stripe Billing',
+      'JWT Authentication',
+      'Vitest & Playwright',
+    ],
+    githubUrl: 'https://github.com/tiagodearaujo13-lab/ClearBounce',
+    links: {
+      github: 'https://github.com/tiagodearaujo13-lab/ClearBounce',
+    },
+  },
+  {
     id: 'leadpulse',
     title: 'LeadPulse',
     status: 'production',
