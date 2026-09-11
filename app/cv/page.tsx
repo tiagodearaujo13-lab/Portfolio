@@ -147,6 +147,14 @@ export default function CvPage() {
                     — B2B EXTENSION & API
                   </span>
                 </h3>
+                <a
+                  href="https://leadpulse-bice.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="label-mono text-ink text-[0.65rem] no-underline hover:text-soft"
+                >
+                  leadpulse-bice.vercel.app ↗
+                </a>
               </div>
               <p className="font-sans text-[0.88rem] leading-[1.5] text-soft mb-2">
                 Módulo cliente/servidor e extensão Chrome para captação,
@@ -169,6 +177,14 @@ export default function CvPage() {
                     — FULL-STACK PLATFORM
                   </span>
                 </h3>
+                <a
+                  href="https://cognirav.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="label-mono text-ink text-[0.65rem] no-underline hover:text-soft"
+                >
+                  cognirav.vercel.app ↗
+                </a>
               </div>
               <p className="font-sans text-[0.88rem] leading-[1.5] text-soft mb-2">
                 Sistema ponta a ponta para execução de baterias psicométricas,
