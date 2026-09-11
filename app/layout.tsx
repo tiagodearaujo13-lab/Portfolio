@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import TouchCrackEffect from '@/components/mobile/TouchCrackEffect';
 
 export const metadata: Metadata = {
   title: {
@@ -76,6 +77,7 @@ export default function RootLayout({
   return (
     <html lang="pt-PT" className="scroll-smooth">
       <body className="font-sans bg-paper text-ink antialiased">
+        <TouchCrackEffect />
         {children}
       </body>
     </html>

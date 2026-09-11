@@ -16,7 +16,7 @@
 
 /* Reset de elementos para estética de papel impresso */
 * {
-  border-radiu: 0 !important;
+  border-radius: 0 !important;
   box-shadow: none !important;
   text-shadow: none !important;
 }
@@ -35,6 +35,9 @@ body {
   padding: 0;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
 }
 
 /* Utilitários tipográficos suíços */
@@ -96,11 +99,84 @@ button:focus-visible {
   }
 }
 
+@keyframes touch-crack-fade {
+  0% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  12% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+}
+
+.touch-crack {
+  animation: touch-crack-fade 1.2s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .touch-crack {
+    display: none;
+  }
+}
+
 @keyframes dash {
   from {
     stroke-dashoffset: 28;
   }
   to {
-    stroke-dashoffset: 0;
+    stroke-dashoffset: -36;
+  }
+}
+
+.topology-flow {
+  animation: dash 1.5s linear infinite;
+}
+
+.topology-node {
+  cursor: pointer;
+  outline: none;
+  transition: filter 170ms ease;
+}
+
+.topology-node:hover,
+.topology-node:focus-visible,
+.topology-node.is-active {
+  filter: drop-shadow(0 0 8px rgba(0, 163, 255, 0.3));
+}
+
+.topology-node:focus-visible rect:first-of-type {
+  stroke: #00A3FF;
+}
+
+.topology-radar {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: topology-radar-pulse 2.8s ease-out infinite;
+  opacity: 0.2;
+}
+
+.topology-radar-delayed {
+  animation-delay: 1.4s;
+}
+
+@keyframes topology-radar-pulse {
+  0%, 100% {
+    opacity: 0.08;
+    transform: scale(0.86);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topology-flow,
+  .topology-radar {
+    animation: none;
   }
 }
