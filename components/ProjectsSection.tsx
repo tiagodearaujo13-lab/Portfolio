@@ -1,6 +1,24 @@
 'use client';
 
 import { projects } from '@/data/projects';
+import { ExternalLink, Github } from 'lucide-react';
+
+const baseActionStyles =
+  'label-mono inline-flex items-center justify-center gap-2 px-4 py-2 border transition-colors duration-[170ms] ease-in-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current';
+
+const liveActionStyles = [
+  baseActionStyles,
+  'bg-ink text-paper border-ink',
+  'hover:bg-soft-ink hover:border-soft-ink',
+  'group-hover:bg-paper group-hover:text-ink group-hover:border-paper',
+].join(' ');
+
+const codeActionStyles = [
+  baseActionStyles,
+  'bg-transparent text-ink border-rule',
+  'hover:bg-ink hover:text-paper',
+  'group-hover:text-paper group-hover:border-paper',
+].join(' ');
 
 export default function ProjectsSection() {
   return (
@@ -26,12 +44,8 @@ export default function ProjectsSection() {
           <div className="divide-y divide-rule">
             {projects.map((project, index) => {
               const kickerNumber = String(index + 1).padStart(2, '0');
-              const linkUrl =
-                project.liveUrl ||
-                project.links?.live ||
-                project.githubUrl ||
-                project.links?.github ||
-                '#';
+              const liveUrl = project.liveUrl || project.links?.live;
+              const githubUrl = project.githubUrl || project.links?.github;
               const statusText = (
                 project.statusLabel ||
                 project.status ||
@@ -40,13 +54,9 @@ export default function ProjectsSection() {
               const stackItems = project.techStack || project.stack || [];
 
               return (
-                <a
+                <article
                   key={project.id}
-                  href={linkUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group grid grid-cols-1 md:grid-cols-[minmax(4rem,0.5fr)_minmax(12rem,1.2fr)_2fr_auto] gap-5 items-baseline p-[clamp(1.5rem,3.2vw,3.2rem)] px-[var(--page-gutter)] text-ink no-underline transition-colors duration-[170ms] ease-in-out hover:bg-ink hover:text-paper"
-                  aria-label={`Ver detalhes do projeto ${project.title} (${statusText})`}
+                  className="group grid grid-cols-1 md:grid-cols-[minmax(4rem,0.5fr)_minmax(12rem,1.2fr)_2fr_auto] gap-5 items-baseline p-[clamp(1.5rem,3.2vw,3.2rem)] px-[var(--page-gutter)] text-ink transition-colors duration-[170ms] ease-in-out hover:bg-ink hover:text-paper"
                 >
                   {/* Coluna 1: Kicker / Status */}
                   <span className="label-mono text-inherit">
@@ -68,14 +78,36 @@ export default function ProjectsSection() {
                     </div>
                   </div>
 
-                  {/* Coluna 4: Seta */}
-                  <span
-                    className="font-sans text-2xl leading-none text-inherit transition-transform duration-[170ms] ease-in-out group-hover:translate-x-[0.35rem]"
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
-                </a>
+                  {/* Ações: Deploy em Produção + Repositório */}
+                  {(liveUrl || githubUrl) && (
+                    <div className="md:col-span-4 flex items-center gap-3 flex-wrap mt-4 pt-4 border-t border-quiet group-hover:border-paper/40">
+                      {liveUrl && (
+                        <a
+                          href={liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Ver projeto ${project.title} online`}
+                          className={liveActionStyles}
+                        >
+                          <ExternalLink size={14} strokeWidth={2} aria-hidden="true" />
+                          Ver Online
+                        </a>
+                      )}
+                      {githubUrl && (
+                        <a
+                          href={githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Ver código de ${project.title} no GitHub`}
+                          className={codeActionStyles}
+                        >
+                          <Github size={14} strokeWidth={2} aria-hidden="true" />
+                          Código
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </article>
               );
             })}
           </div>

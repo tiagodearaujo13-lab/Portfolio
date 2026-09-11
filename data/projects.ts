@@ -83,8 +83,10 @@ export const projects: Project[] = [
       'Vitest & Playwright',
     ],
     githubUrl: 'https://github.com/tiagodearaujo13-lab/ClearBounce',
+    liveUrl: 'https://clear-bounce.vercel.app',
     links: {
       github: 'https://github.com/tiagodearaujo13-lab/ClearBounce',
+      live: 'https://clear-bounce.vercel.app',
     },
   },
   {
@@ -123,8 +125,10 @@ export const projects: Project[] = [
       'Tailwind CSS',
     ],
     githubUrl: 'https://github.com/tiagodearaujo13-lab/leadpulse',
+    liveUrl: 'https://leadpulse-bice.vercel.app',
     links: {
       github: 'https://github.com/tiagodearaujo13-lab/leadpulse',
+      live: 'https://leadpulse-bice.vercel.app',
     },
   },
   {
@@ -163,8 +167,10 @@ export const projects: Project[] = [
       'Tailwind CSS',
     ],
     githubUrl: 'https://github.com/tiagodearaujo13-lab/cognirav',
+    liveUrl: 'https://cognirav.vercel.app',
     links: {
       github: 'https://github.com/tiagodearaujo13-lab/cognirav',
+      live: 'https://cognirav.vercel.app',
     },
   },
   {
