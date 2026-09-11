@@ -91,6 +91,30 @@ describe('Componente ProjectsSection', () => {
     expect(leadPulseLiveLink).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
+  it('deve renderizar o botão "Ver Online" do Godoy Shake apontando para o deploy em produção', () => {
+    render(<ProjectsSection />);
+
+    const godoyShakeLiveLink = getLiveLinkFor('Godoy Shake');
+    expect(godoyShakeLiveLink).toHaveAttribute(
+      'href',
+      'https://godoy-shake.vercel.app'
+    );
+    expect(godoyShakeLiveLink).toHaveAttribute('target', '_blank');
+    expect(godoyShakeLiveLink).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
+  it('deve renderizar o botão "Ver Online" do Raiz & Luz apontando para o deploy em produção', () => {
+    render(<ProjectsSection />);
+
+    const raizELuzLiveLink = getLiveLinkFor('Raiz & Luz');
+    expect(raizELuzLiveLink).toHaveAttribute(
+      'href',
+      'https://raiz-e-luz-web-lemon.vercel.app/'
+    );
+    expect(raizELuzLiveLink).toHaveAttribute('target', '_blank');
+    expect(raizELuzLiveLink).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
   it('deve renderizar o botão "Código" (GitHub) com atributos de segurança para cada projeto com repositório', () => {
     render(<ProjectsSection />);
 

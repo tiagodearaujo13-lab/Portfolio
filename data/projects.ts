@@ -205,8 +205,10 @@ export const projects: Project[] = [
       'Lucide React',
     ],
     githubUrl: 'https://github.com/tiagodearaujo13-lab/godoy-shake',
+    liveUrl: 'https://godoy-shake.vercel.app',
     links: {
       github: 'https://github.com/tiagodearaujo13-lab/godoy-shake',
+      live: 'https://godoy-shake.vercel.app',
     },
   },
   {
@@ -241,8 +243,10 @@ export const projects: Project[] = [
       'Framer Motion',
     ],
     githubUrl: 'https://github.com/tiagodearaujo13-lab/raiz-e-luz-web',
+    liveUrl: 'https://raiz-e-luz-web-lemon.vercel.app/',
     links: {
       github: 'https://github.com/tiagodearaujo13-lab/raiz-e-luz-web',
+      live: 'https://raiz-e-luz-web-lemon.vercel.app/',
     },
   },
 ];
