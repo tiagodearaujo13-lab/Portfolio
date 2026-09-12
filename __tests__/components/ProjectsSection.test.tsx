@@ -58,6 +58,32 @@ describe('Componente ProjectsSection', () => {
     });
   });
 
+  it('deve renderizar o NormaSafe HACCP como primeiro projeto em destaque, apenas com botão "Código"', () => {
+    render(<ProjectsSection />);
+
+    // Primeiro projeto da lista (kicker 01)
+    const firstHeading = screen.getAllByRole('heading', { level: 3 })[0];
+    expect(firstHeading).toHaveTextContent('NormaSafe HACCP');
+
+    // Sem liveUrl: não pode ter botão "Ver Online"
+    expect(
+      screen.queryByRole('link', {
+        name: 'Ver projeto NormaSafe HACCP online',
+      })
+    ).not.toBeInTheDocument();
+
+    // Com repositório: botão "Código" aponta para o GitHub
+    const githubLink = screen.getByRole('link', {
+      name: 'Ver código de NormaSafe HACCP no GitHub',
+    });
+    expect(githubLink).toHaveAttribute(
+      'href',
+      'https://github.com/tiagodearaujo13-lab/normasafe-haccp'
+    );
+    expect(githubLink).toHaveAttribute('target', '_blank');
+    expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
   it('deve renderizar o botão "Ver Online" do ClearBounce apontando para o deploy em produção', () => {
     render(<ProjectsSection />);
 

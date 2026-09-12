@@ -2,6 +2,40 @@ import { Project } from '@/types';
 
 export const projects: Project[] = [
   {
+    id: 'normasafe-haccp',
+    title: 'NormaSafe HACCP',
+    status: 'development',
+    statusLabel: 'Plataforma de Segurança Alimentar',
+    featured: true,
+    users: 'Conformidade HACCP Digital',
+    role: 'Fundador & Lead Full-Stack Engineer',
+    impact: 'Conformidade HACCP Digitalizada',
+    description:
+      'Aplicação web para digitalização e gestão de planos HACCP (Hazard Analysis and Critical Control Points), garantindo conformidade com as normas de segurança alimentar de forma estruturada e auditável.',
+    fullDescription:
+      'Plataforma construída com Next.js (App Router) e TypeScript em modo estrito, orientada à gestão de pontos críticos de controlo, registos de monitorização e documentação de conformidade alimentar.',
+    longDescription:
+      'Plataforma construída com Next.js (App Router) e TypeScript em modo estrito, orientada à gestão de pontos críticos de controlo, registos de monitorização e documentação de conformidade alimentar.',
+    highlight:
+      'Digitalização de planos HACCP: pontos críticos de controlo, monitorização e evidências de auditoria num só sistema.',
+    techStack: [
+      'Next.js (App Router)',
+      'React.js',
+      'TypeScript',
+      'Tailwind CSS',
+    ],
+    stack: [
+      'Next.js (App Router)',
+      'React.js',
+      'TypeScript',
+      'Tailwind CSS',
+    ],
+    githubUrl: 'https://github.com/tiagodearaujo13-lab/normasafe-haccp',
+    links: {
+      github: 'https://github.com/tiagodearaujo13-lab/normasafe-haccp',
+    },
+  },
+  {
     id: 'docfacil',
     title: 'DocFácil.pt',
     status: 'production',
