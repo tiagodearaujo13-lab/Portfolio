@@ -11,7 +11,7 @@ export const projects: Project[] = [
     role: 'Fundador & Lead Full-Stack Engineer',
     impact: 'Pull Requests Prontos para Produção em 48 Horas',
     description:
-      'Capacidade de engenharia sénior entregue de forma assíncrona através de GitHub Issues focadas e pull requests prontos para produção.',
+      'Capacidade de engenharia entregue de forma assíncrona através de GitHub Issues focadas e pull requests prontos para produção.',
     fullDescription:
       'Serviço de subscrição Founder Desk com fila linear de uma tarefa ativa, zero chamadas ou reuniões e entrega de PRs em até 48 horas, com possibilidade de pausa ou cancelamento a qualquer momento.',
     longDescription:
