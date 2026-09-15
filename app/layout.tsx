@@ -4,15 +4,15 @@ import TouchCrackEffect from '@/components/mobile/TouchCrackEffect';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Tiago Araújo | Senior Fullstack Developer',
-    template: '%s | Tiago Araújo',
+    default: 'Tiago Francisco | Fullstack',
+    template: '%s | Tiago Francisco',
   },
   description:
     'Portfólio profissional de Tiago Araújo Francisco — Engenheiro de Software Full-Stack especialista em Node.js, React, Next.js, TypeScript e Clean Architecture.',
   keywords: [
     'Tiago Araújo',
     'Tiago Francisco',
-    'Senior Fullstack Developer',
+    'Fullstack Developer',
     'Engenheiro de Software',
     'Node.js',
     'React',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://portfolio-lilac-six-37.vercel.app',
-    title: 'Tiago Araújo | Senior Fullstack Developer',
+    title: 'Tiago Francisco | Fullstack',
     description:
       'Engenheiro de Software Full-Stack especialista em Node.js, React, Next.js, TypeScript e arquitetura resiliente de produtos em produção.',
     siteName: 'Tiago Araújo | Portfólio',
@@ -37,14 +37,14 @@ export const metadata: Metadata = {
         url: '/assets/tiago.webp',
         width: 1200,
         height: 630,
-        alt: 'Tiago Araújo - Senior Fullstack Developer',
+        alt: 'Tiago Francisco - Fullstack Developer',
       },
     ],
     locale: 'pt_PT',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tiago Araújo | Senior Fullstack Developer',
+    title: 'Tiago Francisco | Fullstack',
     description:
       'Engenheiro de Software Full-Stack especialista em Node.js, React, Next.js, TypeScript e arquitetura resiliente.',
     images: [
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
         url: '/assets/tiago.webp',
         width: 1200,
         height: 630,
-        alt: 'Tiago Araújo - Senior Fullstack Developer',
+        alt: 'Tiago Francisco - Fullstack Developer',
       },
     ],
   },
