@@ -1,6 +1,8 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { copyByLanguage } from '@/data/i18n';
 import { personalInfo } from '@/data/content';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
@@ -17,6 +19,8 @@ const initialForm = {
 export default function ContactSection() {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState<FormStatus>('idle');
+  const { lang } = useLanguage();
+  const copy = copyByLanguage[lang];
 
   const updateField = (field: keyof typeof initialForm, value: string) => {
     setForm((current) => ({ ...current, [field]: value }));
@@ -56,7 +60,7 @@ export default function ContactSection() {
       className="grid grid-cols-1 gap-[clamp(1.5rem,5vw,7rem)] border-b border-rule bg-paper p-[clamp(4rem,10vw,10rem)] px-[var(--page-gutter)] lg:grid-cols-[minmax(9rem,0.33fr)_1fr]"
       aria-labelledby="contact-heading"
     >
-      <div className="label-mono text-soft">05 / CONTATO</div>
+      <div className="label-mono text-soft">{copy.sections.contact}</div>
 
       <div>
         <ScrollReveal direction="left">
@@ -64,7 +68,7 @@ export default function ContactSection() {
             id="contact-heading"
             className="mb-[clamp(2.25rem,5vw,4.75rem)] max-w-[16ch] font-serif text-[clamp(2.3rem,5.1vw,5.7rem)] font-normal leading-[0.94] tracking-[-0.06em] text-ink"
           >
-            Iniciar Diálogo.
+            {copy.contact.heading}
           </h2>
         </ScrollReveal>
 
@@ -73,7 +77,7 @@ export default function ContactSection() {
           <form onSubmit={handleSubmit} className="border border-rule p-[clamp(1.4rem,3vw,2.4rem)]" noValidate>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <label className="font-sans text-sm text-ink">
-                Nome
+                {copy.contact.name}
                 <input
                   required
                   name="name"
@@ -84,11 +88,11 @@ export default function ContactSection() {
                   value={form.name}
                   onChange={(event) => updateField('name', event.target.value)}
                   className={fieldClassName}
-                  placeholder="O seu nome"
+                  placeholder={copy.contact.namePlaceholder}
                 />
               </label>
               <label className="font-sans text-sm text-ink">
-                E-mail de retorno
+                {copy.contact.email}
                 <input
                   required
                   name="email"
@@ -98,13 +102,13 @@ export default function ContactSection() {
                   value={form.email}
                   onChange={(event) => updateField('email', event.target.value)}
                   className={fieldClassName}
-                  placeholder="nome@empresa.pt"
+                  placeholder={copy.contact.emailPlaceholder}
                 />
               </label>
             </div>
 
             <label className="mt-6 block font-sans text-sm text-ink">
-              Assunto
+              {copy.contact.subject}
               <input
                 required
                 name="subject"
@@ -114,12 +118,12 @@ export default function ContactSection() {
                 value={form.subject}
                 onChange={(event) => updateField('subject', event.target.value)}
                 className={fieldClassName}
-                placeholder="Como posso ajudar?"
+                placeholder={copy.contact.subjectPlaceholder}
               />
             </label>
 
             <label className="mt-6 block font-sans text-sm text-ink">
-              Mensagem
+              {copy.contact.message}
               <textarea
                 required
                 name="message"
@@ -129,7 +133,7 @@ export default function ContactSection() {
                 value={form.message}
                 onChange={(event) => updateField('message', event.target.value)}
                 className={`${fieldClassName} resize-y`}
-                placeholder="Descreva o projeto, posição ou desafio técnico."
+                placeholder={copy.contact.messagePlaceholder}
               />
             </label>
 
@@ -153,26 +157,26 @@ export default function ContactSection() {
                 {status === 'sending' && (
                   <span className="h-3 w-3 animate-spin rounded-full border border-paper border-t-transparent motion-reduce:animate-none" aria-hidden="true" />
                 )}
-                {status === 'sending' ? 'A ENVIAR…' : 'ENVIAR MENSAGEM →'}
+                {status === 'sending' ? copy.contact.sending : copy.contact.send}
               </button>
-              <span className="font-mono text-[10px] uppercase tracking-wider text-soft">Resposta direta por e-mail</span>
+              <span className="font-mono text-[10px] uppercase tracking-wider text-soft">{copy.contact.response}</span>
             </div>
 
             <div className="mt-5 min-h-6" role="status" aria-live="polite">
-              {status === 'success' && <p className="font-mono text-xs text-ink">Mensagem enviada. Obrigado pelo contacto.</p>}
-              {status === 'error' && <p className="font-mono text-xs text-red-700">Não foi possível enviar. Verifique os dados ou tente novamente.</p>}
+              {status === 'success' && <p className="font-mono text-xs text-ink">{copy.contact.success}</p>}
+              {status === 'error' && <p className="font-mono text-xs text-red-700">{copy.contact.error}</p>}
             </div>
           </form>
 
-          <aside className="border-t border-rule pt-5 xl:border-l xl:border-t-0 xl:pl-6" aria-label="Outras formas de contacto">
+          <aside className="border-t border-rule pt-5 xl:border-l xl:border-t-0 xl:pl-6" aria-label={copy.contact.aria}>
             <p className="max-w-[26ch] font-serif text-2xl leading-tight text-ink">
-              Tem uma ideia, uma posição ou um sistema para discutir?
+              {copy.contact.aside}
             </p>
             <div className="mt-8 space-y-4">
               <a
                 href={`mailto:${personalInfo.email}`}
                 className="label-mono block text-ink no-underline hover:text-soft"
-                aria-label={`Enviar e-mail para ${personalInfo.email}`}
+                aria-label={`${lang === 'pt' ? 'Enviar e-mail para' : 'Email'} ${personalInfo.email}`}
               >
                 {personalInfo.email} ↗
               </a>
@@ -181,7 +185,7 @@ export default function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="label-mono block text-ink no-underline hover:text-soft"
-                aria-label="Aceder ao perfil no LinkedIn (abre em novo separador)"
+                aria-label={lang === 'pt' ? 'Aceder ao perfil no LinkedIn (abre em novo separador)' : 'Open LinkedIn profile (opens in a new tab)'}
               >
                 LINKEDIN ↗
               </a>
@@ -190,7 +194,7 @@ export default function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="label-mono block text-ink no-underline hover:text-soft"
-                aria-label="Aceder ao perfil no GitHub (abre em novo separador)"
+                aria-label={lang === 'pt' ? 'Aceder ao perfil no GitHub (abre em novo separador)' : 'Open GitHub profile (opens in a new tab)'}
               >
                 GITHUB ↗
               </a>

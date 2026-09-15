@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { copyByLanguage } from '@/data/i18n';
 
 interface CvDownloadModalProps {
   isOpen: boolean;
@@ -11,6 +13,8 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const { lang } = useLanguage();
+  const copy = copyByLanguage[lang];
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -63,7 +67,7 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
     } catch (err) {
       setStatus('error');
       setErrorMessage(
-        err instanceof Error ? err.message : 'Ocorreu um erro. Tente novamente.'
+        err instanceof Error ? err.message : copy.modal.errorFallback
       );
     }
   };
@@ -85,18 +89,18 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
         {/* Cabeçalho */}
         <div className="flex items-start justify-between border-b border-rule pb-4">
           <div className="space-y-1">
-            <span className="label-mono text-soft">DOCUMENTO OFICIAL / 2026</span>
+            <span className="label-mono text-soft">{copy.modal.document}</span>
             <h3
               id="cv-modal-title"
               className="font-serif text-2xl md:text-3xl text-ink tracking-tight"
             >
-              Aceder ao Curriculum Vitae
+              {copy.modal.title}
             </h3>
           </div>
           <button
             onClick={onClose}
             className="label-mono text-sm px-2 py-1 border border-transparent text-ink hover:border-rule"
-            aria-label="Fechar modal"
+            aria-label={copy.modal.closeAria}
           >
             [✕]
           </button>
@@ -107,15 +111,13 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
           <div className="space-y-6 py-4">
             <div className="space-y-3">
               <p className="label-mono text-ink font-bold">
-                AUTORIZAÇÃO CONCEDIDA / 2026
+                {copy.modal.authorised}
               </p>
               <h4 className="font-serif text-2xl text-ink">
-                Acesso ao Curriculum Vitae
+                {copy.modal.successTitle}
               </h4>
               <p className="font-serif text-base md:text-lg text-soft leading-relaxed">
-                O seu registo foi validado com sucesso. Para garantir que recebe
-                a versão oficial, atualizada e com layout de alta densidade
-                técnica (1 página), aceda à visualização web:
+                {copy.modal.successText}
               </p>
             </div>
 
@@ -125,12 +127,11 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
               rel="noopener noreferrer"
               className="block px-6 py-4 bg-ink text-paper label-mono text-center no-underline hover:bg-soft-ink"
             >
-              VISUALIZAR CV WEB ↗
+              {copy.modal.viewWeb}
             </a>
 
             <p className="font-serif text-sm text-soft leading-relaxed">
-              Após abrir o CV Web, clique em “IMPRIMIR / GUARDAR EM PDF” para
-              exportar a versão física oficial de 1 página.
+              {copy.modal.printInstruction}
             </p>
 
             <button
@@ -138,15 +139,14 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
               onClick={onClose}
               className="label-mono text-ink border border-rule px-5 py-3 hover:bg-ink hover:text-paper"
             >
-              FECHAR JANELA
+              {copy.modal.close}
             </button>
           </div>
         ) : (
           /* Estado: Formulário */
           <form onSubmit={handleSubmit} className="space-y-5">
             <p className="font-serif text-sm text-soft leading-relaxed">
-              Introduza o seu endereço de e-mail corporativo ou pessoal para
-              desbloquear o download direto do documento em formato PDF:
+              {copy.modal.intro}
             </p>
 
             <div className="space-y-2">
@@ -154,7 +154,7 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
                 htmlFor="lead-email"
                 className="label-mono text-ink block font-bold"
               >
-                E-MAIL PROFISSIONAL *
+                {copy.modal.emailLabel}
               </label>
               <input
                 ref={inputRef}
@@ -163,7 +163,7 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="exemplo@empresa.com"
+                placeholder={copy.modal.emailPlaceholder}
                 className="w-full px-4 py-3 border border-rule bg-transparent font-mono text-sm text-ink placeholder:text-soft focus:outline-none focus:ring-2 focus:ring-ink"
                 disabled={status === 'loading'}
                 autoComplete="email"
@@ -177,16 +177,14 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
               <span className="label-mono text-[0.6rem] text-soft">
-                SEM SPAM · DADOS PROTEGIDOS
+                {copy.modal.privacy}
               </span>
               <button
                 type="submit"
                 disabled={status === 'loading'}
                 className="w-full sm:w-auto px-8 py-3 bg-ink text-paper label-mono hover:bg-soft-ink disabled:opacity-50"
               >
-                {status === 'loading'
-                  ? 'A PROCESSAR...'
-                  : 'CONFIRMAR & ACEDER AO CV ↓'}
+                {status === 'loading' ? copy.modal.processing : copy.modal.submit}
               </button>
             </div>
           </form>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
 export const metadata: Metadata = {
   title: {
@@ -76,7 +77,7 @@ export default function RootLayout({
   return (
     <html lang="pt-PT" className="scroll-smooth">
       <body className="font-sans bg-paper text-ink antialiased">
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

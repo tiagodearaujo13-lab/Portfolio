@@ -1,10 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { copyByLanguage } from '@/data/i18n';
 import CvDownloadModal from '@/components/CvDownloadModal';
 
 export default function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { lang, setLanguage } = useLanguage();
+  const copy = copyByLanguage[lang];
 
   return (
     <>
@@ -16,7 +20,7 @@ export default function Navbar() {
         <a
           href="#"
           className="font-mono text-xs font-medium tracking-widest text-ink uppercase no-underline hover:no-underline"
-          aria-label="Tiago Araújo — Voltar ao início"
+          aria-label={copy.nav.homeAria}
         >
           ~/tiago.dev
         </a>
@@ -24,46 +28,52 @@ export default function Navbar() {
         {/* Direita: Nota + Links */}
         <div className="flex items-center gap-6 md:gap-8">
           <span className="hidden lg:inline text-soft font-mono text-[0.66rem] uppercase tracking-wider text-right">
-            Engenheiro Full-Stack JS/TS &amp; CSM®
+            {copy.nav.role}
           </span>
 
           <nav
-            aria-label="Navegação principal"
+            aria-label={lang === 'pt' ? 'Navegação principal' : 'Main navigation'}
             className="flex items-center gap-4 md:gap-6 font-mono text-[0.66rem] uppercase tracking-wider"
           >
             <button
               onClick={() => setIsModalOpen(true)}
               className="text-ink underline underline-offset-4 hover:text-soft bg-transparent border-none cursor-pointer font-mono text-[0.66rem] uppercase tracking-wider p-0"
-              aria-label="Abrir modal para descarregar o Curriculum Vitae"
+              aria-label={copy.nav.cvAria}
             >
-              CV ↓
+              {copy.nav.cv}
             </button>
             <a
               href="https://github.com/tiagodearaujo13-lab"
               target="_blank"
               rel="noopener noreferrer"
               className="text-ink underline underline-offset-4 hover:text-soft"
-              aria-label="Ver perfil no GitHub (abre em novo separador)"
+              aria-label={copy.nav.githubAria}
             >
-              GITHUB ↗
+              {copy.nav.githubLabel}
             </a>
             <a
               href="https://www.linkedin.com/in/tiago-araújofrancisco/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-ink underline underline-offset-4 hover:text-soft"
-              aria-label="Ver perfil no LinkedIn (abre em novo separador)"
+              aria-label={copy.nav.linkedinAria}
             >
-              LINKEDIN ↗
+              {copy.nav.linkedinLabel}
             </a>
             <a
               href="#contato"
               className="text-ink underline underline-offset-4 hover:text-soft"
-              aria-label="Ir para a secção de contato"
+              aria-label={copy.nav.contactAria}
             >
-              CONTATO ↗
+              {copy.nav.contact}
             </a>
           </nav>
+
+          <div className="flex items-center border border-rule font-mono text-[0.66rem] uppercase tracking-wider" aria-label={copy.nav.languageAria}>
+            <button type="button" onClick={() => setLanguage('pt')} className={`px-2.5 py-1 transition-colors ${lang === 'pt' ? 'bg-[var(--ink)] text-[var(--paper)] font-bold' : 'text-[var(--soft-ink)] hover:text-[var(--ink)]'}`} aria-pressed={lang === 'pt'}>PT</button>
+            <span className="text-soft" aria-hidden="true">|</span>
+            <button type="button" onClick={() => setLanguage('en')} className={`px-2.5 py-1 transition-colors ${lang === 'en' ? 'bg-[var(--ink)] text-[var(--paper)] font-bold' : 'text-[var(--soft-ink)] hover:text-[var(--ink)]'}`} aria-pressed={lang === 'en'}>EN</button>
+          </div>
         </div>
       </header>
 

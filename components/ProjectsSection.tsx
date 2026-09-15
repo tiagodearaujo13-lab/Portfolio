@@ -1,6 +1,7 @@
 'use client';
 
-import { projects } from '@/data/projects';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { copyByLanguage, getProjectCopy } from '@/data/i18n';
 import { ExternalLink, Github } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
@@ -22,6 +23,9 @@ const codeActionStyles = [
 ].join(' ');
 
 export default function ProjectsSection() {
+  const { lang } = useLanguage();
+  const copy = copyByLanguage[lang];
+
   return (
     <section
       id="projetos"
@@ -29,7 +33,7 @@ export default function ProjectsSection() {
       aria-labelledby="projects-heading"
     >
       {/* Coluna Esquerda: Rótulo */}
-      <div className="label-mono text-soft">02 / PROJETOS</div>
+      <div className="label-mono text-soft">{copy.sections.projects}</div>
 
       {/* Coluna Direita */}
       <div>
@@ -45,14 +49,13 @@ export default function ProjectsSection() {
         {/* Lista Full-Bleed */}
         <div className="-mx-[var(--page-gutter)] border-t border-b border-rule">
           <div className="divide-y divide-rule">
-            {projects.map((project, index) => {
+            {copy.projects.map((project, index) => {
+              const localized = getProjectCopy(lang, project.id);
               const kickerNumber = String(index + 1).padStart(2, '0');
               const liveUrl = project.liveUrl || project.links?.live;
               const githubUrl = project.githubUrl || project.links?.github;
               const statusText = (
-                project.statusLabel ||
-                project.status ||
-                'PROJETO'
+                localized.statusLabel
               ).toUpperCase();
               const stackItems = project.techStack || project.stack || [];
 
@@ -79,7 +82,7 @@ export default function ProjectsSection() {
                   {/* Coluna 3: Descrição & Tags Mono */}
                   <div className="space-y-2 max-w-[28rem]">
                     <p className="font-serif text-[0.95rem] leading-[1.35] text-soft group-hover:text-paper transition-colors duration-[170ms]">
-                      {project.description}
+                      {localized.description}
                     </p>
                     <div className="label-mono opacity-80 text-[0.62rem]">
                       {stackItems.slice(0, 4).join(' — ').toUpperCase()}

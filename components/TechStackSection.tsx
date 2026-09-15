@@ -1,9 +1,13 @@
 'use client';
 
-import { skills } from '@/data/content';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { copyByLanguage } from '@/data/i18n';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function TechStackSection() {
+  const { lang } = useLanguage();
+  const copy = copyByLanguage[lang];
+
   return (
     <section
       id="tech-stack"
@@ -11,7 +15,7 @@ export default function TechStackSection() {
       aria-labelledby="tech-heading"
     >
       {/* Coluna Esquerda: Rótulo */}
-      <div className="label-mono text-soft">03 / TECH STACK</div>
+      <div className="label-mono text-soft">{copy.sections.tech}</div>
 
       {/* Coluna Direita */}
       <div>
@@ -26,7 +30,7 @@ export default function TechStackSection() {
 
         {/* Grade de Categorias */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[clamp(2rem,4vw,4rem)]">
-          {skills.map((cat, index) => (
+          {copy.skills.map((cat, index) => (
             <ScrollReveal key={cat.category} direction="up" delay={index * 100}>
             <div className="border-t border-rule pt-6 space-y-4">
               <h3 className="label-mono text-ink font-semibold tracking-widest">

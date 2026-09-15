@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, type KeyboardEvent } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { copyByLanguage } from '@/data/i18n';
 
 interface NodeData {
   id: string;
@@ -108,10 +110,12 @@ function TopologyNode({
   node,
   active,
   onActivate,
+  nodeLabel,
 }: {
   node: NodeData;
   active: boolean;
   onActivate: (node: NodeData) => void;
+  nodeLabel: string;
 }) {
   const handleKeyDown = (event: KeyboardEvent<SVGGElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -153,7 +157,7 @@ function TopologyNode({
       <CornerMarks {...node} active={active} />
 
       <text x={node.x + 17} y={node.y + 21} fill={CYAN} fontFamily="var(--mono)" fontSize="9" letterSpacing="1.4">
-        {`NÓ 0${NODES.findIndex((item) => item.id === node.id) + 1}`}
+        {`${nodeLabel} 0${NODES.findIndex((item) => item.id === node.id) + 1}`}
       </text>
       <text x={node.x + 17} y={node.y + 43} fill="#f4faff" fontFamily="var(--mono)" fontSize="13" fontWeight="700" letterSpacing="0.8">
         {node.name}
@@ -178,6 +182,8 @@ function TopologyNode({
 }
 
 export function SystemTopology() {
+  const { lang } = useLanguage();
+  const copy = copyByLanguage[lang];
   const defaultNode = NODES.find((node) => node.id === 'api') ?? NODES[0];
   const [activeNode, setActiveNode] = useState<NodeData>(defaultNode);
 
@@ -189,10 +195,10 @@ export function SystemTopology() {
       <header className="mb-4 flex flex-col gap-3 border-b border-[#1e293b] pb-3 sm:flex-row sm:items-center sm:justify-between">
         <h3 id="system-topology-title" className="flex items-center gap-2 font-mono text-[9px] font-bold uppercase tracking-widest text-[#00A3FF]">
           <span aria-hidden="true">■</span>
-          0002 / TOPOLOGIA DE SISTEMAS DINÂMICA
+          {copy.topology.title}
         </h3>
-        <p className="font-mono text-[8px] uppercase tracking-widest text-[#7d94a5]" aria-label="Serviços ativos">
-          CLIENT <span className="text-[#00A3FF]">•</span> API GATEWAY <span className="text-[#00A3FF]">•</span> REDIS CACHE <span className="text-[#00A3FF]">•</span> POSTGRESQL
+        <p className="font-mono text-[8px] uppercase tracking-widest text-[#7d94a5]" aria-label={lang === 'pt' ? 'Serviços ativos' : 'Active services'}>
+          {copy.topology.services}
         </p>
       </header>
 
@@ -210,8 +216,8 @@ export function SystemTopology() {
             aria-labelledby="system-topology-title system-topology-description"
             onMouseLeave={() => setActiveNode(defaultNode)}
           >
-            <title id="system-topology-description">Diagrama de fluxo entre cliente Edge, API Gateway, Redis, PostgreSQL e integrações externas.</title>
-            <desc>Selecione ou passe o cursor sobre um nó para consultar a telemetria no rodapé.</desc>
+            <title id="system-topology-description">{copy.topology.description}</title>
+            <desc>{lang === 'pt' ? 'Selecione ou passe o cursor sobre um nó para consultar a telemetria no rodapé.' : 'Select or hover over a node to inspect telemetry in the footer.'}</desc>
 
             <g opacity="0.28" fill="none" stroke="#284357" strokeWidth="0.7" strokeDasharray="2 7">
               <path d="M 30 18 H 1020" />
@@ -243,6 +249,7 @@ export function SystemTopology() {
                 node={node}
                 active={activeNode.id === node.id}
                 onActivate={setActiveNode}
+                nodeLabel={copy.topology.node}
               />
             ))}
           </svg>
@@ -251,13 +258,13 @@ export function SystemTopology() {
 
       <footer className="mt-4 flex flex-col gap-2 border-t border-[#1e293b] pt-3 font-mono text-[8px] uppercase tracking-wider text-[#91a4b1] sm:flex-row sm:items-center sm:justify-between">
         <p aria-live="polite">
-          <span className="text-[#00A3FF]">[ESTADO OPERACIONAL: TELEMETRIA ATIVA / LATÊNCIA 12ms]</span>
+          <span className="text-[#00A3FF]">{copy.topology.operational}</span>
           <br className="sm:hidden" />
           <span className="hidden sm:inline"> · </span>
           <span className="text-white">{activeNode.name}: </span>
           {activeNode.metrics}
         </p>
-        <p className="text-left sm:text-right">MOTOR: SVG VETORIAL NATIVO • ZERO GPU OVERHEAD • 60 FPS</p>
+        <p className="text-left sm:text-right">{copy.topology.engine}</p>
       </footer>
     </section>
   );

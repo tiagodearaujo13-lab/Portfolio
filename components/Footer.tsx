@@ -1,7 +1,12 @@
-import { personalInfo } from '@/data/content';
+'use client';
+
+import { useLanguage } from '@/contexts/LanguageContext';
+import { copyByLanguage } from '@/data/i18n';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { lang } = useLanguage();
+  const copy = copyByLanguage[lang];
 
   return (
     <footer
@@ -9,15 +14,15 @@ export default function Footer() {
       role="contentinfo"
     >
       <div className="label-mono text-soft">
-        © {currentYear} {personalInfo.name}
+        © {currentYear} Tiago Araújo Francisco
       </div>
 
       <a
         href="#hero"
         className="label-mono text-ink no-underline hover:text-soft"
-        aria-label="Voltar ao topo da página"
+        aria-label={copy.footer.backToTopAria}
       >
-        Voltar ao topo ↑
+        {copy.footer.backToTop}
       </a>
     </footer>
   );

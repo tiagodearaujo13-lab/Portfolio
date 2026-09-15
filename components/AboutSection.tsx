@@ -1,10 +1,14 @@
 'use client';
 
-import { personalInfo } from '@/data/content';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { copyByLanguage } from '@/data/i18n';
 import SystemArchitectureGraphic from './SystemArchitectureGraphic';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function AboutSection() {
+  const { lang } = useLanguage();
+  const copy = copyByLanguage[lang];
+
   return (
     <section
       id="sobre"
@@ -12,7 +16,7 @@ export default function AboutSection() {
       aria-labelledby="about-heading"
     >
       {/* Coluna Esquerda: Rótulo */}
-      <div className="label-mono text-soft">01 / PERFIL &amp; FILOSOFIA DE ENGENHARIA</div>
+      <div className="label-mono text-soft">{copy.sections.about}</div>
 
       {/* Coluna Direita */}
       <div>
@@ -21,12 +25,12 @@ export default function AboutSection() {
             id="about-heading"
             className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[20ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
           >
-            {personalInfo.bioHeadline}
+            {copy.about.headline}
           </h2>
         </ScrollReveal>
 
         <div className="space-y-[clamp(1.5rem,4vw,3.5rem)] max-w-[63rem]">
-          {personalInfo.aboutParagraphs.map((paragraph, index) => (
+          {copy.about.paragraphs.map((paragraph, index) => (
             <ScrollReveal key={index} direction="left" delay={100}>
               <p className="font-serif text-[clamp(1.05rem,1.65vw,1.42rem)] leading-[1.45] text-ink">
                 {paragraph}

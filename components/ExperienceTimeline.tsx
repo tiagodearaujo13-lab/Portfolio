@@ -1,9 +1,13 @@
 'use client';
 
-import { experiences } from '@/data/content';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { copyByLanguage } from '@/data/i18n';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function ExperienceTimeline() {
+  const { lang } = useLanguage();
+  const copy = copyByLanguage[lang];
+
   return (
     <section
       id="experiencia"
@@ -11,7 +15,7 @@ export default function ExperienceTimeline() {
       aria-labelledby="experience-heading"
     >
       {/* Coluna Esquerda: Rótulo */}
-      <div className="label-mono text-soft">04 / EXPERIÊNCIA</div>
+      <div className="label-mono text-soft">{copy.sections.experience}</div>
 
       {/* Coluna Direita */}
       <div>
@@ -25,7 +29,7 @@ export default function ExperienceTimeline() {
         </ScrollReveal>
 
         <div className="space-y-0">
-          {experiences.map((exp, index) => (
+          {copy.experiences.map((exp, index) => (
             <ScrollReveal key={exp.id} direction="up" delay={index * 150}>
             <article
               key={exp.id}
