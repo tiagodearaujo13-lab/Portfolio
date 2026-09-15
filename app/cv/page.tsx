@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     absolute: 'CV — Tiago Francisco | Fullstack',
   },
   description:
-    'Curriculum Vitae de Tiago Araújo Francisco — Engenheiro de Software Full-Stack, CSM®, TKP®. TypeScript, React, Node.js, PostgreSQL.',
+    'Curriculum Vitae de Tiago Francisco — Fullstack Developer, CSM®, TKP®. TypeScript, React, Node.js, PostgreSQL.',
 };
 
 export default function CvPage() {
@@ -40,7 +40,7 @@ export default function CvPage() {
             Francisco
           </h1>
           <p className="font-serif text-[clamp(1.1rem,1.8vw,1.4rem)] text-ink leading-snug mb-4">
-            Engenheiro de Software Full-Stack · Certified Scrum Master (CSM®)
+            Fullstack Developer · Certified Scrum Master (CSM®)
           </p>
           <div className="flex flex-wrap gap-x-6 gap-y-1 label-mono text-soft text-[0.7rem]">
             <a
@@ -272,7 +272,7 @@ export default function CvPage() {
             <article className="border-t border-rule py-5">
               <div className="flex flex-wrap justify-between items-baseline gap-2 mb-2">
                 <h3 className="font-serif text-base md:text-lg font-normal text-ink">
-                  Fundador & Lead Full-Stack Engineer{' '}
+                  Fundador & Lead Fullstack Engineer{' '}
                   <span className="font-sans text-soft font-light">
                     — DocFácil.pt (SaaS LegalTech)
                   </span>
@@ -302,7 +302,7 @@ export default function CvPage() {
             <article className="border-t border-quiet py-5">
               <div className="flex flex-wrap justify-between items-baseline gap-2 mb-2">
                 <h3 className="font-serif text-base md:text-lg font-normal text-ink">
-                  Engenheiro de Software Full-Stack{' '}
+                  Fullstack Developer{' '}
                   <span className="font-sans text-soft font-light">
                     — Consultoria Independente
                   </span>
@@ -407,7 +407,7 @@ export default function CvPage() {
         {/* ────────── RODAPÉ ────────── */}
         <footer className="border-t border-rule pt-4 flex flex-wrap justify-between items-center gap-4">
           <span className="label-mono text-soft text-[0.6rem]">
-            © {new Date().getFullYear()} TIAGO ARAÚJO FRANCISCO
+            © {new Date().getFullYear()} TIAGO FRANCISCO
           </span>
           <a
             href="/"
