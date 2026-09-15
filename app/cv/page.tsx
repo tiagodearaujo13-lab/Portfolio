@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import PrintButton from '@/components/PrintButton';
 
 export const metadata: Metadata = {
-  title: 'CV — Tiago Araújo Francisco | Engenheiro de Software Full-Stack',
+  title: {
+    absolute: 'CV — Tiago Francisco | Fullstack',
+  },
   description:
     'Curriculum Vitae de Tiago Araújo Francisco — Engenheiro de Software Full-Stack, CSM®, TKP®. TypeScript, React, Node.js, PostgreSQL.',
 };
