@@ -90,6 +90,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       try {
         const emailResponse = await fetch('https://api.resend.com/emails', {
           method: 'POST',
+          cache: 'no-store',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${resendApiKey}`,
