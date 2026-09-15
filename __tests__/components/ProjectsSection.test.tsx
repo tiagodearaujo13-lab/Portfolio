@@ -58,12 +58,31 @@ describe('Componente ProjectsSection', () => {
     });
   });
 
-  it('deve renderizar o NormaSafe HACCP como primeiro projeto em destaque, apenas com botão "Código"', () => {
+  it('deve renderizar o MergeDesks como primeiro projeto em destaque, apenas com botão "Ver Online"', () => {
     render(<ProjectsSection />);
 
     // Primeiro projeto da lista (kicker 01)
     const firstHeading = screen.getAllByRole('heading', { level: 3 })[0];
-    expect(firstHeading).toHaveTextContent('NormaSafe HACCP');
+    expect(firstHeading).toHaveTextContent('MergeDesks');
+
+    // Com liveUrl: botão "Ver Online" aponta para o deploy em produção
+    const liveLink = getLiveLinkFor('MergeDesks');
+    expect(liveLink).toHaveAttribute('href', 'https://mergedesks.vercel.app');
+    expect(liveLink).toHaveAttribute('target', '_blank');
+    expect(liveLink).toHaveAttribute('rel', 'noopener noreferrer');
+
+    // Sem repositório público: não pode ter botão "Código"
+    expect(
+      screen.queryByRole('link', {
+        name: 'Ver código de MergeDesks no GitHub',
+      })
+    ).not.toBeInTheDocument();
+  });
+
+  it('deve renderizar o NormaSafe HACCP sem botões, pois o repositório é privado e não há deploy público', () => {
+    render(<ProjectsSection />);
+
+    expect(screen.getByRole('heading', { name: 'NormaSafe HACCP' })).toBeInTheDocument();
 
     // Sem liveUrl: não pode ter botão "Ver Online"
     expect(
@@ -72,16 +91,12 @@ describe('Componente ProjectsSection', () => {
       })
     ).not.toBeInTheDocument();
 
-    // Com repositório: botão "Código" aponta para o GitHub
-    const githubLink = screen.getByRole('link', {
-      name: 'Ver código de NormaSafe HACCP no GitHub',
-    });
-    expect(githubLink).toHaveAttribute(
-      'href',
-      'https://github.com/tiagodearaujo13-lab/normasafe-haccp'
-    );
-    expect(githubLink).toHaveAttribute('target', '_blank');
-    expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
+    // Sem repositório público: não pode ter botão "Código"
+    expect(
+      screen.queryByRole('link', {
+        name: 'Ver código de NormaSafe HACCP no GitHub',
+      })
+    ).not.toBeInTheDocument();
   });
 
   it('deve renderizar o botão "Ver Online" do ClearBounce apontando para o deploy em produção', () => {

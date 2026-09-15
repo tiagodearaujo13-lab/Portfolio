@@ -2,6 +2,30 @@ import { Project } from '@/types';
 
 export const projects: Project[] = [
   {
+    id: 'mergedesks',
+    title: 'MergeDesks',
+    status: 'production',
+    statusLabel: 'SaaS em Produção',
+    featured: true,
+    users: 'Capacidade de Engenharia Assíncrona',
+    role: 'Fundador & Lead Full-Stack Engineer',
+    impact: 'Pull Requests Prontos para Produção em 48 Horas',
+    description:
+      'Capacidade de engenharia sénior entregue de forma assíncrona através de GitHub Issues focadas e pull requests prontos para produção.',
+    fullDescription:
+      'Serviço de subscrição Founder Desk com fila linear de uma tarefa ativa, zero chamadas ou reuniões e entrega de PRs em até 48 horas, com possibilidade de pausa ou cancelamento a qualquer momento.',
+    longDescription:
+      'Serviço de subscrição Founder Desk com fila linear de uma tarefa ativa, zero chamadas ou reuniões e entrega de PRs em até 48 horas, com possibilidade de pausa ou cancelamento a qualquer momento.',
+    highlight:
+      'Modelo assíncrono de engenharia: fila linear com uma tarefa ativa e pull requests em produção em até 48 horas, sem reuniões.',
+    techStack: ['Next.js (App Router)'],
+    stack: ['Next.js (App Router)'],
+    liveUrl: 'https://mergedesks.vercel.app',
+    links: {
+      live: 'https://mergedesks.vercel.app',
+    },
+  },
+  {
     id: 'normasafe-haccp',
     title: 'NormaSafe HACCP',
     status: 'development',
@@ -30,10 +54,6 @@ export const projects: Project[] = [
       'TypeScript',
       'Tailwind CSS',
     ],
-    githubUrl: 'https://github.com/tiagodearaujo13-lab/normasafe-haccp',
-    links: {
-      github: 'https://github.com/tiagodearaujo13-lab/normasafe-haccp',
-    },
   },
   {
     id: 'docfacil',
