@@ -45,7 +45,7 @@ export default function ExperienceTimeline() {
                 {exp.description.map((item, i) => (
                   <li
                     key={i}
-                    className="font-sans text-[clamp(0.95rem,1.4vw,1.15rem)] leading-[1.45] text-soft max-w-[48rem] pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-ink before:text-[0.75rem]"
+                    className="font-serif text-[clamp(0.95rem,1.4vw,1.15rem)] leading-[1.45] text-soft max-w-[48rem] pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-ink before:text-[0.75rem]"
                   >
                     {item}
                   </li>

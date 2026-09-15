@@ -60,13 +60,6 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
 
       setStatus('success');
 
-      // Dispara o download automático do PDF
-      const link = document.createElement('a');
-      link.href = data.downloadUrl;
-      link.download = 'CV_Tiago_Araujo_Francisco.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
     } catch (err) {
       setStatus('error');
       setErrorMessage(
@@ -112,38 +105,46 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
         {/* Estado: Sucesso */}
         {status === 'success' ? (
           <div className="space-y-6 py-4">
-            <div className="p-4 border border-rule space-y-2">
+            <div className="space-y-3">
               <p className="label-mono text-ink font-bold">
-                ✓ DOWNLOAD INICIADO COM SUCESSO
+                AUTORIZAÇÃO CONCEDIDA / 2026
               </p>
-              <p className="font-sans text-sm text-soft leading-relaxed">
-                O arquivo PDF foi enviado para o seu navegador. Caso o download
-                não tenha começado automaticamente, utilize as opções abaixo:
+              <h4 className="font-serif text-2xl text-ink">
+                Acesso ao Curriculum Vitae
+              </h4>
+              <p className="font-serif text-base md:text-lg text-soft leading-relaxed">
+                O seu registo foi validado com sucesso. Para garantir que recebe
+                a versão oficial, atualizada e com layout de alta densidade
+                técnica (1 página), aceda à visualização web:
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <a
-                href="/assets/cv-tiago-francisco.pdf"
-                download
-                className="px-6 py-3 bg-ink text-paper label-mono text-center no-underline hover:bg-soft-ink"
-              >
-                DESCARREGAR NOVAMENTE ↓
-              </a>
-              <a
-                href="/cv"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 border border-rule text-ink label-mono text-center no-underline hover:bg-ink hover:text-paper"
-              >
-                VISUALIZAR CV WEB ↗
-              </a>
-            </div>
+            <a
+              href="/cv"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-6 py-4 bg-ink text-paper label-mono text-center no-underline hover:bg-soft-ink"
+            >
+              VISUALIZAR CV WEB ↗
+            </a>
+
+            <p className="font-serif text-sm text-soft leading-relaxed">
+              Após abrir o CV Web, clique em “IMPRIMIR / GUARDAR EM PDF” para
+              exportar a versão física oficial de 1 página.
+            </p>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="label-mono text-ink border border-rule px-5 py-3 hover:bg-ink hover:text-paper"
+            >
+              FECHAR JANELA
+            </button>
           </div>
         ) : (
           /* Estado: Formulário */
           <form onSubmit={handleSubmit} className="space-y-5">
-            <p className="font-sans text-sm text-soft leading-relaxed">
+            <p className="font-serif text-sm text-soft leading-relaxed">
               Introduza o seu endereço de e-mail corporativo ou pessoal para
               desbloquear o download direto do documento em formato PDF:
             </p>
@@ -185,7 +186,7 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
               >
                 {status === 'loading'
                   ? 'A PROCESSAR...'
-                  : 'CONFIRMAR & DESCARREGAR ↓'}
+                  : 'CONFIRMAR & ACEDER AO CV ↓'}
               </button>
             </div>
           </form>

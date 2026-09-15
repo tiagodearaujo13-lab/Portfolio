@@ -152,25 +152,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       `[CV_LEAD_CAPTURED] Email: ${cleanEmail} | Time: ${timestamp} | IP: ${clientIp} | City: ${city}, ${country}`
     );
 
-    // 4. Verificação defensiva da existência do arquivo
-    try {
-      await fs.promises.access(PDF_FILE_PATH, fs.constants.R_OK);
-    } catch {
-      return NextResponse.json<ApiResponse>(
-        {
-          success: false,
-          error: 'Ficheiro PDF do CV não foi encontrado no servidor.',
-        },
-        { status: 404 }
-      );
-    }
-
-    return NextResponse.json<ApiResponse<{ downloadUrl: string }>>({
+    // 4. A autorização apenas regista o lead; o CV é visualizado e exportado pela página web.
+    return NextResponse.json<ApiResponse>({
       success: true,
-      message: 'Download autorizado com sucesso.',
-      data: {
-        downloadUrl: '/api/download-cv',
-      },
+      message: 'Acesso ao CV autorizado com sucesso.',
     });
   } catch (error) {
     console.error('[API_ROUTE_POST_ERROR]', error);

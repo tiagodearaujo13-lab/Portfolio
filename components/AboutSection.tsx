@@ -26,7 +26,7 @@ export default function AboutSection() {
           {personalInfo.aboutParagraphs.map((paragraph, index) => (
             <p
               key={index}
-              className="font-sans text-[clamp(1.05rem,1.65vw,1.42rem)] leading-[1.45] text-ink"
+              className="font-serif text-[clamp(1.05rem,1.65vw,1.42rem)] leading-[1.45] text-ink"
             >
               {paragraph}
             </p>

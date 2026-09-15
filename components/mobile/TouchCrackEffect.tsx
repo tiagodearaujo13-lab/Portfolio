@@ -10,7 +10,6 @@ interface CrackPoint {
 }
 
 let crackId = 0;
-let audioContext: AudioContext | null = null;
 
 function createCrackPaths(): string[] {
   const paths: string[] = [];
@@ -43,58 +42,6 @@ function createCrackPaths(): string[] {
   return paths;
 }
 
-function playGlassImpact(): void {
-  if (typeof window === 'undefined') return;
-
-  try {
-    const AudioContextConstructor =
-      window.AudioContext ||
-      (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-
-    if (!AudioContextConstructor) return;
-    audioContext ??= new AudioContextConstructor();
-    const context = audioContext;
-    const now = context.currentTime;
-
-    void context.resume();
-
-    const noiseBuffer = context.createBuffer(1, context.sampleRate * 0.08, context.sampleRate);
-    const channel = noiseBuffer.getChannelData(0);
-    for (let index = 0; index < channel.length; index += 1) {
-      channel[index] = (Math.random() * 2 - 1) * (1 - index / channel.length);
-    }
-
-    const noise = context.createBufferSource();
-    const filter = context.createBiquadFilter();
-    const gain = context.createGain();
-    filter.type = 'highpass';
-    filter.frequency.setValueAtTime(2600, now);
-    filter.Q.setValueAtTime(7, now);
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.38, now + 0.004);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.075);
-    noise.connect(filter).connect(gain).connect(context.destination);
-    noise.start(now);
-    noise.stop(now + 0.08);
-
-    // Pequenos harmónicos agudos dão ao ruído um carácter de estilhaço sem asset externo.
-    for (let index = 0; index < 4; index += 1) {
-      const oscillator = context.createOscillator();
-      const oscillatorGain = context.createGain();
-      oscillator.type = 'triangle';
-      oscillator.frequency.setValueAtTime(2400 + Math.random() * 3600, now);
-      oscillatorGain.gain.setValueAtTime(0.0001, now);
-      oscillatorGain.gain.exponentialRampToValueAtTime(0.035, now + 0.003);
-      oscillatorGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06 + index * 0.012);
-      oscillator.connect(oscillatorGain).connect(context.destination);
-      oscillator.start(now);
-      oscillator.stop(now + 0.08 + index * 0.012);
-    }
-  } catch {
-    // O efeito visual continua disponível quando o browser bloqueia áudio ou não o suporta.
-  }
-}
-
 export default function TouchCrackEffect() {
   const [cracks, setCracks] = useState<CrackPoint[]>([]);
   const touchEnabled = useRef(false);
@@ -118,7 +65,6 @@ export default function TouchCrackEffect() {
     };
 
     setCracks((current) => [...current.slice(-2), crack]);
-    playGlassImpact();
     window.setTimeout(() => {
       setCracks((current) => current.filter((item) => item.id !== crack.id));
     }, 1200);

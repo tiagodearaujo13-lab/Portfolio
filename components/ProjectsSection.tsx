@@ -2,6 +2,7 @@
 
 import { projects } from '@/data/projects';
 import { ExternalLink, Github } from 'lucide-react';
+import { playProjectClickSound } from '@/utils/sound';
 
 const baseActionStyles =
   'label-mono inline-flex items-center justify-center gap-2 px-4 py-2 border transition-colors duration-[170ms] ease-in-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current';
@@ -70,7 +71,7 @@ export default function ProjectsSection() {
 
                   {/* Coluna 3: Descrição & Tags Mono */}
                   <div className="space-y-2 max-w-[28rem]">
-                    <p className="font-sans text-[0.95rem] leading-[1.35] text-soft group-hover:text-paper transition-colors duration-[170ms]">
+                    <p className="font-serif text-[0.95rem] leading-[1.35] text-soft group-hover:text-paper transition-colors duration-[170ms]">
                       {project.description}
                     </p>
                     <div className="label-mono opacity-80 text-[0.62rem]">
@@ -88,6 +89,7 @@ export default function ProjectsSection() {
                           rel="noopener noreferrer"
                           aria-label={`Ver projeto ${project.title} online`}
                           className={liveActionStyles}
+                          onClick={playProjectClickSound}
                         >
                           <ExternalLink size={14} strokeWidth={2} aria-hidden="true" />
                           Ver Online
@@ -100,6 +102,7 @@ export default function ProjectsSection() {
                           rel="noopener noreferrer"
                           aria-label={`Ver código de ${project.title} no GitHub`}
                           className={codeActionStyles}
+                          onClick={playProjectClickSound}
                         >
                           <Github size={14} strokeWidth={2} aria-hidden="true" />
                           Código

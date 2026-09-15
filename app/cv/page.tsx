@@ -2,419 +2,136 @@ import type { Metadata } from 'next';
 import PrintButton from '@/components/PrintButton';
 
 export const metadata: Metadata = {
-  title: {
-    absolute: 'CV — Tiago Francisco | Fullstack',
-  },
+  title: { absolute: 'CV — Tiago Francisco | Fullstack' },
   description:
     'Curriculum Vitae de Tiago Francisco — Fullstack Developer, CSM®, TKP®. TypeScript, React, Node.js, PostgreSQL.',
 };
 
+const sectionTitle = 'cv-section-title font-sans text-xs font-bold uppercase tracking-wider border-b border-black pb-0.5 mb-1.5';
+const bodyText = 'font-serif text-[9.5px] leading-tight text-neutral-800';
+const monoText = 'font-mono text-[8px] leading-tight uppercase tracking-wide text-neutral-700';
+
 export default function CvPage() {
   return (
     <>
-      {/* Estilos de Impressão */}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            @media print {
-              .no-print { display: none !important; }
-              body { background: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-              @page { size: A4; margin: 1.5cm 2cm; }
-              .cv-page { padding: 0 !important; border: none !important; }
-              .cv-section { break-inside: avoid; }
-            }
-          `,
-        }}
-      />
+      <style dangerouslySetInnerHTML={{ __html: `
+        @page { size: A4 portrait; margin: 8mm 10mm; }
+        @media print {
+          html, body { width: 210mm; min-height: 297mm; background: #fff !important; }
+          body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          .print-hidden, .no-print { display: none !important; }
+          .cv-page { width: 190mm !important; max-width: none !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; }
+          .cv-section, .cv-block, header, footer { break-inside: avoid; page-break-inside: avoid; }
+          .cv-page p, .cv-page li { orphans: 2; widows: 2; }
+          .cv-section-title { font-size: 8px !important; margin-bottom: 5px !important; }
+          .cv-header { padding-bottom: 5px !important; margin-bottom: 8px !important; }
+          .cv-name { font-size: 20px !important; line-height: 0.88 !important; margin-bottom: 3px !important; }
+          .cv-role { font-size: 10px !important; margin-bottom: 4px !important; }
+          .cv-content { font-size: 9.5px !important; line-height: 1.15 !important; }
+          .cv-section { margin-bottom: 8px !important; }
+          .cv-grid { gap: 6px !important; }
+          .cv-project, .cv-career { padding-top: 4px !important; margin-top: 4px !important; }
+          .cv-project p, .cv-career li { font-size: 9.5px !important; line-height: 1.15 !important; }
+          .cv-skills p { font-size: 8px !important; }
+          .cv-cert { padding-top: 4px !important; }
+          a { color: inherit !important; text-decoration: none !important; }
+        }
+      ` }} />
 
-      {/* Botão Flutuante de Impressão (Client Component) */}
       <PrintButton />
 
-      {/* Página do CV */}
       <main className="cv-page max-w-[52rem] mx-auto px-[var(--page-gutter)] py-12 md:py-16 bg-paper text-ink">
-        {/* ────────── CABEÇALHO ────────── */}
-        <header className="border-b border-rule pb-6 mb-8">
-          <h1 className="font-sans font-normal text-[clamp(2.8rem,7vw,5.5rem)] leading-[0.85] tracking-[-0.07em] text-ink mb-3">
-            Tiago
-            <br />
-            Francisco
+        <header className="cv-header border-b border-rule pb-4 mb-6">
+          <h1 className="cv-name font-sans font-bold text-4xl leading-[0.85] tracking-[-0.07em] text-ink mb-2">
+            Tiago Francisco
           </h1>
-          <p className="font-serif text-[clamp(1.1rem,1.8vw,1.4rem)] text-ink leading-snug mb-4">
+          <p className="cv-role font-serif text-base text-ink leading-snug mb-3">
             Fullstack Developer · Certified Scrum Master (CSM®)
           </p>
-          <div className="flex flex-wrap gap-x-6 gap-y-1 label-mono text-soft text-[0.7rem]">
-            <a
-              href="mailto:tiagodearaujo13@gmail.com"
-              className="text-ink no-underline hover:text-soft"
-            >
-              tiagodearaujo13@gmail.com
-            </a>
-            <a
-              href="tel:+351939347977"
-              className="text-ink no-underline hover:text-soft"
-            >
-              +351 939 347 977
-            </a>
+          <div className="flex flex-wrap gap-x-4 gap-y-0.5 font-mono text-[9px] uppercase tracking-wide text-neutral-700">
+            <a href="mailto:tiagodearaujo13@gmail.com">tiagodearaujo13@gmail.com</a>
+            <a href="tel:+351939347977">+351 939 347 977</a>
             <span>Lagoa, Faro — Portugal</span>
-            <a
-              href="https://www.linkedin.com/in/tiago-araújofrancisco/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-ink no-underline hover:text-soft"
-            >
-              LINKEDIN ↗
-            </a>
-            <a
-              href="https://github.com/tiagodearaujo13-lab"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-ink no-underline hover:text-soft"
-            >
-              GITHUB ↗
-            </a>
+            <a href="https://www.linkedin.com/in/tiago-araújofrancisco/">LINKEDIN ↗</a>
+            <a href="https://github.com/tiagodearaujo13-lab">GITHUB ↗</a>
           </div>
         </header>
 
-        {/* ────────── 01 / PERFIL ────────── */}
-        <section className="cv-section mb-10" aria-labelledby="cv-profile">
-          <div className="flex items-baseline gap-4 border-b border-rule pb-2 mb-4">
-            <span className="label-mono text-soft text-[0.65rem]">01</span>
-            <h2
-              id="cv-profile"
-              className="font-serif text-xl md:text-2xl font-normal text-ink"
-            >
-              Perfil Profissional
-            </h2>
-          </div>
-          <p className="font-sans text-[0.95rem] leading-[1.55] text-ink max-w-[48rem]">
-            Desenvolvo sistemas web resilientes, escaláveis e de alta
-            disponibilidade em TypeScript, Node.js e React. Fundador e
-            engenheiro líder de SaaS em produção com mais de 300 utilizadores
-            ativos, canalizando duas décadas de liderança em operações críticas
-            para engenharia de software previsível, código limpo e entregas
-            Just-in-Time.
+        <section className="cv-section mb-5" aria-labelledby="cv-profile">
+          <h2 id="cv-profile" className={sectionTitle}>01 / Perfil profissional</h2>
+          <p className={`${bodyText} cv-content max-w-[48rem]`}>
+            Desenvolvo sistemas web resilientes, escaláveis e de alta disponibilidade em TypeScript, Node.js e React. Fundador e engenheiro líder de SaaS em produção com mais de 300 utilizadores ativos, canalizando duas décadas de liderança em operações críticas para engenharia de software previsível, código limpo e entregas Just-in-Time.
           </p>
         </section>
 
-        {/* ────────── 02 / PROJETOS EM DESTAQUE ────────── */}
-        <section className="cv-section mb-10" aria-labelledby="cv-projects">
-          <div className="flex items-baseline gap-4 border-b border-rule pb-2 mb-4">
-            <span className="label-mono text-soft text-[0.65rem]">02</span>
-            <h2
-              id="cv-projects"
-              className="font-serif text-xl md:text-2xl font-normal text-ink"
-            >
-              Projetos em Destaque
-            </h2>
-          </div>
-
-          <div className="space-y-6">
-            {/* DocFácil.pt */}
-            <article className="border-t border-quiet pt-4">
-              <div className="flex flex-wrap justify-between items-baseline gap-2 mb-1">
-                <h3 className="font-serif text-lg font-normal text-ink">
-                  DocFácil.pt{' '}
-                  <span className="label-mono text-soft font-normal">
-                    — SaaS EM PRODUÇÃO · +300 UTILIZADORES
-                  </span>
-                </h3>
-                <a
-                  href="https://docfacil.pt"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="label-mono text-ink text-[0.65rem] no-underline hover:text-soft"
-                >
-                  docfacil.pt ↗
-                </a>
+        <section className="cv-section mb-5" aria-labelledby="cv-projects">
+          <h2 id="cv-projects" className={sectionTitle}>02 / Projetos em destaque</h2>
+          <div className="space-y-2">
+            <article className="cv-block cv-project border-t border-quiet pt-2">
+              <div className="flex flex-wrap justify-between gap-x-2 items-baseline">
+                <h3 className="font-serif text-sm">DocFácil.pt <span className={monoText}>— SaaS em produção · +300 utilizadores</span></h3>
+                <a href="https://docfacil.pt" className={monoText}>docfacil.pt ↗</a>
               </div>
-              <p className="font-sans text-[0.88rem] leading-[1.5] text-soft mb-2">
-                Plataforma SaaS LegalTech para orquestração, automação e geração
-                algorítmica de documentos e contratos jurídicos em tempo de
-                execução. Monólito modular com frontend reativo em React.js, API
-                RESTful desacoplada em Node.js/Express, persistência em
-                PostgreSQL (Neon.tech) e webhooks idempotentes do Stripe.
-              </p>
-              <p className="label-mono text-soft text-[0.62rem]">
-                REACT.JS — NODE.JS — EXPRESS — POSTGRESQL — STRIPE WEBHOOKS —
-                JWT — @REACT-PDF/RENDERER — TAILWIND CSS
-              </p>
+              <p className={`${bodyText} mb-1`}>Plataforma SaaS LegalTech para orquestração, automação e geração algorítmica de documentos jurídicos. Monólito modular com React, Node.js/Express, PostgreSQL, Stripe e webhooks idempotentes.</p>
+              <p className={monoText}>REACT — NODE — EXPRESS — POSTGRESQL — STRIPE — JWT — TAILWIND</p>
             </article>
-
-            {/* LeadPulse */}
-            <article className="border-t border-quiet pt-4">
-              <div className="flex flex-wrap justify-between items-baseline gap-2 mb-1">
-                <h3 className="font-serif text-lg font-normal text-ink">
-                  LeadPulse{' '}
-                  <span className="label-mono text-soft font-normal">
-                    — B2B EXTENSION & API
-                  </span>
-                </h3>
-                <a
-                  href="https://leadpulse-bice.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="label-mono text-ink text-[0.65rem] no-underline hover:text-soft"
-                >
-                  leadpulse-bice.vercel.app ↗
-                </a>
+            <article className="cv-block cv-project border-t border-quiet pt-2">
+              <div className="flex flex-wrap justify-between gap-x-2 items-baseline">
+                <h3 className="font-serif text-sm">LeadPulse <span className={monoText}>— B2B Extension &amp; API</span></h3>
+                <a href="https://leadpulse-bice.vercel.app" className={monoText}>leadpulse-bice.vercel.app ↗</a>
               </div>
-              <p className="font-sans text-[0.88rem] leading-[1.5] text-soft mb-2">
-                Módulo cliente/servidor e extensão Chrome para captação,
-                raspagem programática e validação cadastral de leads corporativos
-                B2B. Arquitetura segura com DOMSanitizer customizado, isolamento
-                de contexto Chrome API e rate limiter adaptativo.
-              </p>
-              <p className="label-mono text-soft text-[0.62rem]">
-                TYPESCRIPT — REACT.JS — NODE.JS — EXPRESS — CHROME EXTENSION API
-                — VITEST — TAILWIND CSS
-              </p>
+              <p className={`${bodyText} mb-1`}>Módulo cliente/servidor e extensão Chrome para captação, raspagem programática e validação de leads B2B, com isolamento de contexto, sanitização e rate limiter adaptativo.</p>
+              <p className={monoText}>TYPESCRIPT — REACT — NODE — EXPRESS — CHROME API — VITEST</p>
             </article>
-
-            {/* Cognirav */}
-            <article className="border-t border-quiet pt-4">
-              <div className="flex flex-wrap justify-between items-baseline gap-2 mb-1">
-                <h3 className="font-serif text-lg font-normal text-ink">
-                  Cognirav{' '}
-                  <span className="label-mono text-soft font-normal">
-                    — FULL-STACK PLATFORM
-                  </span>
-                </h3>
-                <a
-                  href="https://cognirav.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="label-mono text-ink text-[0.65rem] no-underline hover:text-soft"
-                >
-                  cognirav.vercel.app ↗
-                </a>
+            <article className="cv-block cv-project border-t border-quiet pt-2">
+              <div className="flex flex-wrap justify-between gap-x-2 items-baseline">
+                <h3 className="font-serif text-sm">Cognirav <span className={monoText}>— Full-stack platform</span></h3>
+                <a href="https://cognirav.vercel.app" className={monoText}>cognirav.vercel.app ↗</a>
               </div>
-              <p className="font-sans text-[0.88rem] leading-[1.5] text-soft mb-2">
-                Sistema ponta a ponta para execução de baterias psicométricas,
-                computação algorítmica de score e geração de diagnósticos
-                analíticos de perfil. Monorepo modular com engine de avaliação em
-                React Context API orquestrando 30+ dimensões.
-              </p>
-              <p className="label-mono text-soft text-[0.62rem]">
-                TYPESCRIPT — REACT.JS (VITE) — NODE.JS — EXPRESS — CONTEXT API —
-                CANVAS API — TAILWIND CSS
-              </p>
+              <p className={`${bodyText} mb-1`}>Sistema ponta a ponta para baterias psicométricas, computação algorítmica de score e diagnósticos analíticos, com engine de avaliação em React Context API.</p>
+              <p className={monoText}>TYPESCRIPT — REACT — NODE — EXPRESS — CONTEXT API — CANVAS</p>
             </article>
           </div>
         </section>
 
-        {/* ────────── 03 / COMPETÊNCIAS TÉCNICAS ────────── */}
-        <section className="cv-section mb-10" aria-labelledby="cv-skills">
-          <div className="flex items-baseline gap-4 border-b border-rule pb-2 mb-4">
-            <span className="label-mono text-soft text-[0.65rem]">03</span>
-            <h2
-              id="cv-skills"
-              className="font-serif text-xl md:text-2xl font-normal text-ink"
-            >
-              Competências Técnicas
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="border-t border-rule pt-3">
-              <h3 className="label-mono text-ink font-semibold tracking-widest mb-2">
-                FRONTEND & INTERFACES
-              </h3>
-              <p className="label-mono text-soft text-[0.68rem] leading-relaxed">
-                TYPESCRIPT — REACT.JS — NEXT.JS (APP ROUTER) — VITE — TAILWIND
-                CSS — CONTEXT API — DESIGN SYSTEMS — WCAG 2.1 AA
-              </p>
-            </div>
-            <div className="border-t border-rule pt-3">
-              <h3 className="label-mono text-ink font-semibold tracking-widest mb-2">
-                BACKEND & DISTRIBUÍDOS
-              </h3>
-              <p className="label-mono text-soft text-[0.68rem] leading-relaxed">
-                NODE.JS — EXPRESS.JS — RESTFUL APIS — JWT — GOOGLE OAUTH 2.0 —
-                BCRYPT — RATE LIMITING — CORS & SECURITY HEADERS — NODEMAILER
-              </p>
-            </div>
-            <div className="border-t border-rule pt-3">
-              <h3 className="label-mono text-ink font-semibold tracking-widest mb-2">
-                PERSISTÊNCIA & DADOS
-              </h3>
-              <p className="label-mono text-soft text-[0.68rem] leading-relaxed">
-                POSTGRESQL (NEON.TECH) — MODELAGEM RELACIONAL — MIGRAÇÕES DE
-                SCHEMA — OTIMIZAÇÃO DE QUERIES — INTEGRIDADE TRANSACIONAL (ACID)
-              </p>
-            </div>
-            <div className="border-t border-rule pt-3">
-              <h3 className="label-mono text-ink font-semibold tracking-widest mb-2">
-                INTEGRAÇÕES, QUALIDADE & DEVOPS
-              </h3>
-              <p className="label-mono text-soft text-[0.68rem] leading-relaxed">
-                STRIPE CHECKOUT & WEBHOOKS — CHROME EXTENSIONS — VITEST — GIT &
-                GITFLOW — CI/CD (GITHUB ACTIONS) — VERCEL — SCRUM (CSM®) —
-                KANBAN (TKP®)
-              </p>
-            </div>
+        <section className="cv-section cv-skills mb-5" aria-labelledby="cv-skills">
+          <h2 id="cv-skills" className={sectionTitle}>03 / Competências técnicas</h2>
+          <div className="cv-grid grid grid-cols-2 gap-3">
+            <div className="cv-block border-t border-rule pt-1.5"><h3 className="font-mono text-[8px] font-semibold tracking-wider">FRONTEND &amp; INTERFACES</h3><p className={monoText}>TYPESCRIPT — REACT — NEXT.JS — VITE — TAILWIND — CONTEXT API — WCAG 2.1 AA</p></div>
+            <div className="cv-block border-t border-rule pt-1.5"><h3 className="font-mono text-[8px] font-semibold tracking-wider">BACKEND &amp; DISTRIBUÍDOS</h3><p className={monoText}>NODE — EXPRESS — REST APIS — JWT — OAUTH 2.0 — BCRYPT — RATE LIMITING</p></div>
+            <div className="cv-block border-t border-rule pt-1.5"><h3 className="font-mono text-[8px] font-semibold tracking-wider">PERSISTÊNCIA &amp; DADOS</h3><p className={monoText}>POSTGRESQL — MODELAGEM RELACIONAL — MIGRAÇÕES — QUERIES — ACID</p></div>
+            <div className="cv-block border-t border-rule pt-1.5"><h3 className="font-mono text-[8px] font-semibold tracking-wider">QUALIDADE &amp; DEVOPS</h3><p className={monoText}>STRIPE — CHROME EXTENSIONS — VITEST — GIT — CI/CD — VERCEL — SCRUM — KANBAN</p></div>
           </div>
         </section>
 
-        {/* ────────── 04 / TRAJETÓRIA PROFISSIONAL ────────── */}
-        <section className="cv-section mb-10" aria-labelledby="cv-experience">
-          <div className="flex items-baseline gap-4 border-b border-rule pb-2 mb-4">
-            <span className="label-mono text-soft text-[0.65rem]">04</span>
-            <h2
-              id="cv-experience"
-              className="font-serif text-xl md:text-2xl font-normal text-ink"
-            >
-              Trajetória Profissional
-            </h2>
-          </div>
-
-          <div className="space-y-0">
-            {/* DocFácil.pt */}
-            <article className="border-t border-rule py-5">
-              <div className="flex flex-wrap justify-between items-baseline gap-2 mb-2">
-                <h3 className="font-serif text-base md:text-lg font-normal text-ink">
-                  Fundador & Lead Fullstack Engineer{' '}
-                  <span className="font-sans text-soft font-light">
-                    — DocFácil.pt (SaaS LegalTech)
-                  </span>
-                </h3>
-                <span className="label-mono text-soft text-[0.65rem]">
-                  2024 — PRESENTE
-                </span>
-              </div>
-              <ul className="space-y-1 list-none pl-0">
-                <li className="font-sans text-[0.85rem] leading-[1.5] text-soft pl-3 relative before:content-['▸'] before:absolute before:left-0 before:text-ink before:text-[0.7rem]">
-                  Idealização, arquitetura de sistemas e implementação ponta a
-                  ponta de plataforma SaaS com +300 utilizadores ativos em
-                  produção.
-                </li>
-                <li className="font-sans text-[0.85rem] leading-[1.5] text-soft pl-3 relative before:content-['▸'] before:absolute before:left-0 before:text-ink before:text-[0.7rem]">
-                  Motor de compilação dinâmica de contratos em PDF com
-                  substituição algorítmica de cláusulas condicionais.
-                </li>
-                <li className="font-sans text-[0.85rem] leading-[1.5] text-soft pl-3 relative before:content-['▸'] before:absolute before:left-0 before:text-ink before:text-[0.7rem]">
-                  Faturamento transacional via Stripe Checkout com webhooks
-                  idempotentes e autenticação híbrida JWT + OAuth 2.0.
-                </li>
-              </ul>
+        <section className="cv-section mb-5" aria-labelledby="cv-experience">
+          <h2 id="cv-experience" className={sectionTitle}>04 / Trajetória profissional</h2>
+          <div className="space-y-2">
+            <article className="cv-block cv-career border-t border-rule pt-2">
+              <div className="flex flex-wrap justify-between gap-x-2 items-baseline"><h3 className="font-serif text-sm">Fundador &amp; Lead Fullstack Engineer <span className="font-sans text-neutral-600">— DocFácil.pt</span></h3><span className={monoText}>2024 — PRESENTE</span></div>
+              <ul className={`${bodyText} list-disc pl-3 space-y-0.5`}><li>Arquitetura e implementação ponta a ponta de SaaS com +300 utilizadores ativos em produção.</li><li>Motor de compilação dinâmica de contratos, Stripe Checkout, webhooks idempotentes e autenticação JWT + OAuth 2.0.</li></ul>
             </article>
-
-            {/* Freelancer */}
-            <article className="border-t border-quiet py-5">
-              <div className="flex flex-wrap justify-between items-baseline gap-2 mb-2">
-                <h3 className="font-serif text-base md:text-lg font-normal text-ink">
-                  Fullstack Developer{' '}
-                  <span className="font-sans text-soft font-light">
-                    — Consultoria Independente
-                  </span>
-                </h3>
-                <span className="label-mono text-soft text-[0.65rem]">
-                  2023 — PRESENTE
-                </span>
-              </div>
-              <ul className="space-y-1 list-none pl-0">
-                <li className="font-sans text-[0.85rem] leading-[1.5] text-soft pl-3 relative before:content-['▸'] before:absolute before:left-0 before:text-ink before:text-[0.7rem]">
-                  Arquitetura PERN/MERN com monólitos modulares, APIs limpas e
-                  contratos semânticos de integração.
-                </li>
-                <li className="font-sans text-[0.85rem] leading-[1.5] text-soft pl-3 relative before:content-['▸'] before:absolute before:left-0 before:text-ink before:text-[0.7rem]">
-                  Extensões Chrome para automação B2B com injeção segura de
-                  scripts e sanitização anti-XSS.
-                </li>
-                <li className="font-sans text-[0.85rem] leading-[1.5] text-soft pl-3 relative before:content-['▸'] before:absolute before:left-0 before:text-ink before:text-[0.7rem]">
-                  Clean Architecture, refatoração orientada a testes (Vitest) e
-                  pipelines CI/CD automatizados.
-                </li>
-              </ul>
+            <article className="cv-block cv-career border-t border-quiet pt-2">
+              <div className="flex flex-wrap justify-between gap-x-2 items-baseline"><h3 className="font-serif text-sm">Fullstack Developer <span className="font-sans text-neutral-600">— Consultoria Independente</span></h3><span className={monoText}>2023 — PRESENTE</span></div>
+              <ul className={`${bodyText} list-disc pl-3 space-y-0.5`}><li>Arquitetura PERN/MERN com monólitos modulares, APIs limpas e contratos semânticos.</li><li>Extensões Chrome B2B, Clean Architecture, Vitest e pipelines CI/CD automatizados.</li></ul>
             </article>
-
-            {/* Operações */}
-            <article className="border-t border-quiet py-5">
-              <div className="flex flex-wrap justify-between items-baseline gap-2 mb-2">
-                <h3 className="font-serif text-base md:text-lg font-normal text-ink">
-                  Gestão Operacional & Liderança Executiva{' '}
-                  <span className="font-sans text-soft font-light">
-                    — Hotelaria & Alta Gastronomia
-                  </span>
-                </h3>
-                <span className="label-mono text-soft text-[0.65rem]">
-                  2003 — 2023
-                </span>
-              </div>
-              <ul className="space-y-1 list-none pl-0">
-                <li className="font-sans text-[0.85rem] leading-[1.5] text-soft pl-3 relative before:content-['▸'] before:absolute before:left-0 before:text-ink before:text-[0.7rem]">
-                  Liderança de equipas de +20 colaboradores em ambientes de alta
-                  pressão e precisão contínua.
-                </li>
-                <li className="font-sans text-[0.85rem] leading-[1.5] text-soft pl-3 relative before:content-['▸'] before:absolute before:left-0 before:text-ink before:text-[0.7rem]">
-                  Gestão de cadeia de suprimentos, controlo orçamentário e
-                  entregas críticas sob modelo Just-in-Time.
-                </li>
-                <li className="font-sans text-[0.85rem] leading-[1.5] text-soft pl-3 relative before:content-['▸'] before:absolute before:left-0 before:text-ink before:text-[0.7rem]">
-                  Tomada de decisão estratégica em tempo real com tolerância zero
-                  a falhas operacionais.
-                </li>
-              </ul>
+            <article className="cv-block cv-career border-t border-quiet pt-2">
+              <div className="flex flex-wrap justify-between gap-x-2 items-baseline"><h3 className="font-serif text-sm">Gestão Operacional &amp; Liderança Executiva <span className="font-sans text-neutral-600">— Hotelaria &amp; Alta Gastronomia</span></h3><span className={monoText}>2003 — 2023</span></div>
+              <ul className={`${bodyText} list-disc pl-3 space-y-0.5`}><li>Liderança de equipas de +20 colaboradores em ambientes de alta pressão e precisão contínua.</li><li>Gestão de cadeia de suprimentos, orçamento e entregas críticas sob modelo Just-in-Time.</li></ul>
             </article>
           </div>
         </section>
 
-        {/* ────────── 05 / FORMAÇÃO & CERTIFICAÇÕES ────────── */}
-        <section className="cv-section mb-10" aria-labelledby="cv-certs">
-          <div className="flex items-baseline gap-4 border-b border-rule pb-2 mb-4">
-            <span className="label-mono text-soft text-[0.65rem]">05</span>
-            <h2
-              id="cv-certs"
-              className="font-serif text-xl md:text-2xl font-normal text-ink"
-            >
-              Formação & Certificações
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="border-t border-quiet pt-3">
-              <h3 className="font-sans text-sm font-semibold text-ink">
-                Certified Scrum Master® (CSM)
-              </h3>
-              <p className="label-mono text-soft text-[0.65rem]">
-                SCRUM ALLIANCE
-              </p>
-            </div>
-            <div className="border-t border-quiet pt-3">
-              <h3 className="font-sans text-sm font-semibold text-ink">
-                Team Kanban Practitioner® (TKP)
-              </h3>
-              <p className="label-mono text-soft text-[0.65rem]">
-                KANBAN UNIVERSITY
-              </p>
-            </div>
-            <div className="border-t border-quiet pt-3">
-              <h3 className="font-sans text-sm font-semibold text-ink">
-                Certified Agile Coach (CAC)
-              </h3>
-              <p className="label-mono text-soft text-[0.65rem]">MASSIMUS</p>
-            </div>
-            <div className="border-t border-quiet pt-3">
-              <h3 className="font-sans text-sm font-semibold text-ink">
-                Engenharia Full-Stack JavaScript/TypeScript
-              </h3>
-              <p className="label-mono text-soft text-[0.65rem]">
-                MATE ACADEMY BRASIL
-              </p>
-            </div>
+        <section className="cv-section mb-5" aria-labelledby="cv-certs">
+          <h2 id="cv-certs" className={sectionTitle}>05 / Formação &amp; certificações</h2>
+          <div className="cv-grid grid grid-cols-2 gap-2">
+            {['Certified Scrum Master® (CSM) — Scrum Alliance', 'Team Kanban Practitioner® (TKP) — Kanban University', 'Certified Agile Coach (CAC) — MASSIMUS', 'Engenharia Full-Stack JavaScript/TypeScript — Mate Academy Brasil'].map((cert) => <p key={cert} className="cv-cert cv-block border-t border-quiet pt-1.5 font-serif text-[9.5px] leading-tight">{cert}</p>)}
           </div>
         </section>
 
-        {/* ────────── RODAPÉ ────────── */}
-        <footer className="border-t border-rule pt-4 flex flex-wrap justify-between items-center gap-4">
-          <span className="label-mono text-soft text-[0.6rem]">
-            © {new Date().getFullYear()} TIAGO FRANCISCO
-          </span>
-          <a
-            href="/"
-            className="label-mono text-ink text-[0.65rem] no-underline hover:text-soft"
-          >
-            ← VOLTAR AO PORTFÓLIO
-          </a>
+        <footer className="print-hidden border-t border-rule pt-3 flex flex-wrap justify-between items-center gap-3">
+          <span className="font-mono text-[8px] uppercase tracking-wide text-neutral-600">© {new Date().getFullYear()} Tiago Francisco</span>
+          <a href="/" className="font-mono text-[9px] uppercase tracking-wide no-underline">← Voltar ao portfólio</a>
         </footer>
       </main>
     </>
