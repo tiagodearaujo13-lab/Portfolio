@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 import { personalInfo } from '@/data/content';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
@@ -58,13 +59,16 @@ export default function ContactSection() {
       <div className="label-mono text-soft">05 / CONTATO</div>
 
       <div>
-        <h2
-          id="contact-heading"
-          className="mb-[clamp(2.25rem,5vw,4.75rem)] max-w-[16ch] font-serif text-[clamp(2.3rem,5.1vw,5.7rem)] font-normal leading-[0.94] tracking-[-0.06em] text-ink"
-        >
-          Iniciar Diálogo.
-        </h2>
+        <ScrollReveal direction="left">
+          <h2
+            id="contact-heading"
+            className="mb-[clamp(2.25rem,5vw,4.75rem)] max-w-[16ch] font-serif text-[clamp(2.3rem,5.1vw,5.7rem)] font-normal leading-[0.94] tracking-[-0.06em] text-ink"
+          >
+            Iniciar Diálogo.
+          </h2>
+        </ScrollReveal>
 
+        <ScrollReveal direction="up" delay={100}>
         <div className="grid max-w-[62rem] grid-cols-1 gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(14rem,0.42fr)]">
           <form onSubmit={handleSubmit} className="border border-rule p-[clamp(1.4rem,3vw,2.4rem)]" noValidate>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -193,6 +197,7 @@ export default function ContactSection() {
             </div>
           </aside>
         </div>
+        </ScrollReveal>
       </div>
     </section>
   );

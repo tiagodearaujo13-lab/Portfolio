@@ -1,6 +1,7 @@
 'use client';
 
 import { experiences } from '@/data/content';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function ExperienceTimeline() {
   return (
@@ -14,15 +15,18 @@ export default function ExperienceTimeline() {
 
       {/* Coluna Direita */}
       <div>
-        <h2
-          id="experience-heading"
-          className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[16ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
-        >
-          Trajetória de Engenharia.
-        </h2>
+        <ScrollReveal direction="left">
+          <h2
+            id="experience-heading"
+            className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[16ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
+          >
+            Trajetória de Engenharia.
+          </h2>
+        </ScrollReveal>
 
         <div className="space-y-0">
           {experiences.map((exp, index) => (
+            <ScrollReveal key={exp.id} direction="up" delay={index * 150}>
             <article
               key={exp.id}
               className={`py-8 ${
@@ -64,6 +68,7 @@ export default function ExperienceTimeline() {
                 ))}
               </div>
             </article>
+            </ScrollReveal>
           ))}
         </div>
       </div>

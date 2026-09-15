@@ -1,6 +1,7 @@
 'use client';
 
 import { skills } from '@/data/content';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function TechStackSection() {
   return (
@@ -14,17 +15,20 @@ export default function TechStackSection() {
 
       {/* Coluna Direita */}
       <div>
-        <h2
-          id="tech-heading"
-          className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[16ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
-        >
-          Taxonomia de Engenharia.
-        </h2>
+        <ScrollReveal direction="left">
+          <h2
+            id="tech-heading"
+            className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[16ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
+          >
+            Taxonomia de Engenharia.
+          </h2>
+        </ScrollReveal>
 
         {/* Grade de Categorias */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[clamp(2rem,4vw,4rem)]">
-          {skills.map((cat) => (
-            <div key={cat.category} className="border-t border-rule pt-6 space-y-4">
+          {skills.map((cat, index) => (
+            <ScrollReveal key={cat.category} direction="up" delay={index * 100}>
+            <div className="border-t border-rule pt-6 space-y-4">
               <h3 className="label-mono text-ink font-semibold tracking-widest">
                 {cat.category}
               </h3>
@@ -32,6 +36,7 @@ export default function TechStackSection() {
                 {cat.items.join(' — ').toUpperCase()}
               </p>
             </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

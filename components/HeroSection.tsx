@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { personalInfo } from '@/data/content';
 import CvDownloadModal from '@/components/CvDownloadModal';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,7 +17,8 @@ export default function HeroSection() {
         aria-label="Perfil profissional de Tiago Araújo Francisco"
       >
         {/* Coluna Esquerda */}
-        <div className="flex flex-col justify-between p-[clamp(2rem,6vw,6rem)] px-[var(--page-gutter)] py-[clamp(2rem,4vw,4rem)]">
+        <ScrollReveal direction="left" className="h-full">
+        <div className="flex h-full flex-col justify-between p-[clamp(2rem,6vw,6rem)] px-[var(--page-gutter)] py-[clamp(2rem,4vw,4rem)]">
           {/* Eyebrow & Status */}
           <div className="flex flex-wrap items-center gap-3">
             <span className="label-mono text-soft">{personalInfo.eyebrow}</span>
@@ -38,13 +40,16 @@ export default function HeroSection() {
               {personalInfo.bioStatement}
             </p>
 
+            <ScrollReveal direction="up" delay={200}>
             <div className="label-mono text-soft flex flex-wrap gap-x-4 gap-y-1">
               <span>{personalInfo.role}</span>
               <span>·</span>
               <span>{personalInfo.location.toUpperCase()}</span>
             </div>
+            </ScrollReveal>
 
             {/* Botões de Ação */}
+            <ScrollReveal direction="up" delay={200}>
             <div className="flex flex-wrap gap-4 pt-2">
               <a
                 href="#projetos"
@@ -68,10 +73,13 @@ export default function HeroSection() {
                 ENTRAR EM CONTATO ↗
               </a>
             </div>
+            </ScrollReveal>
           </div>
         </div>
+        </ScrollReveal>
 
         {/* Coluna Direita (Retrato Retangular P&B) */}
+        <ScrollReveal direction="right" className="relative min-h-[24rem] lg:min-h-full">
         <div className="relative min-h-[24rem] lg:min-h-full bg-[#e5e5e5] border-t lg:border-t-0 lg:border-l border-rule overflow-hidden scanlines-overlay">
           <Image
             src="/assets/tiago.webp"
@@ -86,6 +94,7 @@ export default function HeroSection() {
             <span>0001 / P&amp;B</span>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       <CvDownloadModal

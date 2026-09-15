@@ -2,7 +2,7 @@
 
 import { projects } from '@/data/projects';
 import { ExternalLink, Github } from 'lucide-react';
-import { playProjectClickSound } from '@/utils/sound';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 
 const baseActionStyles =
   'label-mono inline-flex items-center justify-center gap-2 px-4 py-2 border transition-colors duration-[170ms] ease-in-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current';
@@ -33,12 +33,14 @@ export default function ProjectsSection() {
 
       {/* Coluna Direita */}
       <div>
-        <h2
-          id="projects-heading"
-          className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[16ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
-        >
-          Projetos &amp; Produtos.
-        </h2>
+        <ScrollReveal direction="left">
+          <h2
+            id="projects-heading"
+            className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[16ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
+          >
+            Projetos &amp; Produtos.
+          </h2>
+        </ScrollReveal>
 
         {/* Lista Full-Bleed */}
         <div className="-mx-[var(--page-gutter)] border-t border-b border-rule">
@@ -55,6 +57,11 @@ export default function ProjectsSection() {
               const stackItems = project.techStack || project.stack || [];
 
               return (
+                <ScrollReveal
+                  key={project.id}
+                  direction={index % 2 === 0 ? 'left' : 'right'}
+                  delay={index * 150}
+                >
                 <article
                   key={project.id}
                   className="group grid grid-cols-1 md:grid-cols-[minmax(4rem,0.5fr)_minmax(12rem,1.2fr)_2fr_auto] gap-5 items-baseline p-[clamp(1.5rem,3.2vw,3.2rem)] px-[var(--page-gutter)] text-ink transition-colors duration-[170ms] ease-in-out hover:bg-ink hover:text-paper"
@@ -89,7 +96,6 @@ export default function ProjectsSection() {
                           rel="noopener noreferrer"
                           aria-label={`Ver projeto ${project.title} online`}
                           className={liveActionStyles}
-                          onClick={playProjectClickSound}
                         >
                           <ExternalLink size={14} strokeWidth={2} aria-hidden="true" />
                           Ver Online
@@ -102,7 +108,6 @@ export default function ProjectsSection() {
                           rel="noopener noreferrer"
                           aria-label={`Ver código de ${project.title} no GitHub`}
                           className={codeActionStyles}
-                          onClick={playProjectClickSound}
                         >
                           <Github size={14} strokeWidth={2} aria-hidden="true" />
                           Código
@@ -111,6 +116,7 @@ export default function ProjectsSection() {
                     </div>
                   )}
                 </article>
+                </ScrollReveal>
               );
             })}
           </div>

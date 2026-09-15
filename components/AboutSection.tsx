@@ -2,6 +2,7 @@
 
 import { personalInfo } from '@/data/content';
 import SystemArchitectureGraphic from './SystemArchitectureGraphic';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function AboutSection() {
   return (
@@ -15,25 +16,28 @@ export default function AboutSection() {
 
       {/* Coluna Direita */}
       <div>
-        <h2
-          id="about-heading"
-          className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[20ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
-        >
-          {personalInfo.bioHeadline}
-        </h2>
+        <ScrollReveal direction="left">
+          <h2
+            id="about-heading"
+            className="font-serif font-normal text-[clamp(2.3rem,5.1vw,5.7rem)] tracking-[-0.06em] leading-[0.94] max-w-[20ch] mb-[clamp(2.25rem,5vw,4.75rem)] text-ink"
+          >
+            {personalInfo.bioHeadline}
+          </h2>
+        </ScrollReveal>
 
         <div className="space-y-[clamp(1.5rem,4vw,3.5rem)] max-w-[63rem]">
           {personalInfo.aboutParagraphs.map((paragraph, index) => (
-            <p
-              key={index}
-              className="font-serif text-[clamp(1.05rem,1.65vw,1.42rem)] leading-[1.45] text-ink"
-            >
-              {paragraph}
-            </p>
+            <ScrollReveal key={index} direction="left" delay={100}>
+              <p className="font-serif text-[clamp(1.05rem,1.65vw,1.42rem)] leading-[1.45] text-ink">
+                {paragraph}
+              </p>
+            </ScrollReveal>
           ))}
 
           {/* Gráfico Esquemático de Arquitetura de Software */}
-          <SystemArchitectureGraphic />
+          <ScrollReveal direction="up" delay={250}>
+            <SystemArchitectureGraphic />
+          </ScrollReveal>
         </div>
       </div>
     </section>
