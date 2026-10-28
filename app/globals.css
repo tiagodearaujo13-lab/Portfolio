@@ -8,10 +8,29 @@
   --soft-ink: #5c5c5c;
   --rule: #161616;
   --quiet-rule: #d8d8d8;
+  --topology-panel: #f8f8f6;
+  --topology-node: #ffffff;
+  --topology-active: #f0fdf4;
+  --topology-border: #d4d4d0;
+  --topology-accent: #047857;
   --page-gutter: clamp(1.25rem, 4vw, 4.5rem);
   --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --serif: "Iowan Old Style", Baskerville, "Times New Roman", Times, serif;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #101418;
+  --ink: #f2f5f4;
+  --soft-ink: #b5c0bc;
+  --rule: #afbeb9;
+  --quiet-rule: #40504b;
+  --topology-panel: #161d1b;
+  --topology-node: #202b27;
+  --topology-active: #17382d;
+  --topology-border: #50635b;
+  --topology-accent: #6ee7b7;
 }
 
 /* Reset de elementos para estética de papel impresso */
@@ -59,6 +78,37 @@ body {
 
 .border-quiet {
   border-color: var(--quiet-rule);
+}
+
+/* Circuitos decorativos do hero: o brilho segue o ponteiro sem intercetar controlos. */
+.hero-circuit {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  --circuit-x: 50%;
+  --circuit-y: 50%;
+}
+.hero-circuit-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  color: #047857;
+  opacity: 0.12;
+  transition: opacity 180ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .hero-circuit:hover .hero-circuit-layer {
+    opacity: 0.65;
+    mask-image: radial-gradient(circle 240px at var(--circuit-x) var(--circuit-y), black 0%, transparent 100%);
+  }
+}
+:root[data-theme='dark'] .hero-circuit-layer { color: #6ee7b7; opacity: 0.2; }
+:root[data-theme='dark'] .hero-circuit:hover .hero-circuit-layer { opacity: 0.8; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-circuit-layer, .hero-circuit:hover .hero-circuit-layer { opacity: 0.14; mask-image: none; }
+  :root[data-theme='dark'] .hero-circuit:hover .hero-circuit-layer { opacity: 0.2; }
 }
 
 /* Overlay de scanlines do retrato monocromático */
@@ -149,7 +199,7 @@ button:focus-visible {
 }
 
 .topology-node:focus-visible rect:first-of-type {
-  stroke: #047857;
+  stroke: var(--topology-accent);
   stroke-width: 3px;
 }
 

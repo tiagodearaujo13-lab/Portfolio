@@ -41,7 +41,7 @@ export default function CvPage() {
       ` }} />
 
       <PrintButton />
-      <main className="cv-page max-w-[52rem] mx-auto px-[var(--page-gutter)] py-12 md:py-16 bg-paper text-ink">
+      <main className="cv-page max-w-[52rem] mx-auto px-[var(--page-gutter)] py-12 md:py-16 bg-paper text-ink" style={{ '--paper': '#ffffff', '--ink': '#111111', '--soft-ink': '#5c5c5c', '--rule': '#161616', '--quiet-rule': '#d8d8d8' } as React.CSSProperties}>
         <header className="cv-header border-b border-rule pb-4 mb-6">
           <h1 className="cv-name font-sans font-bold text-4xl leading-[0.85] tracking-[-0.07em] text-ink mb-2">Tiago Francisco</h1>
           <p className="cv-role font-serif text-base text-ink leading-snug mb-3">{copy.cv.role}</p>

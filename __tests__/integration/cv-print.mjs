@@ -80,8 +80,21 @@ try {
   cdp = await connect(target.webSocketDebuggerUrl);
   await cdp.send('Page.enable');
   await cdp.send('Runtime.enable');
+  await cdp.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'dark' }] });
+  await cdp.send('Page.navigate', { url: base });
+  await waitFor(() => evaluate(cdp, `location.origin === ${JSON.stringify(base)} && document.documentElement.dataset.theme === 'dark' && !!document.querySelector('#hero')`), 'tema do sistema');
+  await waitFor(() => evaluate(cdp, `!!document.querySelector('button[aria-label="Ativar tema claro"]')`), 'controlo de tema');
+  assert.equal(await evaluate(cdp, `(() => { document.querySelector('button[aria-label="Ativar tema claro"]').click(); return localStorage.getItem('portfolio_theme'); })()`), 'light');
+  await waitFor(() => evaluate(cdp, `document.documentElement.dataset.theme === 'light' && !!document.querySelector('button[aria-label="Ativar tema escuro"]')`), 'alternância para tema claro');
+  await cdp.send('Page.reload');
+  await waitFor(() => evaluate(cdp, `document.readyState === 'complete' && document.documentElement.dataset.theme === 'light' && !!document.querySelector('button[aria-label="Ativar tema escuro"]')`), 'persistência do tema claro');
+  assert.equal(await evaluate(cdp, `(() => { const hero = document.querySelector('#hero'); const rect = hero.getBoundingClientRect(); hero.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, pointerType: 'mouse', clientX: rect.left + 120, clientY: rect.top + 80 })); return hero.style.getPropertyValue('--circuit-x'); })()`), '120px');
+  assert.equal(await evaluate(cdp, `getComputedStyle(document.querySelector('.hero-circuit-layer')).pointerEvents`), 'none');
+  assert.equal(await evaluate(cdp, `(() => { document.querySelector('button[aria-label="Ativar tema escuro"]').click(); return localStorage.getItem('portfolio_theme'); })()`), 'dark');
   await cdp.send('Page.navigate', { url: `${base}/cv` });
-  await waitFor(() => evaluate(cdp, `location.origin === ${JSON.stringify(base)} && document.readyState === 'complete'`), 'carregamento do CV');
+  await waitFor(() => evaluate(cdp, `location.pathname === '/cv' && document.readyState === 'complete' && document.documentElement.dataset.theme === 'dark' && !!document.querySelector('.cv-page')`), 'carregamento do CV com tema escuro');
+  assert.equal(await evaluate(cdp, `getComputedStyle(document.querySelector('.cv-page')).backgroundColor`), 'rgb(255, 255, 255)');
+  console.log('✓ tema do sistema, alternância, persistência e efeito do hero verificados');
 
   for (const lang of ['pt', 'en']) {
     await evaluate(cdp, `localStorage.setItem('portfolio_lang', '${lang}'); location.reload();`);

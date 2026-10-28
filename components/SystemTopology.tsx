@@ -91,12 +91,12 @@ function TopologyNode({ node, index, active, onActivate, nodeLabel }: {
       onMouseEnter={() => onActivate(node.id)}
       onKeyDown={handleKeyDown}
     >
-      <rect x={node.x} y={node.y} width={node.width} height={node.height} rx="4" fill={active ? '#f0fdf4' : '#ffffff'} stroke={active ? '#047857' : '#d4d4d0'} strokeWidth={active ? 2 : 1} />
-      <text x={node.x + 18} y={node.y + 24} fill="#047857" fontFamily="var(--mono)" fontSize="10" fontWeight="700" letterSpacing="1">{`${String(index + 1).padStart(2, '0')} / ${nodeLabel.toUpperCase()}`}</text>
-      <text x={node.x + 18} y={node.y + 48} fill="#18181b" fontFamily="var(--mono)" fontSize="13" fontWeight="700">{node.title}</text>
-      <text x={node.x + 18} y={node.y + 68} fill="#52525b" fontFamily="var(--mono)" fontSize="11">{node.subtitle}</text>
+      <rect x={node.x} y={node.y} width={node.width} height={node.height} rx="4" fill={active ? 'var(--topology-active)' : 'var(--topology-node)'} stroke={active ? 'var(--topology-accent)' : 'var(--topology-border)'} strokeWidth={active ? 2 : 1} />
+      <text x={node.x + 18} y={node.y + 24} fill="var(--topology-accent)" fontFamily="var(--mono)" fontSize="10" fontWeight="700" letterSpacing="1">{`${String(index + 1).padStart(2, '0')} / ${nodeLabel.toUpperCase()}`}</text>
+      <text x={node.x + 18} y={node.y + 48} fill="var(--ink)" fontFamily="var(--mono)" fontSize="13" fontWeight="700">{node.title}</text>
+      <text x={node.x + 18} y={node.y + 68} fill="var(--soft-ink)" fontFamily="var(--mono)" fontSize="11">{node.subtitle}</text>
       {node.details.map((detail, detailIndex) => (
-        <text key={detail} x={node.x + 18} y={node.y + 88 + detailIndex * 15} fill="#52525b" fontFamily="var(--mono)" fontSize="10">{detail}</text>
+        <text key={detail} x={node.x + 18} y={node.y + 88 + detailIndex * 15} fill="var(--soft-ink)" fontFamily="var(--mono)" fontSize="10">{detail}</text>
       ))}
     </g>
   );
@@ -110,32 +110,32 @@ export function SystemTopology() {
   const activeNode = nodes.find((node) => node.id === activeId) ?? nodes[1];
 
   return (
-    <section className="topology-panel mt-6 w-full border border-[#d4d4d0] bg-[#f8f8f6] p-4 text-[#18181b] sm:p-6" aria-labelledby="system-topology-title">
-      <header className="flex flex-wrap items-end justify-between gap-3 border-b border-[#d4d4d0] pb-4">
+    <section className="topology-panel mt-6 w-full border border-[var(--topology-border)] bg-[var(--topology-panel)] p-4 text-ink sm:p-6" aria-labelledby="system-topology-title">
+      <header className="flex flex-wrap items-end justify-between gap-3 border-b border-[var(--topology-border)] pb-4">
         <div>
-          <p className="font-mono text-[10px] font-bold tracking-widest text-[#047857]">{content.eyebrow}</p>
+          <p className="font-mono text-[10px] font-bold tracking-widest text-[var(--topology-accent)]">{content.eyebrow}</p>
           <h3 id="system-topology-title" className="mt-2 font-serif text-xl sm:text-2xl">{content.title}</h3>
         </div>
-        <p className="font-mono text-[10px] tracking-wider text-[#52525b]">{content.caption}</p>
+        <p className="font-mono text-[10px] tracking-wider text-soft">{content.caption}</p>
       </header>
 
-      <p className="mt-4 font-mono text-xs leading-relaxed text-[#52525b]">{content.hint}</p>
-      <p className="mt-2 font-mono text-xs text-[#52525b] md:hidden">{content.scroll}</p>
+      <p className="mt-4 font-mono text-xs leading-relaxed text-soft">{content.hint}</p>
+      <p className="mt-2 font-mono text-xs text-soft md:hidden">{content.scroll}</p>
       <div className="mt-3 overflow-x-auto" role="region" aria-label={content.title} tabIndex={0}>
         <svg viewBox="0 0 1000 450" className="block h-auto min-w-[760px] w-full" role="group" aria-labelledby="system-topology-title system-topology-description">
           <desc id="system-topology-description">{content.description}</desc>
           <defs>
             <marker id="topology-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-              <path d="M0 0 L8 4 L0 8 Z" fill="#047857" />
+              <path d="M0 0 L8 4 L0 8 Z" fill="var(--topology-accent)" />
             </marker>
           </defs>
-          {connections.map((path) => <path key={path} d={path} fill="none" stroke="#047857" strokeWidth="1.5" markerEnd="url(#topology-arrow)" />)}
+          {connections.map((path) => <path key={path} d={path} fill="none" stroke="var(--topology-accent)" strokeWidth="1.5" markerEnd="url(#topology-arrow)" />)}
           {nodes.map((node, index) => <TopologyNode key={node.id} node={node} index={index} active={activeNode.id === node.id} onActivate={setActiveId} nodeLabel={content.nodeLabel} />)}
         </svg>
       </div>
-      <div className="mt-4 min-h-[5rem] border-t border-[#d4d4d0] pt-4" aria-live="polite" aria-atomic="true">
-        <p className="font-mono text-[10px] font-bold tracking-wider text-[#047857]">{activeNode.title} / {activeNode.subtitle}</p>
-        <p className="mt-2 max-w-3xl font-serif text-sm leading-relaxed text-[#3f3f46]">{activeNode.description}</p>
+      <div className="mt-4 min-h-[5rem] border-t border-[var(--topology-border)] pt-4" aria-live="polite" aria-atomic="true">
+        <p className="font-mono text-[10px] font-bold tracking-wider text-[var(--topology-accent)]">{activeNode.title} / {activeNode.subtitle}</p>
+        <p className="mt-2 max-w-3xl font-serif text-sm leading-relaxed text-soft">{activeNode.description}</p>
       </div>
     </section>
   );
