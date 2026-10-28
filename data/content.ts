@@ -20,13 +20,13 @@ export const personalInfo = {
   eyebrow: 'ENGENHARIA DE SOFTWARE & ARQUITETURA DE PRODUTO',
   headline: 'TIAGO\nFRANCISCO',
   bioHeadline:
-    'Arquitetura escalável, sistemas desacoplados e produtos reais em produção.',
+    'Auditoria fiscal automática, arquitetura resiliente e um produto real em produção.',
   bioStatement:
     'Desenvolvo sistemas web resilientes, escaláveis e de alta disponibilidade em TypeScript, Node.js e React. Fundador e engenheiro líder de SaaS em produção com mais de 300 utilizadores ativos, canalizando duas décadas de liderança em operações críticas para engenharia de software previsível, código limpo e entregas Just-in-Time.',
   aboutParagraphs: [
-    'Engenharia de software de alto rendimento compartilha os mesmos princípios de operações críticas de grande escala: organização rigorosa, desenho de arquitetura desacoplada, tolerância zero a falhas em produção e foco obsessivo em entrega de valor real ao utilizador final.',
-    'Durante 20 anos, liderei equipas multidisciplinares de mais de 20 profissionais em ambientes de pressão extrema e alta precisão. Essa vivência consolidou uma maturidade executiva rara: capacidade de dialogar com stakeholders de negócio, priorização implacável de backlog técnico sob incerteza e entrega pontual.',
-    'Como fundador e desenvolvedor do DocFácil.pt, projetei e coloquei em produção uma solução LegalTech completa: modelação relacional em PostgreSQL, pipelines de autenticação segura (JWT, Bcrypt, OAuth 2.0), motor de compilação de documentos em tempo de execução e processamento assíncrono de pagamentos via webhooks Stripe.',
+    'Duas décadas a liderar operações de alta gastronomia ensinam o que nenhuma folha de cálculo resolve: a inflação silenciosa escondida nas guias de remessa, as quebras físicas na doca de carga e as margens que evaporam entre o camião e a cozinha. O GastroSpec Radar nasceu dessa vivência direta — engenharia que conhece o problema de dentro do camarim.',
+    'Como fundador e engenheiro líder do GastroSpec Radar, projeto e opero em produção uma plataforma de auditoria fiscal e inteligência de margens na restauração: scanner OCR com IA (Gemini 2.5 Flash Lite) sobre guias e faturas, validação nativa de QR Code fiscal AT/ATCUD, disputas de inflação em 1 clique, gestão de stock com Custo Médio Ponderado e Semáforo de Margens em tempo real.',
+    'A arquitetura espelha a filosofia que a operação de cozinha me ensinou — tolerância zero a falhas: servidor Node.js com arquitetura limpa e gates fail-closed no Google Cloud Run, PostgreSQL com trilha de auditoria cifrada (AES-256-GCM), motor nativo em Rust para streaming SAF-T, billing por plano com webhooks Stripe e suítes Vitest e Playwright, com acessibilidade WCAG 2.2 AA/AAA para quem opera de mãos molhadas sob sol direto na doca.',
   ],
   links: {
     github: 'https://github.com/tiagodearaujo13-lab',
