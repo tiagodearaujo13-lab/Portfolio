@@ -19,6 +19,7 @@ export interface Project {
   impact?: string;
   techStack: string[];
   liveUrl?: string;
+  liveLabel?: string;
   githubUrl?: string;
   featured: boolean;
   // Propriedades suplementares para apresentação de interface

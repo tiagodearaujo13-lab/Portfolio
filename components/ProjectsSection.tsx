@@ -53,6 +53,7 @@ export default function ProjectsSection() {
               const localized = getProjectCopy(lang, project.id);
               const kickerNumber = String(index + 1).padStart(2, '0');
               const liveUrl = project.liveUrl || project.links?.live;
+              const liveLabel = project.liveLabel ?? 'Ver Online';
               const githubUrl = project.githubUrl || project.links?.github;
               const statusText = (
                 localized.statusLabel
@@ -101,7 +102,7 @@ export default function ProjectsSection() {
                           className={liveActionStyles}
                         >
                           <ExternalLink size={14} strokeWidth={2} aria-hidden="true" />
-                          Ver Online
+                          {liveLabel}
                         </a>
                       )}
                       {githubUrl && (

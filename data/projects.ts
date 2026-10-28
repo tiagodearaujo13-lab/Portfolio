@@ -2,6 +2,49 @@ import { Project } from '@/types';
 
 export const projects: Project[] = [
   {
+    id: 'gastrospec-radar',
+    title: 'GastroSpec Radar',
+    status: 'production',
+    statusLabel: 'SaaS Fiscal-OCR em Produção',
+    featured: true,
+    liveLabel: 'Ver Site',
+    users: 'Auditoria Fiscal & Inteligência de Margens na Restauração',
+    role: 'Fundador & Lead Full-Stack Engineer',
+    impact: 'Auditoria Fiscal OCR + Stock & Margens em Tempo Real',
+    description:
+      'Plataforma SaaS de auditoria fiscal para restauração: scanner OCR com IA (Gemini) de guias de remessa e faturas, validação QR Code AT/ATCUD, disputas de inflação em 1 clique, gestão de stock com Custo Médio Ponderado e Semáforo de Margens em tempo real.',
+    fullDescription:
+      'Sistema em produção no Google Cloud Run e Vercel com arquitetura limpa em Node.js, PostgreSQL, webhooks assinados HMAC-SHA256, motor nativo Rust (NAPI-RS) para streaming SAF-T, detetor de faturas fantasma via Cruzamento e-Fatura vs. Doca, app shell mobile nativo com câmara ao vivo e lanterna, modo offline-first cifrado (IndexedDB + Web Crypto AES-256-GCM), acessibilidade WCAG 2.2 AA/AAA e paywall com planos Free, Básico, Pro, Scale/Holding e Enterprise.',
+    longDescription:
+      'Sistema em produção no Google Cloud Run e Vercel com arquitetura limpa em Node.js, PostgreSQL, webhooks assinados HMAC-SHA256, motor nativo Rust (NAPI-RS) para streaming SAF-T, detetor de faturas fantasma via Cruzamento e-Fatura vs. Doca, app shell mobile nativo com câmara ao vivo e lanterna, modo offline-first cifrado (IndexedDB + Web Crypto AES-256-GCM), acessibilidade WCAG 2.2 AA/AAA e paywall com planos Free, Básico, Pro, Scale/Holding e Enterprise.',
+    highlight:
+      'Pipeline OCR com IA que audita guias e faturas contra acordos de fornecimento, deteta rasuras manuais e inflação silenciosa, e evita prejuízos de +267,40 €/semana por restaurante.',
+    techStack: [
+      'Next.js (App Router)',
+      'React.js',
+      'TypeScript',
+      'Node.js',
+      'PostgreSQL',
+      'Gemini AI (OCR)',
+      'Rust (NAPI-RS)',
+      'Stripe Billing',
+    ],
+    stack: [
+      'Next.js (App Router)',
+      'React.js',
+      'TypeScript',
+      'Node.js',
+      'PostgreSQL',
+      'Gemini AI (OCR)',
+      'Rust (NAPI-RS)',
+      'Stripe Billing',
+    ],
+    liveUrl: 'https://gastrospec.app',
+    links: {
+      live: 'https://gastrospec.app',
+    },
+  },
+  {
     id: 'mergedesks',
     title: 'MergeDesks',
     status: 'production',

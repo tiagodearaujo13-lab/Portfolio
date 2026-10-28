@@ -58,14 +58,36 @@ describe('Componente ProjectsSection', () => {
     });
   });
 
-  it('deve renderizar o MergeDesks como primeiro projeto em destaque, apenas com botão "Ver Online"', () => {
+  it('deve renderizar o GastroSpec Radar como primeiro projeto em destaque, apenas com o botão "Ver Site" (código privado)', () => {
     render(<ProjectsSection />);
 
     // Primeiro projeto da lista (kicker 01)
     const firstHeading = screen.getAllByRole('heading', { level: 3 })[0];
-    expect(firstHeading).toHaveTextContent('MergeDesks');
+    expect(firstHeading).toHaveTextContent('GastroSpec Radar');
 
-    // Com liveUrl: botão "Ver Online" aponta para o deploy em produção
+    // Segundo projeto da lista: MergeDesks permanece imediatamente a seguir
+    const secondHeading = screen.getAllByRole('heading', { level: 3 })[1];
+    expect(secondHeading).toHaveTextContent('MergeDesks');
+
+    // Com liveUrl: botão "Ver Site" aponta para o site em produção
+    const liveLink = getLiveLinkFor('GastroSpec Radar');
+    expect(liveLink).toHaveAttribute('href', 'https://gastrospec.app');
+    expect(liveLink).toHaveAttribute('target', '_blank');
+    expect(liveLink).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(liveLink).toHaveTextContent('Ver Site');
+
+    // Repositório privado: não pode ter botão "Código"
+    expect(
+      screen.queryByRole('link', {
+        name: 'Ver código de GastroSpec Radar no GitHub',
+      })
+    ).not.toBeInTheDocument();
+  });
+
+  it('deve renderizar o botão "Ver Online" do MergeDesks (segundo projeto) apenas para o deploy em produção', () => {
+    render(<ProjectsSection />);
+
+    // Com liveUrl: botão continua a apontar para o deploy em produção
     const liveLink = getLiveLinkFor('MergeDesks');
     expect(liveLink).toHaveAttribute('href', 'https://mergedesks.vercel.app');
     expect(liveLink).toHaveAttribute('target', '_blank');
