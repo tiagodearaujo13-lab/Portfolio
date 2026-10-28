@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",
+    "test:cv-print": "node __tests__/integration/cv-print.mjs",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
   },
