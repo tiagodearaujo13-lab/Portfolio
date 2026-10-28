@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
+import SystemTopology from '@/components/SystemTopology';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 import ProjectsSection from '@/components/ProjectsSection';
 import { projects } from '@/data/projects';
 
@@ -14,6 +16,34 @@ const getLiveLinkFor = (projectTitle: string): HTMLAnchorElement => {
   });
   return liveLink as HTMLAnchorElement;
 };
+
+describe('Topologia GastroSpec', () => {
+  it('apresenta a arquitetura e permite selecionar módulos por clique e teclado', () => {
+    render(<SystemTopology />);
+    expect(screen.getByRole('heading', { name: 'Arquitetura do GastroSpec Radar' })).toBeInTheDocument();
+    const ocr = screen.getByRole('button', { name: /EXTRAÇÃO COM IA/ });
+    fireEvent.click(ocr);
+    expect(ocr).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByText(/O Gemini extrai dados dos documentos/)).toBeInTheDocument();
+    const data = screen.getByRole('button', { name: /DADOS & AUDITORIA/ });
+    fireEvent.keyDown(data, { key: 'Enter' });
+    expect(data).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByText(/O PostgreSQL guarda dados operacionais/)).toBeInTheDocument();
+    expect(screen.queryByText(/TELEMETRIA ATIVA/)).not.toBeInTheDocument();
+  });
+
+  it('traduz os módulos e o conteúdo ativo para inglês', () => {
+    window.localStorage.setItem('portfolio_lang', 'en');
+    try {
+      render(<LanguageProvider><SystemTopology /></LanguageProvider>);
+      expect(screen.getByRole('heading', { name: 'GastroSpec Radar architecture' })).toBeInTheDocument();
+      fireEvent.click(screen.getByRole('button', { name: /AI EXTRACTION/ }));
+      expect(screen.getByText(/Gemini extracts document data/)).toBeInTheDocument();
+    } finally {
+      window.localStorage.removeItem('portfolio_lang');
+    }
+  });
+});
 
 describe('Componente ProjectsSection', () => {
   it('deve renderizar o título principal da secção de projetos', () => {

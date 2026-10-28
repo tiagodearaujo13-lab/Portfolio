@@ -2,125 +2,80 @@
 
 import { useState, type KeyboardEvent } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { copyByLanguage } from '@/data/i18n';
 
 interface NodeData {
   id: string;
-  name: string;
-  type: string;
+  title: string;
+  subtitle: string;
   details: string[];
-  metrics: string;
+  description: string;
   x: number;
   y: number;
   width: number;
   height: number;
 }
 
-const CYAN = '#00A3FF';
-const NODE_BASE = '#2E3236';
-const NODE_FILL = '#07131e';
-
-const NODES: NodeData[] = [
-  {
-    id: 'client',
-    name: 'CLIENTE / EDGE',
-    type: 'Vercel / Next.js 15',
-    details: ['App Shell Mobile + PWA', 'BFF · cookie radar_session', 'Offline: IndexedDB + AES-256'],
-    metrics: 'BFF: 1 hop série • Orçamento OCR: 15 guias grátis • Deploy: Cloud Run',
-    x: 42,
-    y: 152,
-    width: 230,
-    height: 112,
-  },
-  {
-    id: 'api',
-    name: 'CORE API — CLOUD RUN',
-    type: 'Node.js HTTP Nativo',
-    details: ['AuthGuard + Load Shedder', 'Gates Fail-Closed por plano', 'Motor Rust: SAF-T streaming'],
-    metrics: 'Event Loop Lag < 10ms • Heap < 70% • 200 OK sob carga',
-    x: 364,
-    y: 142,
-    width: 286,
-    height: 132,
-  },
-  {
-    id: 'gemini',
-    name: 'OCR COM IA GEMINI',
-    type: 'Gemini 2.5 Flash Lite',
-    details: ['Extração de guias/faturas', 'Rasura manual · subfaturação', 'QR ATCUD · NIF Módulo 11'],
-    metrics: 'Extração: território fiscal PT • Tolerância: ±0.02 €',
-    x: 738,
-    y: 32,
-    width: 270,
-    height: 112,
-  },
-  {
-    id: 'external',
-    name: 'PAGAMENTOS & ALERTAS',
-    type: 'Stripe + Resend',
-    details: ['Faturação por plano/loja', 'Disputa ao fornecedor'],
-    metrics: 'Webhooks idempotentes • E-mail verificado do fornecedor',
-    x: 738,
-    y: 160,
-    width: 270,
-    height: 90,
-  },
-  {
-    id: 'db',
-    name: 'PERSISTÊNCIA RELACIONAL',
-    type: 'PostgreSQL (Cloud Run)',
-    details: ['Trilha de auditoria cifrada', 'CMP & movimentos de stock', 'Trigger-locked · ACID'],
-    metrics: 'Audit: AES-256-GCM • Pool: 20 conexões • Backup contínuo',
-    x: 738,
-    y: 276,
-    width: 270,
-    height: 112,
-  },
+const positions = [
+  { id: 'client', x: 30, y: 160, width: 235, height: 130 },
+  { id: 'api', x: 340, y: 150, width: 265, height: 150 },
+  { id: 'ocr', x: 690, y: 30, width: 280, height: 110 },
+  { id: 'data', x: 690, y: 170, width: 280, height: 110 },
+  { id: 'integrations', x: 690, y: 310, width: 280, height: 110 },
 ];
 
-const BUS_LINES = [
-  'M 272 208 H 364',
-  'M 650 190 H 690 V 88 H 738',
-  'M 650 208 H 738',
-  'M 650 226 H 690 V 332 H 738',
+const translations = {
+  pt: {
+    title: 'Arquitetura do GastroSpec Radar',
+    eyebrow: '02 / ARQUITETURA DE PRODUTO',
+    caption: 'DA CAPTURA À AUDITORIA',
+    description: 'Diagrama conceptual: cliente Next.js comunica com a API Node.js, que integra o Gemini, o PostgreSQL e serviços externos.',
+    hint: 'Selecione um módulo para explorar a sua função.',
+    scroll: 'Deslize horizontalmente para ver o diagrama completo.',
+    nodeLabel: 'Módulo',
+    nodes: [
+      { title: 'CLIENTE & SCANNER', subtitle: 'Next.js · Vercel', details: ['Câmara e QR fiscal', 'IndexedDB · AES-GCM'], description: 'O scanner captura guias e faturas, lê o QR fiscal e permite guardar fotografias cifradas offline para sincronização posterior.' },
+      { title: 'API & REGRAS', subtitle: 'Node.js · Cloud Run', details: ['Autenticação e controlo de acesso', 'Auditoria · stock · Rust / SAF-T'], description: 'A API aplica as regras de acesso e de negócio, processa a auditoria e o stock e integra o motor Rust para ficheiros SAF-T.' },
+      { title: 'EXTRAÇÃO COM IA', subtitle: 'Gemini 2.5 Flash Lite', details: ['OCR de guias e faturas', 'Deteção de alterações manuais'], description: 'O Gemini extrai dados dos documentos e identifica possíveis alterações manuscritas para revisão pelo utilizador.' },
+      { title: 'DADOS & AUDITORIA', subtitle: 'PostgreSQL', details: ['Stock · CMP · acordos', 'Trilho de auditoria'], description: 'O PostgreSQL guarda dados operacionais, movimentos de stock, acordos com fornecedores e registos de auditoria.' },
+      { title: 'INTEGRAÇÕES', subtitle: 'Stripe · Resend', details: ['Subscrições e pagamentos', 'Disputas por e-mail'], description: 'O Stripe suporta a faturação por subscrição; o Resend permite enviar disputas para o e-mail registado do fornecedor.' },
+    ],
+  },
+  en: {
+    title: 'GastroSpec Radar architecture',
+    eyebrow: '02 / PRODUCT ARCHITECTURE',
+    caption: 'FROM CAPTURE TO AUDIT',
+    description: 'Conceptual diagram: a Next.js client communicates with the Node.js API, which integrates Gemini, PostgreSQL and external services.',
+    hint: 'Select a module to explore its role.',
+    scroll: 'Scroll horizontally to view the complete diagram.',
+    nodeLabel: 'Module',
+    nodes: [
+      { title: 'CLIENT & SCANNER', subtitle: 'Next.js · Vercel', details: ['Camera and fiscal QR', 'IndexedDB · AES-GCM'], description: 'The scanner captures delivery notes and invoices, reads fiscal QR codes and stores encrypted photographs offline for later synchronisation.' },
+      { title: 'API & BUSINESS RULES', subtitle: 'Node.js · Cloud Run', details: ['Authentication and access control', 'Audit · stock · Rust / SAF-T'], description: 'The API enforces access and business rules, processes audits and inventory and integrates the Rust engine for SAF-T files.' },
+      { title: 'AI EXTRACTION', subtitle: 'Gemini 2.5 Flash Lite', details: ['Delivery note and invoice OCR', 'Handwritten alteration detection'], description: 'Gemini extracts document data and identifies possible handwritten alterations for the user to review.' },
+      { title: 'DATA & AUDIT', subtitle: 'PostgreSQL', details: ['Stock · average cost · agreements', 'Audit trail'], description: 'PostgreSQL stores operational data, inventory movements, supplier agreements and audit records.' },
+      { title: 'INTEGRATIONS', subtitle: 'Stripe · Resend', details: ['Subscriptions and payments', 'Supplier disputes by email'], description: 'Stripe supports subscription billing; Resend sends disputes to the supplier’s registered email address.' },
+    ],
+  },
+};
+
+const connections = [
+  'M265 225 H340',
+  'M605 195 H645 V85 H690',
+  'M605 225 H690',
+  'M605 255 H645 V365 H690',
 ];
 
-function CornerMarks({
-  x,
-  y,
-  width,
-  height,
-  active,
-}: Pick<NodeData, 'x' | 'y' | 'width' | 'height'> & { active: boolean }) {
-  const length = 13;
-  const stroke = active ? CYAN : '#557080';
-  const opacity = active ? 1 : 0.75;
-
-  return (
-    <g stroke={stroke} strokeWidth="2" opacity={opacity} fill="none">
-      <path d={`M ${x} ${y + length} V ${y} H ${x + length}`} />
-      <path d={`M ${x + width - length} ${y} H ${x + width} V ${y + length}`} />
-      <path d={`M ${x} ${y + height - length} V ${y + height} H ${x + length}`} />
-      <path d={`M ${x + width - length} ${y + height} H ${x + width} V ${y + height - length}`} />
-    </g>
-  );
-}
-
-function TopologyNode({
-  node,
-  active,
-  onActivate,
-  nodeLabel,
-}: {
+function TopologyNode({ node, index, active, onActivate, nodeLabel }: {
   node: NodeData;
+  index: number;
   active: boolean;
-  onActivate: (node: NodeData) => void;
+  onActivate: (id: string) => void;
   nodeLabel: string;
 }) {
   const handleKeyDown = (event: KeyboardEvent<SVGGElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      onActivate(node);
+      onActivate(node.id);
     }
   };
 
@@ -129,53 +84,19 @@ function TopologyNode({
       className={`topology-node${active ? ' is-active' : ''}`}
       role="button"
       tabIndex={0}
-      aria-label={`${node.name}: ${node.type}. ${node.metrics}`}
+      aria-label={`${nodeLabel} ${index + 1}: ${node.title}. ${node.description}`}
       aria-pressed={active}
-      onMouseEnter={() => onActivate(node)}
-      onFocus={() => onActivate(node)}
+      onClick={() => onActivate(node.id)}
+      onFocus={() => onActivate(node.id)}
+      onMouseEnter={() => onActivate(node.id)}
       onKeyDown={handleKeyDown}
     >
-      <rect
-        x={node.x}
-        y={node.y}
-        width={node.width}
-        height={node.height}
-        fill={NODE_FILL}
-        stroke={active ? CYAN : NODE_BASE}
-        strokeWidth={active ? 1.8 : 1.2}
-      />
-      <rect
-        x={node.x + 7}
-        y={node.y + 7}
-        width={node.width - 14}
-        height={node.height - 14}
-        fill="none"
-        stroke="#183044"
-        strokeWidth="0.6"
-        strokeDasharray="2 5"
-      />
-      <CornerMarks {...node} active={active} />
-
-      <text x={node.x + 17} y={node.y + 21} fill={CYAN} fontFamily="var(--mono)" fontSize="9" letterSpacing="1.4">
-        {`${nodeLabel} 0${NODES.findIndex((item) => item.id === node.id) + 1}`}
-      </text>
-      <text x={node.x + 17} y={node.y + 43} fill="#f4faff" fontFamily="var(--mono)" fontSize="13" fontWeight="700" letterSpacing="0.8">
-        {node.name}
-      </text>
-      <text x={node.x + 17} y={node.y + 61} fill="#8ca4b5" fontFamily="var(--mono)" fontSize="9.5">
-        {node.type}
-      </text>
-      {node.details.map((detail, index) => (
-        <text
-          key={detail}
-          x={node.x + 17}
-          y={node.y + 81 + index * 14}
-          fill={index === 0 && node.id === 'api' ? CYAN : '#b4c4cf'}
-          fontFamily="var(--mono)"
-          fontSize="9"
-        >
-          {`› ${detail}`}
-        </text>
+      <rect x={node.x} y={node.y} width={node.width} height={node.height} rx="4" fill={active ? '#f0fdf4' : '#ffffff'} stroke={active ? '#047857' : '#d4d4d0'} strokeWidth={active ? 2 : 1} />
+      <text x={node.x + 18} y={node.y + 24} fill="#047857" fontFamily="var(--mono)" fontSize="10" fontWeight="700" letterSpacing="1">{`${String(index + 1).padStart(2, '0')} / ${nodeLabel.toUpperCase()}`}</text>
+      <text x={node.x + 18} y={node.y + 48} fill="#18181b" fontFamily="var(--mono)" fontSize="13" fontWeight="700">{node.title}</text>
+      <text x={node.x + 18} y={node.y + 68} fill="#52525b" fontFamily="var(--mono)" fontSize="11">{node.subtitle}</text>
+      {node.details.map((detail, detailIndex) => (
+        <text key={detail} x={node.x + 18} y={node.y + 88 + detailIndex * 15} fill="#52525b" fontFamily="var(--mono)" fontSize="10">{detail}</text>
       ))}
     </g>
   );
@@ -183,89 +104,39 @@ function TopologyNode({
 
 export function SystemTopology() {
   const { lang } = useLanguage();
-  const copy = copyByLanguage[lang];
-  const defaultNode = NODES.find((node) => node.id === 'api') ?? NODES[0];
-  const [activeNode, setActiveNode] = useState<NodeData>(defaultNode);
+  const content = translations[lang];
+  const nodes: NodeData[] = positions.map((position, index) => ({ ...position, ...content.nodes[index] }));
+  const [activeId, setActiveId] = useState('api');
+  const activeNode = nodes.find((node) => node.id === activeId) ?? nodes[1];
 
   return (
-    <section
-      className="topology-panel mt-6 w-full border border-[#1e293b] bg-[#050b12] p-4 text-white sm:p-5 md:p-6"
-      aria-labelledby="system-topology-title"
-    >
-      <header className="mb-4 flex flex-col gap-3 border-b border-[#1e293b] pb-3 sm:flex-row sm:items-center sm:justify-between">
-        <h3 id="system-topology-title" className="flex items-center gap-2 font-mono text-[9px] font-bold uppercase tracking-widest text-[#00A3FF]">
-          <span aria-hidden="true">■</span>
-          {copy.topology.title}
-        </h3>
-        <p className="font-mono text-[8px] uppercase tracking-widest text-[#7d94a5]" aria-label={lang === 'pt' ? 'Serviços ativos' : 'Active services'}>
-          {copy.topology.services}
-        </p>
+    <section className="topology-panel mt-6 w-full border border-[#d4d4d0] bg-[#f8f8f6] p-4 text-[#18181b] sm:p-6" aria-labelledby="system-topology-title">
+      <header className="flex flex-wrap items-end justify-between gap-3 border-b border-[#d4d4d0] pb-4">
+        <div>
+          <p className="font-mono text-[10px] font-bold tracking-widest text-[#047857]">{content.eyebrow}</p>
+          <h3 id="system-topology-title" className="mt-2 font-serif text-xl sm:text-2xl">{content.title}</h3>
+        </div>
+        <p className="font-mono text-[10px] tracking-wider text-[#52525b]">{content.caption}</p>
       </header>
 
-      <div className="relative overflow-hidden border border-[#152838] bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px]">
-        <div className="pointer-events-none absolute left-0 top-0 h-5 w-5 border-l-2 border-t-2 border-[#00A3FF]" />
-        <div className="pointer-events-none absolute right-0 top-0 h-5 w-5 border-r-2 border-t-2 border-[#00A3FF]" />
-        <div className="pointer-events-none absolute bottom-0 left-0 h-5 w-5 border-b-2 border-l-2 border-[#00A3FF]" />
-        <div className="pointer-events-none absolute bottom-0 right-0 h-5 w-5 border-b-2 border-r-2 border-[#00A3FF]" />
-
-        <div className="overflow-x-auto">
-          <svg
-            viewBox="0 0 1050 420"
-            className="block h-auto min-w-[760px] w-full"
-            role="group"
-            aria-labelledby="system-topology-title system-topology-description"
-            onMouseLeave={() => setActiveNode(defaultNode)}
-          >
-            <title id="system-topology-description">{copy.topology.description}</title>
-            <desc>{lang === 'pt' ? 'Selecione ou passe o cursor sobre um nó para consultar a telemetria no rodapé.' : 'Select or hover over a node to inspect telemetry in the footer.'}</desc>
-
-            <g opacity="0.28" fill="none" stroke="#284357" strokeWidth="0.7" strokeDasharray="2 7">
-              <path d="M 30 18 H 1020" />
-              <path d="M 30 402 H 1020" />
-              <path d="M 30 18 V 402" />
-              <path d="M 1020 18 V 402" />
-            </g>
-
-            <circle className="topology-radar" cx="507" cy="208" r="91" fill="none" stroke={CYAN} strokeWidth="1" />
-            <circle className="topology-radar topology-radar-delayed" cx="507" cy="208" r="72" fill="none" stroke={CYAN} strokeWidth="0.7" />
-
-            {BUS_LINES.map((path) => (
-              <g key={path} fill="none">
-                <path d={path} stroke={NODE_BASE} strokeWidth="1.5" />
-                <path d={path} className="topology-flow" stroke={CYAN} strokeWidth="2" strokeDasharray="6 12" />
-              </g>
-            ))}
-
-            <g className="topology-bus-marker" fill={CYAN}>
-              <circle cx="323" cy="208" r="3" />
-              <circle cx="690" cy="88" r="3" />
-              <circle cx="690" cy="208" r="3" />
-              <circle cx="690" cy="332" r="3" />
-            </g>
-
-            {NODES.map((node) => (
-              <TopologyNode
-                key={node.id}
-                node={node}
-                active={activeNode.id === node.id}
-                onActivate={setActiveNode}
-                nodeLabel={copy.topology.node}
-              />
-            ))}
-          </svg>
-        </div>
+      <p className="mt-4 font-mono text-xs leading-relaxed text-[#52525b]">{content.hint}</p>
+      <p className="mt-2 font-mono text-xs text-[#52525b] md:hidden">{content.scroll}</p>
+      <div className="mt-3 overflow-x-auto" role="region" aria-label={content.title} tabIndex={0}>
+        <svg viewBox="0 0 1000 450" className="block h-auto min-w-[760px] w-full" role="group" aria-labelledby="system-topology-title system-topology-description">
+          <desc id="system-topology-description">{content.description}</desc>
+          <defs>
+            <marker id="topology-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+              <path d="M0 0 L8 4 L0 8 Z" fill="#047857" />
+            </marker>
+          </defs>
+          {connections.map((path) => <path key={path} d={path} fill="none" stroke="#047857" strokeWidth="1.5" markerEnd="url(#topology-arrow)" />)}
+          {nodes.map((node, index) => <TopologyNode key={node.id} node={node} index={index} active={activeNode.id === node.id} onActivate={setActiveId} nodeLabel={content.nodeLabel} />)}
+        </svg>
       </div>
-
-      <footer className="mt-4 flex flex-col gap-2 border-t border-[#1e293b] pt-3 font-mono text-[8px] uppercase tracking-wider text-[#91a4b1] sm:flex-row sm:items-center sm:justify-between">
-        <p aria-live="polite">
-          <span className="text-[#00A3FF]">{copy.topology.operational}</span>
-          <br className="sm:hidden" />
-          <span className="hidden sm:inline"> · </span>
-          <span className="text-white">{activeNode.name}: </span>
-          {activeNode.metrics}
-        </p>
-        <p className="text-left sm:text-right">{copy.topology.engine}</p>
-      </footer>
+      <div className="mt-4 min-h-[5rem] border-t border-[#d4d4d0] pt-4" aria-live="polite" aria-atomic="true">
+        <p className="font-mono text-[10px] font-bold tracking-wider text-[#047857]">{activeNode.title} / {activeNode.subtitle}</p>
+        <p className="mt-2 max-w-3xl font-serif text-sm leading-relaxed text-[#3f3f46]">{activeNode.description}</p>
+      </div>
     </section>
   );
 }
