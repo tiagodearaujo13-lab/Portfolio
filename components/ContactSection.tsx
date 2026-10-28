@@ -164,7 +164,7 @@ export default function ContactSection() {
 
             <div className="mt-5 min-h-6" role="status" aria-live="polite">
               {status === 'success' && <p className="font-mono text-xs text-ink">{copy.contact.success}</p>}
-              {status === 'error' && <p className="font-mono text-xs text-red-700">{copy.contact.error}</p>}
+              {status === 'error' && <p className="font-mono text-xs text-[var(--error)]">{copy.contact.error}</p>}
             </div>
           </form>
 

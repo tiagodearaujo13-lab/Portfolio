@@ -16,22 +16,47 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
   const { lang } = useLanguage();
   const copy = copyByLanguage[lang];
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+    if (!isOpen) return;
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    inputRef.current?.focus();
+
+    const focusableElements = () => Array.from(dialogRef.current?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    ) ?? []).filter((element) => element.getClientRects().length > 0);
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        onCloseRef.current();
+      } else if (event.key === 'Tab') {
+        const elements = focusableElements();
+        const first = elements[0];
+        const last = elements[elements.length - 1];
+        if (!first || !last) {
+          event.preventDefault();
+          dialogRef.current?.focus();
+        } else if (event.shiftKey && (document.activeElement === first || !dialogRef.current?.contains(document.activeElement))) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && (document.activeElement === last || !dialogRef.current?.contains(document.activeElement))) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     };
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-      // Focus no input ao abrir
-      setTimeout(() => inputRef.current?.focus(), 100);
-    }
+    document.addEventListener('keydown', handleKeyDown);
     return () => {
-      document.body.style.overflow = 'unset';
-      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+      previousFocus?.focus();
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   // Reset ao fechar
   useEffect(() => {
@@ -81,6 +106,8 @@ export default function CvDownloadModal({ isOpen, onClose }: CvDownloadModalProp
       role="presentation"
     >
       <div
+        ref={dialogRef}
+        tabIndex={-1}
         className="w-full max-w-lg bg-paper border border-rule p-6 md:p-8 space-y-6"
         role="dialog"
         aria-modal="true"

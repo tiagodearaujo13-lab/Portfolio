@@ -91,6 +91,45 @@ try {
   assert.equal(await evaluate(cdp, `(() => { const hero = document.querySelector('#hero'); const rect = hero.getBoundingClientRect(); hero.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, pointerType: 'mouse', clientX: rect.left + 120, clientY: rect.top + 80 })); return hero.style.getPropertyValue('--circuit-x'); })()`), '120px');
   assert.equal(await evaluate(cdp, `getComputedStyle(document.querySelector('.hero-circuit-layer')).pointerEvents`), 'none');
   assert.equal(await evaluate(cdp, `(() => { document.querySelector('button[aria-label="Ativar tema escuro"]').click(); return localStorage.getItem('portfolio_theme'); })()`), 'dark');
+  for (const width of [320, 390]) {
+    await cdp.send('Emulation.setDeviceMetricsOverride', { width, height: 844, deviceScaleFactor: 1, mobile: true });
+    const nav = await evaluate(cdp, `(() => {
+      const header = document.querySelector('header[role="banner"]');
+      return [...header.querySelectorAll('a, button')].map(el => { const r = el.getBoundingClientRect(); return { label: el.getAttribute('aria-label') || el.textContent, width: r.width, height: r.height, left: r.left, right: r.right }; });
+    })()`);
+    for (const item of nav) {
+      assert.ok(item.width >= 44 && item.height >= 44, `${width}px: alvo tátil pequeno: ${item.label}`);
+      assert.ok(item.left >= 0 && item.right <= width, `${width}px: navegação cortada: ${item.label}`);
+    }
+  }
+  await cdp.send('Emulation.clearDeviceMetricsOverride');
+  for (const theme of ['light', 'dark']) {
+    await evaluate(cdp, `document.documentElement.dataset.theme = '${theme}'`);
+    await cdp.send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 });
+    await cdp.send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 });
+    const focus = await evaluate(cdp, `(() => { const el = document.querySelector('input[name="name"]'); el.focus(); const style = getComputedStyle(el); return { color: style.outlineColor, width: parseFloat(style.outlineWidth), style: style.outlineStyle }; })()`);
+    assert.ok(focus.width >= 2 && focus.style !== 'none' && focus.color !== 'rgba(0, 0, 0, 0)', `${theme}: foco do formulário invisível`);
+    const colors = await evaluate(cdp, `(() => { const style = getComputedStyle(document.documentElement); return [style.getPropertyValue('--error').trim(), style.getPropertyValue('--paper').trim()]; })()`);
+    const luminance = (hex) => { const parts = hex.match(/[a-f\d]{2}/gi).map((value) => parseInt(value, 16) / 255).map((value) => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4); return 0.2126 * parts[0] + 0.7152 * parts[1] + 0.0722 * parts[2]; };
+    const values = colors.map(luminance);
+    assert.ok((Math.max(...values) + 0.05) / (Math.min(...values) + 0.05) >= 4.5, `${theme}: contraste insuficiente da mensagem de erro`);
+  }
+  await evaluate(cdp, `document.documentElement.dataset.theme = 'dark'; document.querySelector('header nav button').focus(); document.querySelector('header nav button').click()`);
+  await waitFor(() => evaluate(cdp, `document.activeElement?.id === 'lead-email'`), 'foco inicial no diálogo');
+  for (let i = 0; i < 6; i++) {
+    await cdp.send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 });
+    await cdp.send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 });
+    assert.equal(await evaluate(cdp, `!!document.activeElement?.closest('[role="dialog"]')`), true, 'o foco saiu do diálogo');
+  }
+  for (let i = 0; i < 4; i++) {
+    await cdp.send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9, modifiers: 8 });
+    await cdp.send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9, modifiers: 8 });
+    assert.equal(await evaluate(cdp, `!!document.activeElement?.closest('[role="dialog"]')`), true, 'o foco saiu do diálogo ao recuar');
+  }
+  await cdp.send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
+  await cdp.send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
+  await waitFor(() => evaluate(cdp, `!document.querySelector('[role="dialog"]') && document.activeElement === document.querySelector('header nav button')`), 'retorno do foco');
+  console.log('✓ navegação móvel, contraste, foco e teclado verificados');
   await cdp.send('Page.navigate', { url: `${base}/cv` });
   await waitFor(() => evaluate(cdp, `location.pathname === '/cv' && document.readyState === 'complete' && document.documentElement.dataset.theme === 'dark' && !!document.querySelector('.cv-page')`), 'carregamento do CV com tema escuro');
   assert.equal(await evaluate(cdp, `getComputedStyle(document.querySelector('.cv-page')).backgroundColor`), 'rgb(255, 255, 255)');

@@ -45,25 +45,25 @@ export default function Navbar() {
         {/* Esquerda: Wordmark */}
         <a
           href="#"
-          className="font-mono text-xs font-medium tracking-widest text-ink uppercase no-underline hover:no-underline"
+          className="inline-flex min-h-[44px] items-center font-mono text-xs font-medium tracking-widest text-ink uppercase no-underline hover:no-underline"
           aria-label={copy.nav.homeAria}
         >
           ~/tiago.dev
         </a>
 
         {/* Direita: Nota + Links */}
-        <div className="flex flex-wrap items-center gap-4 md:gap-8">
+        <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-2 md:gap-8">
           <span className="hidden lg:inline text-soft font-mono text-[0.66rem] uppercase tracking-wider text-right">
             {copy.nav.role}
           </span>
 
           <nav
             aria-label={lang === 'pt' ? 'Navegação principal' : 'Main navigation'}
-            className="flex items-center gap-4 md:gap-6 font-mono text-[0.66rem] uppercase tracking-wider"
+            className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1 md:gap-x-6 font-mono text-[0.66rem] uppercase tracking-wider"
           >
             <button
               onClick={() => setIsModalOpen(true)}
-              className="text-ink underline underline-offset-4 hover:text-soft bg-transparent border-none cursor-pointer font-mono text-[0.66rem] uppercase tracking-wider p-0"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-ink underline underline-offset-4 hover:text-soft bg-transparent border-none cursor-pointer font-mono text-[0.66rem] uppercase tracking-wider p-0"
               aria-label={copy.nav.cvAria}
             >
               {copy.nav.cv}
@@ -72,7 +72,7 @@ export default function Navbar() {
               href="https://github.com/tiagodearaujo13-lab"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ink underline underline-offset-4 hover:text-soft"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-ink underline underline-offset-4 hover:text-soft"
               aria-label={copy.nav.githubAria}
             >
               {copy.nav.githubLabel}
@@ -81,14 +81,14 @@ export default function Navbar() {
               href="https://www.linkedin.com/in/tiago-araújofrancisco/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ink underline underline-offset-4 hover:text-soft"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-ink underline underline-offset-4 hover:text-soft"
               aria-label={copy.nav.linkedinAria}
             >
               {copy.nav.linkedinLabel}
             </a>
             <a
               href="#contato"
-              className="text-ink underline underline-offset-4 hover:text-soft"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-ink underline underline-offset-4 hover:text-soft"
               aria-label={copy.nav.contactAria}
             >
               {copy.nav.contact}
@@ -100,9 +100,9 @@ export default function Navbar() {
           </button>
 
           <div className="flex items-center border border-rule font-mono text-[0.66rem] uppercase tracking-wider" aria-label={copy.nav.languageAria}>
-            <button type="button" onClick={() => setLanguage('pt')} className={`px-2.5 py-1 transition-colors ${lang === 'pt' ? 'bg-[var(--ink)] text-[var(--paper)] font-bold' : 'text-[var(--soft-ink)] hover:text-[var(--ink)]'}`} aria-pressed={lang === 'pt'}>PT</button>
+            <button type="button" onClick={() => setLanguage('pt')} className={`inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-2.5 py-1 transition-colors ${lang === 'pt' ? 'bg-[var(--ink)] text-[var(--paper)] font-bold' : 'text-[var(--soft-ink)] hover:text-[var(--ink)]'}`} aria-pressed={lang === 'pt'}>PT</button>
             <span className="text-soft" aria-hidden="true">|</span>
-            <button type="button" onClick={() => setLanguage('en')} className={`px-2.5 py-1 transition-colors ${lang === 'en' ? 'bg-[var(--ink)] text-[var(--paper)] font-bold' : 'text-[var(--soft-ink)] hover:text-[var(--ink)]'}`} aria-pressed={lang === 'en'}>EN</button>
+            <button type="button" onClick={() => setLanguage('en')} className={`inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-2.5 py-1 transition-colors ${lang === 'en' ? 'bg-[var(--ink)] text-[var(--paper)] font-bold' : 'text-[var(--soft-ink)] hover:text-[var(--ink)]'}`} aria-pressed={lang === 'en'}>EN</button>
           </div>
         </div>
       </header>

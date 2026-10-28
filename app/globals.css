@@ -13,6 +13,7 @@
   --topology-active: #f0fdf4;
   --topology-border: #d4d4d0;
   --topology-accent: #047857;
+  --error: #b91c1c;
   --page-gutter: clamp(1.25rem, 4vw, 4.5rem);
   --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -31,6 +32,7 @@
   --topology-active: #17382d;
   --topology-border: #50635b;
   --topology-accent: #6ee7b7;
+  --error: #fca5a5;
 }
 
 /* Reset de elementos para estética de papel impresso */
@@ -136,7 +138,10 @@ button {
 }
 
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
   outline: 2px solid var(--ink) !important;
   outline-offset: 4px !important;
 }
