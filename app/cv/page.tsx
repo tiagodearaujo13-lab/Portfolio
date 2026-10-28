@@ -8,7 +8,7 @@ const sectionTitle = 'cv-section-title font-sans text-xs font-bold uppercase tra
 const bodyText = 'font-serif text-[9.5px] leading-tight text-neutral-800';
 const monoText = 'font-mono text-[8px] leading-tight uppercase tracking-wide text-neutral-700';
 
-const projectUrls = ['https://docfacil.pt', 'https://leadpulse-bice.vercel.app', 'https://cognirav.vercel.app'];
+const projectUrls = ['https://gastrospec.app', 'https://docfacil.pt', 'https://leadpulse-bice.vercel.app', 'https://cognirav.vercel.app'];
 
 export default function CvPage() {
   const { lang } = useLanguage();
