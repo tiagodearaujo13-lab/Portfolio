@@ -22,7 +22,7 @@ export const personalInfo = {
   bioHeadline:
     'Auditoria fiscal automática, arquitetura resiliente e um produto real em produção.',
   bioStatement:
-    'Desenvolvo sistemas web resilientes, escaláveis e de alta disponibilidade em TypeScript, Node.js e React. Fundador e engenheiro líder de SaaS em produção com mais de 300 utilizadores ativos, canalizando duas décadas de liderança em operações críticas para engenharia de software previsível, código limpo e entregas Just-in-Time.',
+    'Desenvolvo sistemas web resilientes, escaláveis e de alta disponibilidade em TypeScript, Node.js e React. Fundador e engenheiro líder do GastroSpec Radar — SaaS de auditoria fiscal OCR e inteligência de margens na restauração, em produção no Google Cloud Run e Vercel —, canalizando duas décadas de liderança em operações críticas para engenharia de software previsível, código limpo e entregas Just-in-Time.',
   aboutParagraphs: [
     'Duas décadas a liderar operações de alta gastronomia ensinam o que nenhuma folha de cálculo resolve: a inflação silenciosa escondida nas guias de remessa, as quebras físicas na doca de carga e as margens que evaporam entre o camião e a cozinha. O GastroSpec Radar nasceu dessa vivência direta — engenharia que conhece o problema de dentro do camarim.',
     'Como fundador e engenheiro líder do GastroSpec Radar, projeto e opero em produção uma plataforma de auditoria fiscal e inteligência de margens na restauração: scanner OCR com IA (Gemini 2.5 Flash Lite) sobre guias e faturas, validação nativa de QR Code fiscal AT/ATCUD, disputas de inflação em 1 clique, gestão de stock com Custo Médio Ponderado e Semáforo de Margens em tempo real.',
