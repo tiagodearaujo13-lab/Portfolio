@@ -239,6 +239,32 @@ export const experiences: ExperienceItem[] = [
       'Controlo Orçamentário',
     ],
   },
+  {
+    id: 'russa-tattoo',
+    role: 'Engenheiro Full-Stack & UI/UX Designer',
+    company: 'Russa Tatuadora (Estúdio de Tatuagem — Algarve)',
+    location: 'Parchal, Portimão, Portugal',
+    period: '2026',
+    description: [
+      'Conceção e desenvolvimento completo da plataforma web oficial do estúdio (russatatuadora.vercel.app) com Next.js, React e TypeScript.',
+      'Implementação de fluxo de pedido de orçamento online, galeria otimizada de trabalhos, secção de FAQ interativa e suporte bilíngue (PT/EN).',
+      'Otimização técnica de SEO local (Open Graph, metadados estruturados e performance de imagens) para captação orgânica no Algarve.',
+    ],
+    techStack: [
+      'Next.js (App Router)',
+      'React.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'SEO Local',
+    ],
+    technologies: [
+      'Next.js (App Router)',
+      'React.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'SEO Local',
+    ],
+  },
 ];
 
 export const certifications: Certification[] = [

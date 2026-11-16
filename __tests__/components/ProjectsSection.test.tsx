@@ -131,6 +131,24 @@ describe('Componente ProjectsSection', () => {
     ).not.toBeInTheDocument();
   });
 
+  it('deve renderizar o Russa Tatuadora como terceiro projeto (abaixo do MergeDesks), apenas com o botão "Ver Online"', () => {
+    render(<ProjectsSection />);
+
+    const thirdHeading = screen.getAllByRole('heading', { level: 3 })[2];
+    expect(thirdHeading).toHaveTextContent('Russa Tatuadora');
+
+    const liveLink = getLiveLinkFor('Russa Tatuadora');
+    expect(liveLink).toHaveAttribute('href', 'https://russatatuadora.vercel.app');
+    expect(liveLink).toHaveAttribute('target', '_blank');
+    expect(liveLink).toHaveAttribute('rel', 'noopener noreferrer');
+
+    expect(
+      screen.queryByRole('link', {
+        name: 'Ver código de Russa Tatuadora no GitHub',
+      })
+    ).not.toBeInTheDocument();
+  });
+
   it('deve renderizar o NormaSafe HACCP sem botões, pois o repositório é privado e não há deploy público', () => {
     render(<ProjectsSection />);
 

@@ -69,6 +69,40 @@ export const projects: Project[] = [
     },
   },
   {
+    id: 'russa-tattoo',
+    title: 'Russa Tatuadora',
+    status: 'production',
+    statusLabel: 'Web App em Produção',
+    featured: true,
+    users: 'Estúdio de Tatuagem · Parchal, Portimão & Algarve',
+    role: 'Engenheiro Full-Stack & UI/UX Designer',
+    impact: 'Orçamentos Online & Presença Bilíngue (PT/EN)',
+    description:
+      'Plataforma web editorial e sistema de orçamentos online para estúdio de tatuagem no Parchal (Portimão, Algarve), com suporte bilíngue (PT/EN), galeria de trabalhos e SEO local otimizado.',
+    fullDescription:
+      'Aplicação web desenvolvida em Next.js (App Router), React e TypeScript com foco em conversão e SEO local no Algarve. Inclui fluxo de pedido de orçamento online, galeria de estilos (Fine Line, Micro-Realismo, Botânica e Blackwork), FAQ interativa, alternância PT/EN e otimização de imagens e Core Web Vitals.',
+    longDescription:
+      'Aplicação web desenvolvida em Next.js (App Router), React e TypeScript com foco em conversão e SEO local no Algarve. Inclui fluxo de pedido de orçamento online, galeria de estilos (Fine Line, Micro-Realismo, Botânica e Blackwork), FAQ interativa, alternância PT/EN e otimização de imagens e Core Web Vitals.',
+    highlight:
+      'Presença digital de alta conversão com pedido de orçamento online, galeria otimizada e SEO local estruturado para Portimão, Parchal e Algarve.',
+    techStack: [
+      'Next.js (App Router)',
+      'React.js',
+      'TypeScript',
+      'Tailwind CSS',
+    ],
+    stack: [
+      'Next.js (App Router)',
+      'React.js',
+      'TypeScript',
+      'Tailwind CSS',
+    ],
+    liveUrl: 'https://russatatuadora.vercel.app',
+    links: {
+      live: 'https://russatatuadora.vercel.app',
+    },
+  },
+  {
     id: 'normasafe-haccp',
     title: 'NormaSafe HACCP',
     status: 'development',
